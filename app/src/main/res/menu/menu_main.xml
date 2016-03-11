@@ -1,10 +1,12 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="br.edu.ifce.engcomp.francis.radarpolitico.MainActivity">
+    tools:context=".controllers.MainActivity">
+
     <item
-        android:id="@+id/action_settings"
-        android:orderInCategory="100"
-        android:title="@string/action_settings"
-        app:showAsAction="never" />
+        android:id="@+id/action_add_politico"
+        android:icon="@drawable/ic_add"
+        android:orderInCategory="101"
+        android:title="Add Politico"
+        android:showAsAction="ifRoom"/>
 </menu>

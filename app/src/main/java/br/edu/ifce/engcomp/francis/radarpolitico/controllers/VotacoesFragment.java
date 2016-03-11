@@ -1,4 +1,4 @@
-package br.edu.ifce.engcomp.francis.radarpolitico;
+package br.edu.ifce.engcomp.francis.radarpolitico.controllers;
 
 
 import android.os.Bundle;
@@ -6,6 +6,8 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import br.edu.ifce.engcomp.francis.radarpolitico.R;
 
 
 /**
