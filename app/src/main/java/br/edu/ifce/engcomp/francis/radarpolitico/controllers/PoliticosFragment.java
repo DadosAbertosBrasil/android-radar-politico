@@ -27,10 +27,7 @@ import br.edu.ifce.engcomp.francis.radarpolitico.models.Deputado;
 public class PoliticosFragment extends Fragment {
 
     RecyclerView recyclerView;
-    LinearLayoutManager layoutManager;
     ArrayList<Deputado> datasource;
-    DeputadoRecyclerViewAdapter adapter;
-
     FloatingActionButton addDeputadoFAB;
 
     public PoliticosFragment() {
