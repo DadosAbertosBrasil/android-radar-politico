@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import br.edu.ifce.engcomp.francis.radarpolitico.R;
+import br.edu.ifce.engcomp.francis.radarpolitico.models.IndexPath;
 import br.edu.ifce.engcomp.francis.radarpolitico.models.Votacao;
 import br.edu.ifce.engcomp.francis.radarpolitico.models.Voto;
 
@@ -49,6 +50,10 @@ public class VotacoesRecyclerViewAdapter extends SectionedRecyclerViewAdapter<Vo
 
         holder.title.setText(key.getResumo());
         holder.subtitle.setText(key.getDataVotacao());
+
+        if (holder.indexPath == null){
+            holder.indexPath = new IndexPath(section, -1);
+        }
     }
 
     @Override
@@ -58,7 +63,12 @@ public class VotacoesRecyclerViewAdapter extends SectionedRecyclerViewAdapter<Vo
         Voto voto = votos.get(relativePosition);
 
         holder.title.setText(voto.getDeputado().getNome());
+        holder.subtitle.setText(voto.getValue().toUpperCase());
         holder.setBackgroundColor(voto);
+
+        if (holder.indexPath == null){
+            holder.indexPath = new IndexPath(section, relativePosition);
+        }
     }
 
     @Override
@@ -77,6 +87,7 @@ public class VotacoesRecyclerViewAdapter extends SectionedRecyclerViewAdapter<Vo
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private int viewType;
         private View itemView;
+        private IndexPath indexPath;
 
         private TextView title;
         private TextView subtitle;
@@ -85,12 +96,22 @@ public class VotacoesRecyclerViewAdapter extends SectionedRecyclerViewAdapter<Vo
         public ViewHolder(View itemView) {
             super(itemView);
 
-            this.title = (TextView) itemView.findViewById(R.id.title);
-            this.subtitle = (TextView) itemView.findViewById(R.id.subtitle);
-            this.icon = (ImageView) itemView.findViewById(R.id.icon);
-            this.itemView = itemView;
+            this.title      = (TextView) itemView.findViewById(R.id.title);
+            this.subtitle   = (TextView) itemView.findViewById(R.id.subtitle);
+            this.icon       = (ImageView) itemView.findViewById(R.id.icon);
+            this.itemView   = itemView;
 
             this.itemView.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View v) {
+            if (this.viewType == VIEW_TYPE_HEADER) {
+                Toast.makeText(v.getContext(), "Header Click", Toast.LENGTH_SHORT).show();
+            }
+            else if(indexPath != null){
+                Toast.makeText(v.getContext(), String.format("Item cliked at: [%d, %d]", indexPath.getSection(), indexPath.getRow()), Toast.LENGTH_SHORT).show();
+            }
         }
 
         public void setBackgroundColor(Voto v) {
@@ -105,16 +126,6 @@ public class VotacoesRecyclerViewAdapter extends SectionedRecyclerViewAdapter<Vo
 
             this.itemView.setBackgroundColor(color);
 
-        }
-
-        @Override
-        public void onClick(View v) {
-            if (this.viewType == VIEW_TYPE_HEADER) {
-                Toast.makeText(v.getContext(), "Header Click", Toast.LENGTH_SHORT).show();
-            }
-            else {
-                Toast.makeText(v.getContext(), "Item Click", Toast.LENGTH_SHORT).show();
-            }
         }
     }
 
