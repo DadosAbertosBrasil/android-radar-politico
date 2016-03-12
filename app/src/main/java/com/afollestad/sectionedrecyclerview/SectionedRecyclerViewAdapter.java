@@ -139,9 +139,9 @@ public abstract class SectionedRecyclerViewAdapter<VH extends RecyclerView.ViewH
      * @hide
      * @deprecated
      */
-    @Deprecated
-    @Override
-    public final void onBindViewHolder(VH holder, int position, List<Object> payloads) {
-        super.onBindViewHolder(holder, position, payloads);
-    }
+//    @Deprecated
+//    @Override
+//    public final void onBindViewHolder(VH holder, int position, List<Object> payloads) {
+//        super.onBindViewHolder(holder, position, payloads);
+//    }
 }
