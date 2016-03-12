@@ -18,7 +18,10 @@
         android:layout_row="0"
         android:layout_column="0"
         android:textStyle="bold"
-        android:layout_margin="8dp" />
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="12dp" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -28,5 +31,8 @@
         android:id="@+id/subtitle"
         android:layout_row="0"
         android:layout_column="16"
-        android:layout_margin="8dp" />
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginBottom="12dp" />
 </GridLayout>

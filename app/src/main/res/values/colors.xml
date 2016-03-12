@@ -5,4 +5,6 @@
     <color name="colorAccent">#FFC107</color>
     <color name="colorBackground">#E0F2F1</color>
     <color name="colorWhite">#FFFFFF</color>
+    <color name="colorVoteNo">#FF5252</color>
+    <color name="colorVoteYes">#8BC34A</color>
 </resources>

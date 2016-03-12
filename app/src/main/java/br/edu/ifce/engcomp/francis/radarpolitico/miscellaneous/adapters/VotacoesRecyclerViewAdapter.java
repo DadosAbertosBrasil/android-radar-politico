@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.afollestad.sectionedrecyclerview.SectionedRecyclerViewAdapter;
 
@@ -65,10 +66,15 @@ public class VotacoesRecyclerViewAdapter extends SectionedRecyclerViewAdapter<Vo
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         View itemView = (View) inflater.inflate(resource, parent, false);
 
-        return new ViewHolder(itemView);
+        ViewHolder holder = new ViewHolder(itemView);
+        holder.viewType = viewType;
+
+        return holder;
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+        private int viewType;
+
         private TextView title;
         private TextView subtitle;
         private ImageView icon;
@@ -80,8 +86,18 @@ public class VotacoesRecyclerViewAdapter extends SectionedRecyclerViewAdapter<Vo
             this.subtitle = (TextView) itemView.findViewById(R.id.subtitle);
             this.icon = (ImageView) itemView.findViewById(R.id.icon);
 
+            itemView.setOnClickListener(this);
         }
 
+        @Override
+        public void onClick(View v) {
+            if (this.viewType == VIEW_TYPE_HEADER) {
+                Toast.makeText(v.getContext(), "Header Click", Toast.LENGTH_SHORT).show();
+            }
+            else {
+                Toast.makeText(v.getContext(), "Item Click", Toast.LENGTH_SHORT).show();
+            }
+        }
     }
 
 }
