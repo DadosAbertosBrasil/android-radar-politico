@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -78,7 +79,7 @@ public class DeputadoRecyclerViewAdapter extends RecyclerView.Adapter<DeputadoRe
 
         @Override
         public void onClick(View v) {
-
+            Toast.makeText(context, "Cliked", Toast.LENGTH_SHORT).show();
         }
     }
 }
