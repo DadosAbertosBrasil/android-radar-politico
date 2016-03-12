@@ -1,5 +1,6 @@
 package br.edu.ifce.engcomp.francis.radarpolitico.miscellaneous.adapters;
 
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -57,6 +58,7 @@ public class VotacoesRecyclerViewAdapter extends SectionedRecyclerViewAdapter<Vo
         Voto voto = votos.get(relativePosition);
 
         holder.title.setText(voto.getDeputado().getNome());
+        holder.setBackgroundColor(voto);
     }
 
     @Override
@@ -74,6 +76,7 @@ public class VotacoesRecyclerViewAdapter extends SectionedRecyclerViewAdapter<Vo
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private int viewType;
+        private View itemView;
 
         private TextView title;
         private TextView subtitle;
@@ -85,8 +88,23 @@ public class VotacoesRecyclerViewAdapter extends SectionedRecyclerViewAdapter<Vo
             this.title = (TextView) itemView.findViewById(R.id.title);
             this.subtitle = (TextView) itemView.findViewById(R.id.subtitle);
             this.icon = (ImageView) itemView.findViewById(R.id.icon);
+            this.itemView = itemView;
 
-            itemView.setOnClickListener(this);
+            this.itemView.setOnClickListener(this);
+        }
+
+        public void setBackgroundColor(Voto v) {
+            int color = this.itemView.getResources().getColor(R.color.colorBackground);
+
+            if(v.getValue().toLowerCase().equals("sim")) {
+                color = this.itemView.getResources().getColor(R.color.colorVoteYes);
+            }
+            else if (v.getValue().toLowerCase().equals("não")) {
+                color = this.itemView.getResources().getColor(R.color.colorVoteNo);
+            }
+
+            this.itemView.setBackgroundColor(color);
+
         }
 
         @Override
