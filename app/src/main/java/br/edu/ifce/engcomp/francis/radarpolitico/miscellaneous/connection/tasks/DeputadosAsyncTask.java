@@ -12,11 +12,11 @@ import br.edu.ifce.engcomp.francis.radarpolitico.models.Deputado;
 /**
  * Created by francisco on 15/03/16.
  */
-public class DeputadoAsyncTask extends AsyncTask<String, Void, ArrayList<Deputado>> {
+public class DeputadosAsyncTask extends AsyncTask<String, Void, ArrayList<Deputado>> {
     private Context context;
     private ProgressDialog progressDialog;
 
-    public DeputadoAsyncTask(Context context) {
+    public DeputadosAsyncTask(Context context) {
         this.context = context;
         this.progressDialog = new ProgressDialog(this.context);
     }

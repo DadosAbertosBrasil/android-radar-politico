@@ -21,7 +21,7 @@ public class CDUrlFormatter {
                 "ObterDeputados";
     }
 
-    public static String obterDeputados(String idDeputado, String numeroLegislatura) {
+    public static String obterDeputado(String idDeputado, String numeroLegislatura) {
         return DEPUTADOS_BASE_URL +
                 String.format("ObterDetalhesDeputado?ideCadastro=%s&numLegislatura=%s", idDeputado, numeroLegislatura);
     }

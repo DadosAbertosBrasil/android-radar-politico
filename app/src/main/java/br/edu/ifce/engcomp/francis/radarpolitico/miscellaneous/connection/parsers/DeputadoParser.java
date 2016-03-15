@@ -32,11 +32,11 @@ public class DeputadoParser {
 
         while (event != XmlPullParser.END_DOCUMENT) {
 
-            switch (event){
+            switch (event) {
                 case XmlPullParser.START_TAG:
                     tagAtual = parser.getName();
 
-                    if (tagAtual.equals("deputado")){
+                    if (tagAtual.equals("deputado")) {
                         deputadoAtual = new Deputado();
                     }
 
@@ -44,44 +44,32 @@ public class DeputadoParser {
 
                 case XmlPullParser.TEXT:
 
-                    if (!parser.getText().contains("\n")) {
-                        if (tagAtual.equals("ideCadastro")){
+                    if (!parser.getText().contains("\n") && deputadoAtual != null) {
+                        if (tagAtual.equals("ideCadastro")) {
                             deputadoAtual.setIdCadastro(parser.getText());
-                        }
-                        else if (tagAtual.equals("condicao")){
+                        } else if (tagAtual.equals("condicao")) {
                             deputadoAtual.setCondicao(parser.getText());
-                        }
-                        else if (tagAtual.equals("matricula")){
+                        } else if (tagAtual.equals("matricula")) {
                             deputadoAtual.setMatricula(parser.getText());
-                        }
-                        else if (tagAtual.equals("idParlamentar")){
+                        } else if (tagAtual.equals("idParlamentar")) {
                             deputadoAtual.setIdParlamentar(parser.getText());
-                        }
-                        else if (tagAtual.equals("nome")){
+                        } else if (tagAtual.equals("nome")) {
                             deputadoAtual.setNome(parser.getText());
-                        }
-                        else if (tagAtual.equals("nomeParlamentar")){
+                        } else if (tagAtual.equals("nomeParlamentar")) {
                             deputadoAtual.setNomeParlamentar(parser.getText());
-                        }
-                        else if (tagAtual.equals("urlFoto")){
+                        } else if (tagAtual.equals("urlFoto")) {
                             deputadoAtual.setUrlFoto(parser.getText());
-                        }
-                        else if (tagAtual.equals("uf")){
+                        } else if (tagAtual.equals("uf")) {
                             deputadoAtual.setUf(parser.getText());
-                        }
-                        else if (tagAtual.equals("partido")){
+                        } else if (tagAtual.equals("partido")) {
                             deputadoAtual.setPartido(parser.getText());
-                        }
-                        else if (tagAtual.equals("gabinete")){
+                        } else if (tagAtual.equals("gabinete")) {
                             deputadoAtual.setPartido(parser.getText());
-                        }
-                        else if (tagAtual.equals("anexo")){
+                        } else if (tagAtual.equals("anexo")) {
                             deputadoAtual.setAnexo(parser.getText());
-                        }
-                        else if (tagAtual.equals("fone")){
+                        } else if (tagAtual.equals("fone")) {
                             deputadoAtual.setFone(parser.getText());
-                        }
-                        else if (tagAtual.equals("email")){
+                        } else if (tagAtual.equals("email")) {
                             deputadoAtual.setEmail(parser.getText());
                         }
                     }

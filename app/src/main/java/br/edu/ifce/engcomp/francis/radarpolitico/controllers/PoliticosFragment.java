@@ -16,7 +16,6 @@ import java.util.ArrayList;
 
 import br.edu.ifce.engcomp.francis.radarpolitico.R;
 import br.edu.ifce.engcomp.francis.radarpolitico.miscellaneous.adapters.DeputadoRecyclerViewAdapter;
-import br.edu.ifce.engcomp.francis.radarpolitico.miscellaneous.connection.tasks.DeputadoAsyncTask;
 import br.edu.ifce.engcomp.francis.radarpolitico.models.Deputado;
 
 

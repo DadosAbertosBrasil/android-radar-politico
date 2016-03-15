@@ -41,7 +41,6 @@ public class DeputadoService {
 
                 stream.close();
                 connection.disconnect();
-
             }
 
         } catch (MalformedURLException e) {
