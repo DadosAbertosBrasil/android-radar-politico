@@ -1,7 +1,5 @@
 package br.edu.ifce.engcomp.francis.radarpolitico.models;
 
-import java.util.ArrayList;
-
 /**
  * Created by francisco on 12/03/16.
  */

@@ -14,8 +14,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import br.edu.ifce.engcomp.francis.radarpolitico.R;
-import br.edu.ifce.engcomp.francis.radarpolitico.dummy.VotacoesMock;
-import br.edu.ifce.engcomp.francis.radarpolitico.miscellaneous.adapters.DeputadoRecyclerViewAdapter;
 import br.edu.ifce.engcomp.francis.radarpolitico.miscellaneous.adapters.VotacoesRecyclerViewAdapter;
 import br.edu.ifce.engcomp.francis.radarpolitico.models.Votacao;
 import br.edu.ifce.engcomp.francis.radarpolitico.models.Voto;
@@ -26,9 +24,7 @@ public class VotacoesFragment extends Fragment {
 
     
     public VotacoesFragment() {
-        datasource = VotacoesMock.makeVotacao();
-
-//        datasource = new HashMap<>();
+        datasource = new HashMap<>();
     }
 
     @Override

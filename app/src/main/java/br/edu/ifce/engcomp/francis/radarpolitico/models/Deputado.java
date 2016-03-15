@@ -189,4 +189,27 @@ public class Deputado {
     public void setNomeProfissao(String nomeProfissao) {
         this.nomeProfissao = nomeProfissao;
     }
+
+    @Override
+    public String toString() {
+        return "Deputado{" +
+                "idCadastro='" + idCadastro + '\'' +
+                ", matricula='" + matricula + '\'' +
+                ", idParlamentar='" + idParlamentar + '\'' +
+                ", condicao='" + condicao + '\'' +
+                ", nome='" + nome + '\'' +
+                ", nomeParlamentar='" + nomeParlamentar + '\'' +
+                ", urlFoto='" + urlFoto + '\'' +
+                ", partido='" + partido + '\'' +
+                ", gabinete='" + gabinete + '\'' +
+                ", anexo='" + anexo + '\'' +
+                ", uf='" + uf + '\'' +
+                ", fone='" + fone + '\'' +
+                ", email='" + email + '\'' +
+                ", dataNascimento='" + dataNascimento + '\'' +
+                ", situacaoLegislaturaAtual='" + situacaoLegislaturaAtual + '\'' +
+                ", ufRepresentacaoAtual='" + ufRepresentacaoAtual + '\'' +
+                ", nomeProfissao='" + nomeProfissao + '\'' +
+                '}';
+    }
 }

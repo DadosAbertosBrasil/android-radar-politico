@@ -7,7 +7,6 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,8 +15,8 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 import br.edu.ifce.engcomp.francis.radarpolitico.R;
-import br.edu.ifce.engcomp.francis.radarpolitico.dummy.DeputadosMock;
 import br.edu.ifce.engcomp.francis.radarpolitico.miscellaneous.adapters.DeputadoRecyclerViewAdapter;
+import br.edu.ifce.engcomp.francis.radarpolitico.miscellaneous.connection.tasks.DeputadoAsyncTask;
 import br.edu.ifce.engcomp.francis.radarpolitico.models.Deputado;
 
 
@@ -64,6 +63,8 @@ public class PoliticosFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Toast.makeText(getActivity(), "Add a politician...", Toast.LENGTH_SHORT).show();
+                DeputadoAsyncTask task = new DeputadoAsyncTask(getActivity());
+                task.execute();
             }
         });
     }

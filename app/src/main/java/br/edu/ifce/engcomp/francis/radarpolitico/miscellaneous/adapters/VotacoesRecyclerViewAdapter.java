@@ -60,8 +60,8 @@ public class VotacoesRecyclerViewAdapter extends SectionedRecyclerViewAdapter<Vo
         ArrayList<Voto> votos = this.datasource.get(key);
         Voto voto = votos.get(relativePosition);
 
-        holder.title.setText(voto.getDeputado().getNome());
-        holder.subtitle.setText(voto.getValue().toUpperCase());
+//        holder.title.setText(voto.getDeputado().getNome());
+//        holder.subtitle.setText(voto.getValue().toUpperCase());
         holder.setBackgroundColor(voto);
 
         if (holder.indexPath == null){
@@ -115,10 +115,10 @@ public class VotacoesRecyclerViewAdapter extends SectionedRecyclerViewAdapter<Vo
         public void setBackgroundColor(Voto v) {
             int color = this.itemView.getResources().getColor(R.color.colorBackground);
 
-            if(v.getValue().toLowerCase().equals("sim")) {
+            if(v.getVoto().toLowerCase().equals("sim")) {
                 color = this.itemView.getResources().getColor(R.color.colorVoteYes);
             }
-            else if (v.getValue().toLowerCase().equals("não")) {
+            else if (v.getVoto().toLowerCase().equals("não")) {
                 color = this.itemView.getResources().getColor(R.color.colorVoteNo);
             }
 

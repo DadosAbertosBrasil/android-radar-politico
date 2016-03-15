@@ -17,8 +17,8 @@ public class CDUrlFormatter {
 //    Formatadores de url referentes a Deputados da Câmara
 
     public static String obterDeputados() {
-        return BASE_URL +
-                "dObterDeputados";
+        return DEPUTADOS_BASE_URL +
+                "ObterDeputados";
     }
 
     public static String obterDeputados(String idDeputado, String numeroLegislatura) {

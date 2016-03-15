@@ -8,8 +8,6 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.ViewGroup;
 
-import java.util.List;
-
 /**
  * @author Aidan Follestad (afollestad)
  */
