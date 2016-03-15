@@ -27,6 +27,9 @@ public class Deputado {
     private String ufRepresentacaoAtual;
     private String nomeProfissao;
 
+    public Deputado() {
+    }
+
     public Deputado(String idCadastro, String matricula, String idParlamentar, String condicao,
                     String nome, String nomeParlamentar, String urlFoto, String partido, String gabinete,
                     String anexo, String uf, String fone, String email, String dataNascimento, String situacaoLegislaturaAtual,

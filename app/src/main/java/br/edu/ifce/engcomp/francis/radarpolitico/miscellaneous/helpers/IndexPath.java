@@ -1,4 +1,4 @@
-package br.edu.ifce.engcomp.francis.radarpolitico.models;
+package br.edu.ifce.engcomp.francis.radarpolitico.miscellaneous.helpers;
 
 /**
  * Created by francisco on 12/03/16.

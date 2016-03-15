@@ -1,8 +1,6 @@
 package br.edu.ifce.engcomp.francis.radarpolitico.miscellaneous.adapters;
 
-import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,7 +14,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import br.edu.ifce.engcomp.francis.radarpolitico.R;
-import br.edu.ifce.engcomp.francis.radarpolitico.models.IndexPath;
+import br.edu.ifce.engcomp.francis.radarpolitico.miscellaneous.helpers.IndexPath;
 import br.edu.ifce.engcomp.francis.radarpolitico.models.Votacao;
 import br.edu.ifce.engcomp.francis.radarpolitico.models.Voto;
 
