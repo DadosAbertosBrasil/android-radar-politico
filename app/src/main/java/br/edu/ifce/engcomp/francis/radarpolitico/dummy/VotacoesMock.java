@@ -16,15 +16,15 @@ public class VotacoesMock {
     public static HashMap<Votacao, ArrayList<Voto>> makeVotacao(){
         Votacao votacao = new Votacao();
         votacao.setResumo("PDC 315/2016");
-        votacao.setDataVotacao("25/02/2016");
+        votacao.setData("25/02/2016");
 
         Votacao votacao2 = new Votacao();
         votacao2.setResumo("PDC 696/2015");
-        votacao2.setDataVotacao("18/02/2016");
+        votacao2.setData("18/02/2016");
 
         Votacao votacao3 = new Votacao();
         votacao3.setResumo("PDC 697/2015");
-        votacao3.setDataVotacao("18/02/2016");
+        votacao3.setData("18/02/2016");
 
         Deputado d1 = new Deputado("Afonso Mota", "", "PDC", "CE");
         Deputado d2 = new Deputado("Carlos Henrique Gaguim", "", "PDC", "CE");

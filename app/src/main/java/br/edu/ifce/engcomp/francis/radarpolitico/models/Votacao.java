@@ -7,18 +7,37 @@ import java.util.ArrayList;
  */
 public class Votacao {
     private String resumo;
-    private String dataVotacao;
 
-    private ArrayList<Voto> votos;
+    private String data;
+    private String hora;
+
+    private String objetoVotacao;
+    private String codigoSessao;
+
+    private int totalVotosSim;
+    private int totalVotosNao;
+    private int totalVotosAbstencao;
+    private int totalVotosObstrucao;
+    private int totalVotosSessao;
+
 
     public Votacao() {
 
     }
 
-    public Votacao(String resumo, ArrayList<Voto> votos, String dataVotacao) {
+    public Votacao(String resumo, String data, String hora, String objetoVotacao, String codigoSessao,
+                   int totalVotosSim, int totalVotosNao, int totalVotosAbstencao, int totalVotosObstrucao, int totalVotosSessao) {
+
         this.resumo = resumo;
-        this.votos = votos;
-        this.dataVotacao = dataVotacao;
+        this.data = data;
+        this.hora = hora;
+        this.objetoVotacao = objetoVotacao;
+        this.codigoSessao = codigoSessao;
+        this.totalVotosSim = totalVotosSim;
+        this.totalVotosNao = totalVotosNao;
+        this.totalVotosAbstencao = totalVotosAbstencao;
+        this.totalVotosObstrucao = totalVotosObstrucao;
+        this.totalVotosSessao = totalVotosSessao;
     }
 
     public String getResumo() {
@@ -29,27 +48,75 @@ public class Votacao {
         this.resumo = resumo;
     }
 
-    public ArrayList<Voto> getVotos() {
-        return votos;
+    public String getData() {
+        return data;
     }
 
-    public void setVotos(ArrayList<Voto> votos) {
-        this.votos = votos;
+    public void setData(String data) {
+        this.data = data;
     }
 
-    public String getDataVotacao() {
-        return dataVotacao;
+    public String getHora() {
+        return hora;
     }
 
-    public void setDataVotacao(String dataVotacao) {
-        this.dataVotacao = dataVotacao;
+    public void setHora(String hora) {
+        this.hora = hora;
     }
 
-    @Override
-    public String toString() {
-        return "Votacao{" +
-                "resumo='" + resumo + '\'' +
-                ", dataVotacao='" + dataVotacao + '\'' +
-                '}';
+    public String getObjetoVotacao() {
+        return objetoVotacao;
+    }
+
+    public void setObjetoVotacao(String objetoVotacao) {
+        this.objetoVotacao = objetoVotacao;
+    }
+
+    public String getCodigoSessao() {
+        return codigoSessao;
+    }
+
+    public void setCodigoSessao(String codigoSessao) {
+        this.codigoSessao = codigoSessao;
+    }
+
+    public int getTotalVotosSim() {
+        return totalVotosSim;
+    }
+
+    public void setTotalVotosSim(int totalVotosSim) {
+        this.totalVotosSim = totalVotosSim;
+    }
+
+    public int getTotalVotosNao() {
+        return totalVotosNao;
+    }
+
+    public void setTotalVotosNao(int totalVotosNao) {
+        this.totalVotosNao = totalVotosNao;
+    }
+
+    public int getTotalVotosAbstencao() {
+        return totalVotosAbstencao;
+    }
+
+    public void setTotalVotosAbstencao(int totalVotosAbstencao) {
+        this.totalVotosAbstencao = totalVotosAbstencao;
+    }
+
+    public int getTotalVotosObstrucao() {
+        return totalVotosObstrucao;
+    }
+
+    public void setTotalVotosObstrucao(int totalVotosObstrucao) {
+        this.totalVotosObstrucao = totalVotosObstrucao;
+    }
+
+    public int getTotalVotosSessao() {
+        return totalVotosSessao;
+    }
+
+    public void setTotalVotosSessao(int totalVotosSessao) {
+        this.totalVotosSessao = totalVotosSessao;
     }
 }

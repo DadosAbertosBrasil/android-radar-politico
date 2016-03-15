@@ -47,7 +47,7 @@ public class VotacoesRecyclerViewAdapter extends SectionedRecyclerViewAdapter<Vo
         Votacao key = (Votacao) this.datasource.keySet().toArray()[section];
 
         holder.title.setText(key.getResumo());
-        holder.subtitle.setText(key.getDataVotacao());
+        holder.subtitle.setText(key.getData());
 
         if (holder.indexPath == null){
             holder.indexPath = new IndexPath(section, -1);
