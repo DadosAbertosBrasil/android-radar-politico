@@ -1,11 +1,13 @@
 package br.edu.ifce.engcomp.francis.radarpolitico.miscellaneous.connection.parsers;
 
 import android.util.Log;
+import android.util.Xml;
 
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 import org.xmlpull.v1.XmlPullParserFactory;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 
@@ -15,40 +17,89 @@ import br.edu.ifce.engcomp.francis.radarpolitico.models.Deputado;
  * Created by francisco on 15/03/16.
  */
 public class DeputadoParser {
-    public static ArrayList<Deputado> parseDeputadosFromXML(InputStream xmlInputStream) throws XmlPullParserException {
+    public static ArrayList<Deputado> parseDeputadosFromXML(InputStream xmlInputStream) throws XmlPullParserException, IOException {
         XmlPullParserFactory xmlPullParserFactory = XmlPullParserFactory.newInstance();
         XmlPullParser parser = xmlPullParserFactory.newPullParser();
-        ArrayList<Deputado> deputados = new ArrayList<>();
-        int xmlEvent;
 
+        ArrayList<Deputado> deputados = new ArrayList<>();
+
+        parser.setFeature(XmlPullParser.FEATURE_PROCESS_NAMESPACES, false);
         parser.setInput(xmlInputStream, null);
 
-        while((xmlEvent = parser.getEventType()) != XmlPullParser.END_DOCUMENT) {
-            String eventName = parser.getName();
+        int event = parser.getEventType();
+        Deputado deputadoAtual = null;
+        String tagAtual = null;
 
-            if(xmlEvent == XmlPullParser.END_TAG){
-                if (eventName.equals("deputado")) {
-                    Deputado deputado = new Deputado();
+        while (event != XmlPullParser.END_DOCUMENT) {
 
-                    deputado.setIdCadastro(parser.getAttributeValue(null, "ideCadastro"));
-                    deputado.setCondicao(parser.getAttributeValue(null, "condicao"));
-                    deputado.setMatricula(parser.getAttributeValue(null, "matricula"));
-                    deputado.setIdParlamentar(parser.getAttributeValue(null, "idParlamentar"));
-                    deputado.setNome(parser.getAttributeValue(null, "nome"));
-                    deputado.setNomeParlamentar(parser.getAttributeValue(null, "nomeParlamentar"));
-                    deputado.setUrlFoto(parser.getAttributeValue(null, "urlFoto"));
-                    deputado.setUf(parser.getAttributeValue(null, "uf"));
-                    deputado.setPartido(parser.getAttributeValue(null, "partido"));
-                    deputado.setGabinete(parser.getAttributeValue(null, "gabinete"));
-                    deputado.setAnexo(parser.getAttributeValue(null, "anexo"));
-                    deputado.setFone(parser.getAttributeValue(null, "fone"));
-                    deputado.setEmail(parser.getAttributeValue(null, "email"));
+            switch (event){
+                case XmlPullParser.START_TAG:
+                    tagAtual = parser.getName();
 
-                    Log.i("XML PARSER", deputado.toString());
+                    if (tagAtual.equals("deputado")){
+                        deputadoAtual = new Deputado();
+                    }
 
-                    deputados.add(deputado);
-                }
+                    break;
+
+                case XmlPullParser.TEXT:
+
+                    if (!parser.getText().contains("\n")) {
+                        if (tagAtual.equals("ideCadastro")){
+                            deputadoAtual.setIdCadastro(parser.getText());
+                        }
+                        else if (tagAtual.equals("condicao")){
+                            deputadoAtual.setCondicao(parser.getText());
+                        }
+                        else if (tagAtual.equals("matricula")){
+                            deputadoAtual.setMatricula(parser.getText());
+                        }
+                        else if (tagAtual.equals("idParlamentar")){
+                            deputadoAtual.setIdParlamentar(parser.getText());
+                        }
+                        else if (tagAtual.equals("nome")){
+                            deputadoAtual.setNome(parser.getText());
+                        }
+                        else if (tagAtual.equals("nomeParlamentar")){
+                            deputadoAtual.setNomeParlamentar(parser.getText());
+                        }
+                        else if (tagAtual.equals("urlFoto")){
+                            deputadoAtual.setUrlFoto(parser.getText());
+                        }
+                        else if (tagAtual.equals("uf")){
+                            deputadoAtual.setUf(parser.getText());
+                        }
+                        else if (tagAtual.equals("partido")){
+                            deputadoAtual.setPartido(parser.getText());
+                        }
+                        else if (tagAtual.equals("gabinete")){
+                            deputadoAtual.setPartido(parser.getText());
+                        }
+                        else if (tagAtual.equals("anexo")){
+                            deputadoAtual.setAnexo(parser.getText());
+                        }
+                        else if (tagAtual.equals("fone")){
+                            deputadoAtual.setFone(parser.getText());
+                        }
+                        else if (tagAtual.equals("email")){
+                            deputadoAtual.setEmail(parser.getText());
+                        }
+                    }
+
+                    break;
+
+                case XmlPullParser.END_TAG:
+                    tagAtual = parser.getName();
+
+                    if (tagAtual.equals("deputado") && deputadoAtual != null) {
+                        deputados.add(deputadoAtual);
+                        deputadoAtual = null;
+                    }
+
+                    break;
             }
+
+            event = parser.next();
         }
 
         return deputados;

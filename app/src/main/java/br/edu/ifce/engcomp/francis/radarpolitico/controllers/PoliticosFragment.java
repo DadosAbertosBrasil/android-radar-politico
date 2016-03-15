@@ -63,8 +63,6 @@ public class PoliticosFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Toast.makeText(getActivity(), "Add a politician...", Toast.LENGTH_SHORT).show();
-                DeputadoAsyncTask task = new DeputadoAsyncTask(getActivity());
-                task.execute();
             }
         });
     }

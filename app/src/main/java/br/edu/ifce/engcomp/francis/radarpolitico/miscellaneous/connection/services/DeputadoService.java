@@ -5,6 +5,7 @@ import android.util.Log;
 import org.xmlpull.v1.XmlPullParserException;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -22,21 +23,25 @@ public class DeputadoService {
     public static ArrayList<Deputado> listAllDeputados(){
         ArrayList<Deputado> deputados = new ArrayList<>();
 
-        Log.i("ADDRESS", CDUrlFormatter.obterDeputados());
-
         try {
             URL url = new URL(CDUrlFormatter.obterDeputados());
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
 
+            connection.setReadTimeout(10000);
+            connection.setConnectTimeout(15000);
             connection.setRequestMethod("GET");
             connection.setDoInput(true);
-            connection.setRequestProperty("Content-type", "text/xml");
             connection.connect();
 
             int response_code = connection.getResponseCode();
 
             if (response_code == HttpURLConnection.HTTP_OK) {
-                deputados = DeputadoParser.parseDeputadosFromXML(connection.getInputStream());
+                InputStream stream = connection.getInputStream();
+                deputados = DeputadoParser.parseDeputadosFromXML(stream);
+
+                stream.close();
+                connection.disconnect();
+
             }
 
         } catch (MalformedURLException e) {
