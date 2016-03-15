@@ -4,31 +4,61 @@ package br.edu.ifce.engcomp.francis.radarpolitico.models;
  * Created by francisco on 12/03/16.
  */
 public class Voto {
-    private String value;
-    private Deputado deputado;
+    private String voto;
+
+    private String nome;
+    private String partido;
+    private String idCadastro;
+    private String uf;
 
     public Voto() {
-
     }
 
-    public Voto(String value, Deputado deputado) {
-        this.value = value;
-        this.deputado = deputado;
+    public Voto(String voto, String nome, String partido, String idCadastro, String uf) {
+        this.voto = voto;
+        this.nome = nome;
+        this.partido = partido;
+        this.idCadastro = idCadastro;
+        this.uf = uf;
     }
 
-    public String getValue() {
-        return value;
+    public String getVoto() {
+        return voto;
     }
 
-    public void setValue(String value) {
-        this.value = value;
+    public void setVoto(String voto) {
+        this.voto = voto;
     }
 
-    public Deputado getDeputado() {
-        return deputado;
+    public String getNome() {
+        return nome;
     }
 
-    public void setDeputado(Deputado deputado) {
-        this.deputado = deputado;
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public String getPartido() {
+        return partido;
+    }
+
+    public void setPartido(String partido) {
+        this.partido = partido;
+    }
+
+    public String getIdCadastro() {
+        return idCadastro;
+    }
+
+    public void setIdCadastro(String idCadastro) {
+        this.idCadastro = idCadastro;
+    }
+
+    public String getUf() {
+        return uf;
+    }
+
+    public void setUf(String uf) {
+        this.uf = uf;
     }
 }
