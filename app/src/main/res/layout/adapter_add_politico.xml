@@ -18,14 +18,14 @@
 
             <LinearLayout
                 android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_width="wrap_content"
+                android:layout_height="75dp">
 
                 <ImageView
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
-                    android:minHeight="80dp"
-                    android:minWidth="80dp"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:minHeight="50dp"
+                    android:minWidth="50dp"
                     android:id="@+id/add_politico_image_view"
                     android:layout_marginTop="8dp"
                     android:layout_marginLeft="8dp"
@@ -33,7 +33,7 @@
                     android:background="@color/colorPrimary" />
 
                 <GridLayout
-                    android:layout_width="252dp"
+                    android:layout_width="290dp"
                     android:layout_height="match_parent"
                     android:layout_marginTop="8dp">
 
@@ -46,24 +46,26 @@
                         android:layout_row="0"
                         android:layout_column="0" />
 
+                    <ImageButton
+                        android:layout_width="54dp"
+                        android:layout_height="44dp"
+                        android:id="@+id/add_politico_image_buttom"
+                        android:layout_row="2"
+                        android:layout_column="12"
+                        android:layout_marginRight="40dp"
+                        android:layout_marginBottom="30dp"
+                        android:clickable="true"
+                        android:src="@drawable/ic_plus"
+                        android:adjustViewBounds="false" />
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textAppearance="?android:attr/textAppearanceSmall"
                         android:text="Small Text"
                         android:id="@+id/add_politico_partido_text_view"
-                        android:layout_row="1"
+                        android:layout_row="2"
                         android:layout_column="0" />
-
-                    <ImageButton
-                        android:layout_width="54dp"
-                        android:layout_height="44dp"
-                        android:id="@+id/add_politico_image_buttom"
-                        android:layout_row="1"
-                        android:layout_column="10"
-                        android:layout_marginRight="20dp"
-                        android:clickable="true"
-                        android:src="@drawable/ic_add" />
 
                 </GridLayout>
 

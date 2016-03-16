@@ -33,7 +33,7 @@ public class AddDeputadoRecyclerViewAdapter extends RecyclerView.Adapter<AddDepu
     @Override
     public AddDeputadoRecyclerViewAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        View itemView = inflater.inflate(R.layout.adapter_politico, parent, false);
+        View itemView = inflater.inflate(R.layout.adapter_add_politico, parent, false);
 
         return new AddDeputadoRecyclerViewAdapter.ViewHolder(itemView);
     }
@@ -43,7 +43,7 @@ public class AddDeputadoRecyclerViewAdapter extends RecyclerView.Adapter<AddDepu
         Deputado deputado = this.dataSource.get(position);
 
         holder.nomePoliticoTextView.setText(deputado.getNome());
-        holder.partidoPoliticoTextView.setText(deputado.getPartido());
+        holder.partidoPoliticoTextView.setText(deputado.getPartido() + " - " + deputado.getUf());
     }
 
     @Override
@@ -60,9 +60,9 @@ public class AddDeputadoRecyclerViewAdapter extends RecyclerView.Adapter<AddDepu
         public ViewHolder(View itemView){
             super(itemView);
 
-            this.nomePoliticoTextView    = (TextView) itemView.findViewById(R.id.politico_nome_text_view);
-            this.partidoPoliticoTextView = (TextView) itemView.findViewById(R.id.politico_part_text_view);
-            this.fotoPoliticoImageView   = (ImageView) itemView.findViewById(R.id.politico_image_view);
+            this.nomePoliticoTextView    = (TextView) itemView.findViewById(R.id.add_politico_nome_text_view);
+            this.partidoPoliticoTextView = (TextView) itemView.findViewById(R.id.add_politico_partido_text_view);
+            this.fotoPoliticoImageView   = (ImageView) itemView.findViewById(R.id.add_politico_image_view);
 
             itemView.setOnClickListener(this);
         }

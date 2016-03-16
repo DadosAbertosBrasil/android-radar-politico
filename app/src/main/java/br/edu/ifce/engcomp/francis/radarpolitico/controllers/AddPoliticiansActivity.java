@@ -1,20 +1,16 @@
 package br.edu.ifce.engcomp.francis.radarpolitico.controllers;
 
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.view.View;
 
 import java.util.ArrayList;
 
 import br.edu.ifce.engcomp.francis.radarpolitico.R;
 import br.edu.ifce.engcomp.francis.radarpolitico.miscellaneous.adapters.AddDeputadoRecyclerViewAdapter;
-import br.edu.ifce.engcomp.francis.radarpolitico.miscellaneous.adapters.DeputadoRecyclerViewAdapter;
 import br.edu.ifce.engcomp.francis.radarpolitico.models.Deputado;
 
 public class AddPoliticiansActivity extends AppCompatActivity {
@@ -22,9 +18,22 @@ public class AddPoliticiansActivity extends AppCompatActivity {
     ArrayList<Deputado> datasource;
 
     public AddPoliticiansActivity(){
-        datasource = new ArrayList<>();
+        datasource = generateDataSourceMock();
     }
 
+    public ArrayList<Deputado> generateDataSourceMock(){
+        ArrayList<Deputado> deputados = new ArrayList<>();
+
+        Deputado teste1 = new Deputado("Joamila Brito", "PVDC", "CE");
+        Deputado teste2 = new Deputado("Francisco Souza", "PVDC", "CE");
+        Deputado teste3 = new Deputado("Ulysses Rocha", "PVDC", "CE");
+
+        deputados.add(teste1);
+        deputados.add(teste2);
+        deputados.add(teste3);
+
+        return deputados;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
