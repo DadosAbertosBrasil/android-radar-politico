@@ -16,7 +16,7 @@ import br.edu.ifce.engcomp.francis.radarpolitico.models.Deputado;
 /**
  * Created by francisco on 15/03/16.
  */
-public class DeputadoParser {
+public class DeputadosParser {
     public static ArrayList<Deputado> parseDeputadosFromXML(InputStream xmlInputStream) throws IOException, XmlPullParserException e {
         XmlPullParserFactory xmlPullParserFactory = XmlPullParserFactory.newInstance();
         XmlPullParser parser = xmlPullParserFactory.newPullParser();
