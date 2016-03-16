@@ -65,7 +65,6 @@ public class PoliticosFragment extends Fragment {
         this.addDeputadoFAB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Toast.makeText(getActivity(), "Add a politician...", Toast.LENGTH_SHORT).show();
                 Intent intentAddPoliticosActivity = new Intent (getActivity(), AddPoliticiansActivity.class);
                 startActivity(intentAddPoliticosActivity);
             }
