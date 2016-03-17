@@ -28,29 +28,7 @@ public class Proposicao {
     private String nomeAutor;
 
     public Proposicao() {
-    }
 
-    public Proposicao(String id, String nome, String sigla, String numero, String ano,
-                      String tipoProposicao, String tema, String ementa, String explicacaoEmenta,
-                      String indexacao, String regimeTramitacao, String situacao, String urlInteiroTeor,
-                      String quantidadeAutores, String idAutor, String nomeAutor) {
-
-        this.id = id;
-        this.nome = nome;
-        this.sigla = sigla;
-        this.numero = numero;
-        this.ano = ano;
-        this.tipoProposicao = tipoProposicao;
-        this.tema = tema;
-        this.ementa = ementa;
-        this.explicacaoEmenta = explicacaoEmenta;
-        this.indexacao = indexacao;
-        this.regimeTramitacao = regimeTramitacao;
-        this.situacao = situacao;
-        this.urlInteiroTeor = urlInteiroTeor;
-        this.quantidadeAutores = quantidadeAutores;
-        this.idAutor = idAutor;
-        this.nomeAutor = nomeAutor;
     }
 
     public String getId() {

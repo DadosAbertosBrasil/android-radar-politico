@@ -25,7 +25,6 @@ public class ProposicaoParser {
         Proposicao proposicao = new Proposicao();
 
         int xmlEvent = parser.getEventType();
-        Proposicao proposicao = new Proposicao();
         String tagAtual = "";
 
         while(xmlEvent != XmlPullParser.END_DOCUMENT){

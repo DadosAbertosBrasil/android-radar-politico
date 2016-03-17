@@ -14,14 +14,6 @@ public class Voto {
     public Voto() {
     }
 
-    public Voto(String voto, String nome, String partido, String idCadastro, String uf) {
-        this.voto = voto;
-        this.nome = nome;
-        this.partido = partido;
-        this.idCadastro = idCadastro;
-        this.uf = uf;
-    }
-
     public String getVoto() {
         return voto;
     }

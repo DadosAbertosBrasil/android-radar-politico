@@ -30,30 +30,6 @@ public class Deputado {
     public Deputado() {
     }
 
-    public Deputado(String idCadastro, String matricula, String idParlamentar, String condicao,
-                    String nome, String nomeParlamentar, String urlFoto, String partido, String gabinete,
-                    String anexo, String uf, String fone, String email, String dataNascimento, String situacaoLegislaturaAtual,
-                    String ufRepresentacaoAtual, String nomeProfissao) {
-
-        this.idCadastro = idCadastro;
-        this.matricula = matricula;
-        this.idParlamentar = idParlamentar;
-        this.condicao = condicao;
-        this.nome = nome;
-        this.nomeParlamentar = nomeParlamentar;
-        this.urlFoto = urlFoto;
-        this.partido = partido;
-        this.gabinete = gabinete;
-        this.anexo = anexo;
-        this.uf = uf;
-        this.fone = fone;
-        this.email = email;
-        this.dataNascimento = dataNascimento;
-        this.situacaoLegislaturaAtual = situacaoLegislaturaAtual;
-        this.ufRepresentacaoAtual = ufRepresentacaoAtual;
-        this.nomeProfissao = nomeProfissao;
-    }
-
     public String getIdCadastro() {
         return idCadastro;
     }

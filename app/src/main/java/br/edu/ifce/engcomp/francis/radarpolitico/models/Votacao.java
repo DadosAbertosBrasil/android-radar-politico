@@ -1,5 +1,7 @@
 package br.edu.ifce.engcomp.francis.radarpolitico.models;
 
+import java.util.ArrayList;
+
 /**
  * Created by francisco on 12/03/16.
  */
@@ -18,24 +20,18 @@ public class Votacao {
     private int totalVotosObstrucao;
     private int totalVotosSessao;
 
+    private ArrayList<Voto> votos;
 
     public Votacao() {
-
+        this.votos = new ArrayList<>();
     }
 
-    public Votacao(String resumo, String data, String hora, String objetoVotacao, String codigoSessao,
-                   int totalVotosSim, int totalVotosNao, int totalVotosAbstencao, int totalVotosObstrucao, int totalVotosSessao) {
+    public ArrayList<Voto> getVotos() {
+        return votos;
+    }
 
-        this.resumo = resumo;
-        this.data = data;
-        this.hora = hora;
-        this.objetoVotacao = objetoVotacao;
-        this.codigoSessao = codigoSessao;
-        this.totalVotosSim = totalVotosSim;
-        this.totalVotosNao = totalVotosNao;
-        this.totalVotosAbstencao = totalVotosAbstencao;
-        this.totalVotosObstrucao = totalVotosObstrucao;
-        this.totalVotosSessao = totalVotosSessao;
+    public void setVotos(ArrayList<Voto> votos) {
+        this.votos = votos;
     }
 
     public String getResumo() {

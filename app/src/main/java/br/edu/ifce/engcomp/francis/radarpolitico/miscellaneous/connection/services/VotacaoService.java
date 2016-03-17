@@ -8,19 +8,19 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 import br.edu.ifce.engcomp.francis.radarpolitico.miscellaneous.connection.CDUrlFormatter;
-import br.edu.ifce.engcomp.francis.radarpolitico.miscellaneous.connection.parsers.ProposicaoParser;
-import br.edu.ifce.engcomp.francis.radarpolitico.models.Proposicao;
+import br.edu.ifce.engcomp.francis.radarpolitico.miscellaneous.connection.parsers.VotacaoParser;
+import br.edu.ifce.engcomp.francis.radarpolitico.models.Votacao;
 
 /**
- * Created by francisco on 16/03/16.
+ * Created by francisco on 17/03/16.
  */
-public class ProposicaoService {
-    public static Proposicao obterProposicaoPorID(String idProposicao) {
-        Proposicao proposicao = new Proposicao();
+public class VotacaoService {
+    public static Votacao obterVotacaoDeProposicao(String sigla, String proposicaoID, String ano){
+        Votacao votacao = null;
 
-        try {
+        try{
 
-            URL url = new URL(CDUrlFormatter.obterProposicao(idProposicao));
+            URL url = new URL(CDUrlFormatter.obterVotacaoProposicao(sigla, proposicaoID, ano));
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
 
             connection.setReadTimeout(10000);
@@ -31,19 +31,19 @@ public class ProposicaoService {
 
             int responseCode = connection.getResponseCode();
 
-            if (responseCode == HttpURLConnection.HTTP_OK) {
+            if (responseCode == HttpURLConnection.HTTP_OK){
                 InputStream stream = connection.getInputStream();
-                proposicao = ProposicaoParser.parserProposicaoFromXML(stream);
+
+                votacao = VotacaoParser.parseVotacaoFromXML(stream);
 
                 stream.close();
                 connection.disconnect();
-
             }
 
         } catch (IOException | XmlPullParserException e) {
             e.printStackTrace();
         }
 
-        return proposicao;
+        return votacao;
     }
 }
