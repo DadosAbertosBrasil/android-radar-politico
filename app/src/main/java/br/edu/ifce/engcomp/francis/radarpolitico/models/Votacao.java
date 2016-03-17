@@ -113,4 +113,21 @@ public class Votacao {
     public void setTotalVotosSessao(int totalVotosSessao) {
         this.totalVotosSessao = totalVotosSessao;
     }
+
+    @Override
+    public String toString() {
+        return "Votacao{" +
+                "resumo='" + resumo + '\'' +
+                ", data='" + data + '\'' +
+                ", hora='" + hora + '\'' +
+                ", objetoVotacao='" + objetoVotacao + '\'' +
+                ", codigoSessao='" + codigoSessao + '\'' +
+                ", totalVotosSim=" + totalVotosSim +
+                ", totalVotosNao=" + totalVotosNao +
+                ", totalVotosAbstencao=" + totalVotosAbstencao +
+                ", totalVotosObstrucao=" + totalVotosObstrucao +
+                ", totalVotosSessao=" + totalVotosSessao +
+                ", votos=" + votos +
+                '}';
+    }
 }

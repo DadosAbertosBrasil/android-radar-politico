@@ -168,4 +168,27 @@ public class Proposicao {
     public void setNomeAutor(String nomeAutor) {
         this.nomeAutor = nomeAutor;
     }
+
+    @Override
+    public String toString() {
+        return "Proposicao{" +
+                "id='" + id + '\'' +
+                ", nome='" + nome + '\'' +
+                ", sigla='" + sigla + '\'' +
+                ", numero='" + numero + '\'' +
+                ", ano='" + ano + '\'' +
+                ", tipoProposicao='" + tipoProposicao + '\'' +
+                ", tema='" + tema + '\'' +
+                ", ementa='" + ementa + '\'' +
+                ", explicacaoEmenta='" + explicacaoEmenta + '\'' +
+                ", indexacao='" + indexacao + '\'' +
+                ", regimeTramitacao='" + regimeTramitacao + '\'' +
+                ", situacao='" + situacao + '\'' +
+                ", urlInteiroTeor='" + urlInteiroTeor + '\'' +
+                ", quantidadeAutores='" + quantidadeAutores + '\'' +
+                ", idAutor='" + idAutor + '\'' +
+                ", nomeAutor='" + nomeAutor + '\'' +
+                ", ultimaVotacao=" + ultimaVotacao +
+                '}';
+    }
 }

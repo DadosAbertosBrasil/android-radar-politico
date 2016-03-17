@@ -3,6 +3,7 @@ package br.edu.ifce.engcomp.francis.radarpolitico.miscellaneous.connection.tasks
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
+import android.util.Log;
 
 import java.util.ArrayList;
 
@@ -46,7 +47,7 @@ public class ProposicoesVotadasAsyncTask extends AsyncTask<String, Void, ArrayLi
 
         for (Proposicao proposicao : proposicoes) {
             proposicao = ProposicaoService.obterProposicaoPorID(proposicao.getId());
-            proposicao.setUltimaVotacao(VotacaoService.obterVotacaoDeProposicao(proposicao.getSigla(), proposicao.getId(), proposicao.getAno()));
+            proposicao.setUltimaVotacao(VotacaoService.obterVotacaoDeProposicao(proposicao.getSigla(), proposicao.getNumero(), proposicao.getAno()));
         }
 
         return proposicoes;

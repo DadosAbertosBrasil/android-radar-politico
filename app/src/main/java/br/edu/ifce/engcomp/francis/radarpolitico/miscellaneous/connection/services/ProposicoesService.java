@@ -46,6 +46,8 @@ public class ProposicoesService {
         } catch (IOException | XmlPullParserException e) {
             e.printStackTrace();
         }
+
+        return proposicoes;
     }
 
 }

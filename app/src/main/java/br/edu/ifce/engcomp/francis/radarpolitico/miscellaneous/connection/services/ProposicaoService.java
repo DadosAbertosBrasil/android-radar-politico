@@ -1,5 +1,7 @@
 package br.edu.ifce.engcomp.francis.radarpolitico.miscellaneous.connection.services;
 
+import android.util.Log;
+
 import org.xmlpull.v1.XmlPullParserException;
 
 import java.io.IOException;

@@ -33,18 +33,10 @@ public class ProposicaoParser {
                 case XmlPullParser.START_TAG:
                     tagAtual = parser.getName();
 
-                    switch (tagAtual) {
-                        case "proposicao":
-                            proposicao.setSigla(parser.getAttributeValue(null, "tipo"));
-                            break;
-
-                        case "numero":
-                            proposicao.setNumero(parser.getAttributeValue(null, "numero"));
-                            break;
-
-                        case "ano":
-                            proposicao.setAno(parser.getAttributeValue(null, "ano"));
-                            break;
+                    if (tagAtual.equals("proposicao")) {
+                        proposicao.setSigla(parser.getAttributeValue(null, "tipo").replaceAll("\\s", ""));
+                        proposicao.setNumero(parser.getAttributeValue(null, "numero"));
+                        proposicao.setAno(parser.getAttributeValue(null, "ano"));
                     }
 
                     break;
@@ -54,7 +46,7 @@ public class ProposicaoParser {
                     if (!parser.getText().contains("\n")) {
                         switch (tagAtual){
                             case "nomeProposicao":
-                                proposicao.setNumero(parser.getText());
+                                proposicao.setNome(parser.getText());
                                 break;
 
                             case "idProposicao":

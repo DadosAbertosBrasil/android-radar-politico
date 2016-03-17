@@ -1,5 +1,7 @@
 package br.edu.ifce.engcomp.francis.radarpolitico.miscellaneous.connection.services;
 
+import android.util.Log;
+
 import org.xmlpull.v1.XmlPullParserException;
 
 import java.io.IOException;
@@ -15,12 +17,12 @@ import br.edu.ifce.engcomp.francis.radarpolitico.models.Votacao;
  * Created by francisco on 17/03/16.
  */
 public class VotacaoService {
-    public static Votacao obterVotacaoDeProposicao(String sigla, String proposicaoID, String ano){
+    public static Votacao obterVotacaoDeProposicao(String sigla, String proposicaoNumero, String ano){
         Votacao votacao = null;
 
         try{
 
-            URL url = new URL(CDUrlFormatter.obterVotacaoProposicao(sigla, proposicaoID, ano));
+            URL url = new URL(CDUrlFormatter.obterVotacaoProposicao(sigla, proposicaoNumero, ano));
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
 
             connection.setReadTimeout(10000);

@@ -1,5 +1,7 @@
 package br.edu.ifce.engcomp.francis.radarpolitico.miscellaneous.connection.parsers;
 
+import android.util.Log;
+
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 import org.xmlpull.v1.XmlPullParserFactory;
@@ -67,6 +69,8 @@ public class VotacaoParser {
                     tagAtual = parser.getName();
 
                     if(tagAtual.equals("Votacao")){
+                        Log.i("VOTACAO-PARSER-LOG", votacao.toString());
+
                         votacoes.add(votacao);
                         votacao = null;
                     }

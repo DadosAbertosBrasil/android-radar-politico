@@ -15,6 +15,7 @@ import java.util.HashMap;
 
 import br.edu.ifce.engcomp.francis.radarpolitico.R;
 import br.edu.ifce.engcomp.francis.radarpolitico.miscellaneous.adapters.VotacoesRecyclerViewAdapter;
+import br.edu.ifce.engcomp.francis.radarpolitico.miscellaneous.connection.tasks.ProposicoesVotadasAsyncTask;
 import br.edu.ifce.engcomp.francis.radarpolitico.models.Votacao;
 import br.edu.ifce.engcomp.francis.radarpolitico.models.Voto;
 
@@ -25,6 +26,14 @@ public class VotacoesFragment extends Fragment {
     
     public VotacoesFragment() {
         datasource = new HashMap<>();
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        ProposicoesVotadasAsyncTask task = new ProposicoesVotadasAsyncTask(getActivity());
+        task.execute("2016");
     }
 
     @Override
