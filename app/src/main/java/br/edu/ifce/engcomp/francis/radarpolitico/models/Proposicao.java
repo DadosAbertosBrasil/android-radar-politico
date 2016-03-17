@@ -27,8 +27,18 @@ public class Proposicao {
     private String idAutor;
     private String nomeAutor;
 
+    private Votacao ultimaVotacao;
+
     public Proposicao() {
 
+    }
+
+    public Votacao getUltimaVotacao() {
+        return ultimaVotacao;
+    }
+
+    public void setUltimaVotacao(Votacao ultimaVotacao) {
+        this.ultimaVotacao = ultimaVotacao;
     }
 
     public String getId() {
