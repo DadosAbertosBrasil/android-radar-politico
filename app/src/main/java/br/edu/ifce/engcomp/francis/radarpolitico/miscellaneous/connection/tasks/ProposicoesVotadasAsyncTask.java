@@ -7,13 +7,11 @@ import android.util.Log;
 
 import java.util.ArrayList;
 
-import br.edu.ifce.engcomp.francis.radarpolitico.miscellaneous.connection.parsers.ProposicoesParser;
+import br.edu.ifce.engcomp.francis.radarpolitico.miscellaneous.connection.interfaces.OnVotedPropositionsHasLoaded;
 import br.edu.ifce.engcomp.francis.radarpolitico.miscellaneous.connection.services.ProposicaoService;
 import br.edu.ifce.engcomp.francis.radarpolitico.miscellaneous.connection.services.ProposicoesService;
 import br.edu.ifce.engcomp.francis.radarpolitico.miscellaneous.connection.services.VotacaoService;
-import br.edu.ifce.engcomp.francis.radarpolitico.models.Deputado;
 import br.edu.ifce.engcomp.francis.radarpolitico.models.Proposicao;
-import br.edu.ifce.engcomp.francis.radarpolitico.models.Votacao;
 
 /**
  *
@@ -24,10 +22,12 @@ import br.edu.ifce.engcomp.francis.radarpolitico.models.Votacao;
 
 public class ProposicoesVotadasAsyncTask extends AsyncTask<String, Void, ArrayList<Proposicao>>{
     private Context context;
+    private OnVotedPropositionsHasLoaded propositionsHasLoadedDelegate;
     private ProgressDialog progressDialog;
 
-    public ProposicoesVotadasAsyncTask(Context context) {
+    public ProposicoesVotadasAsyncTask(Context context, OnVotedPropositionsHasLoaded propositionsHasLoadedDelegate) {
         this.context = context;
+        this.propositionsHasLoadedDelegate = propositionsHasLoadedDelegate;
         this.progressDialog = new ProgressDialog(this.context);
     }
 
@@ -46,8 +46,11 @@ public class ProposicoesVotadasAsyncTask extends AsyncTask<String, Void, ArrayLi
         ArrayList<Proposicao> proposicoes = ProposicoesService.loadProposicoesVotadasNoAno(params[0]);
 
         for (Proposicao proposicao : proposicoes) {
-            proposicao = ProposicaoService.obterProposicaoPorID(proposicao.getId());
-            proposicao.setUltimaVotacao(VotacaoService.obterVotacaoDeProposicao(proposicao.getSigla(), proposicao.getNumero(), proposicao.getAno()));
+            Proposicao p = ProposicaoService.obterProposicaoPorID(proposicao.getId());
+            p.setUltimaVotacao(VotacaoService.obterVotacaoDeProposicao(p.getSigla(), p.getNumero(), p.getAno()));
+
+            proposicao.merge(p);
+
         }
 
         return proposicoes;
@@ -57,6 +60,7 @@ public class ProposicoesVotadasAsyncTask extends AsyncTask<String, Void, ArrayLi
     protected void onPostExecute(ArrayList<Proposicao> proposicoes) {
         super.onPostExecute(proposicoes);
 
+        this.propositionsHasLoadedDelegate.onPrepositionsLoaded(proposicoes);
         this.progressDialog.dismiss();
     }
 }

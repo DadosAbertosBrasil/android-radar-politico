@@ -44,8 +44,8 @@ public class VotacaoParser {
                         votacao = new Votacao();
 
                         votacao.setResumo(parser.getAttributeValue(null, "Resumo"));
-                        votacao.setData(parser.getAttributeValue(null, "Data"));
-                        votacao.setHora(parser.getAttributeValue(null, "Hora"));
+                        votacao.setData(parser.getAttributeValue(null, "Data").replaceAll("\\s", ""));
+                        votacao.setHora(parser.getAttributeValue(null, "Hora").replaceAll("\\s", ""));
                         votacao.setObjetoVotacao(parser.getAttributeValue(null, "ObjVotacao"));
                         votacao.setCodigoSessao(parser.getAttributeValue(null, "codSessao"));
                     }
@@ -53,10 +53,10 @@ public class VotacaoParser {
                         voto = new Voto();
 
                         voto.setNome(parser.getAttributeValue(null, "Nome"));
-                        voto.setIdCadastro(parser.getAttributeValue(null, "ideCadastro"));
-                        voto.setPartido(parser.getAttributeValue(null, "Partido"));
-                        voto.setUf(parser.getAttributeValue(null, "UF"));
-                        voto.setVoto(parser.getAttributeValue(null, "Voto"));
+                        voto.setIdCadastro(parser.getAttributeValue(null, "ideCadastro").replaceAll("\\s", ""));
+                        voto.setPartido(parser.getAttributeValue(null, "Partido").replaceAll("\\s", ""));
+                        voto.setUf(parser.getAttributeValue(null, "UF").replaceAll("\\s", ""));
+                        voto.setVoto(parser.getAttributeValue(null, "Voto").replaceAll("\\s", ""));
                     }
 
                     break;
@@ -69,8 +69,6 @@ public class VotacaoParser {
                     tagAtual = parser.getName();
 
                     if(tagAtual.equals("Votacao")){
-                        Log.i("VOTACAO-PARSER-LOG", votacao.toString());
-
                         votacoes.add(votacao);
                         votacao = null;
                     }

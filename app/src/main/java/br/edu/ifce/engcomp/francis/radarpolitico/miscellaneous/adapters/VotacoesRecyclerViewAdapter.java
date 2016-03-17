@@ -1,6 +1,7 @@
 package br.edu.ifce.engcomp.francis.radarpolitico.miscellaneous.adapters;
 
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -60,8 +61,8 @@ public class VotacoesRecyclerViewAdapter extends SectionedRecyclerViewAdapter<Vo
         ArrayList<Voto> votos = this.datasource.get(key);
         Voto voto = votos.get(relativePosition);
 
-//        holder.title.setText(voto.getDeputado().getNome());
-//        holder.subtitle.setText(voto.getValue().toUpperCase());
+        holder.title.setText(voto.getNome());
+        holder.subtitle.setText(voto.getVoto().toUpperCase());
         holder.setBackgroundColor(voto);
 
         if (holder.indexPath == null){

@@ -33,6 +33,24 @@ public class Proposicao {
 
     }
 
+    public void merge(Proposicao p){
+        this.nome = p.nome == null? this.nome : p.nome;
+        this.sigla = p.sigla == null? this.sigla : p.sigla;
+        this.ano = p.ano == null? this.ano : p.ano;
+        this.tipoProposicao = p.tipoProposicao == null? this.tipoProposicao : p.tipoProposicao;
+        this.tema = p.tema == null? this.tema : p.tema;
+        this.ementa = p.ementa == null? this.ementa : p.ementa;
+        this.explicacaoEmenta = p.explicacaoEmenta == null? this.explicacaoEmenta : p.explicacaoEmenta;
+        this.indexacao = p.indexacao == null? this.indexacao : p.indexacao;
+        this.regimeTramitacao = p.regimeTramitacao == null? this.regimeTramitacao : p.regimeTramitacao;
+        this.situacao = p.situacao == null? this.situacao : p.situacao;
+        this.urlInteiroTeor = p.urlInteiroTeor == null? this.urlInteiroTeor : p.urlInteiroTeor;
+        this.quantidadeAutores = p.quantidadeAutores == null? this.quantidadeAutores : p.quantidadeAutores;
+        this.idAutor = p.idAutor == null? this.idAutor : p.idAutor;
+        this.nomeAutor = p.nomeAutor == null? this.nomeAutor : p.nomeAutor;
+        this.ultimaVotacao = p.ultimaVotacao == null? this.ultimaVotacao : p.ultimaVotacao;
+    }
+
     public Votacao getUltimaVotacao() {
         return ultimaVotacao;
     }
