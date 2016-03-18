@@ -21,12 +21,13 @@ public class AddPoliticiansActivity extends AppCompatActivity {
         datasource = generateDataSourceMock();
     }
 
+    
     public ArrayList<Deputado> generateDataSourceMock(){
         ArrayList<Deputado> deputados = new ArrayList<>();
 
         Deputado teste1 = new Deputado("Joamila Brito", "PVDC", "CE");
         Deputado teste2 = new Deputado("Francisco Souza", "PVDC", "CE");
-        Deputado teste3 = new Deputado("Ulysses Rocha", "PVDC", "CE");
+        Deputado teste3 = new Deputado("Ulysses Rocha", "PVDC", "RJ");
 
         deputados.add(teste1);
         deputados.add(teste2);
