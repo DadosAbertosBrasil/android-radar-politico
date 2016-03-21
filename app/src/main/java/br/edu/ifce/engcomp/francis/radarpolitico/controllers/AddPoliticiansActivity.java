@@ -40,12 +40,12 @@ public class AddPoliticiansActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_politicians);
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         this.recyclerView   = (RecyclerView) findViewById(R.id.add_politicos_recyler_view);
         initRecyclerView();
-
     }
 
     private void initRecyclerView() {
