@@ -42,7 +42,7 @@ public class AddDeputadoRecyclerViewAdapter extends RecyclerView.Adapter<AddDepu
     public void onBindViewHolder(AddDeputadoRecyclerViewAdapter.ViewHolder holder, int position) {
         Deputado deputado = this.dataSource.get(position);
 
-        holder.nomePoliticoTextView.setText(deputado.getNome());
+        holder.nomePoliticoTextView.setText(deputado.getNomeParlamentar());
         holder.partidoPoliticoTextView.setText(deputado.getPartido() + " - " + deputado.getUf());
     }
 
