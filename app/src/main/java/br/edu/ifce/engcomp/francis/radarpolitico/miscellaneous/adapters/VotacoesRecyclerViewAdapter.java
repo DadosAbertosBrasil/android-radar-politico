@@ -1,6 +1,5 @@
 package br.edu.ifce.engcomp.francis.radarpolitico.miscellaneous.adapters;
 
-import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -16,7 +15,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import br.edu.ifce.engcomp.francis.radarpolitico.R;
-import br.edu.ifce.engcomp.francis.radarpolitico.models.IndexPath;
+import br.edu.ifce.engcomp.francis.radarpolitico.miscellaneous.helpers.IndexPath;
 import br.edu.ifce.engcomp.francis.radarpolitico.models.Votacao;
 import br.edu.ifce.engcomp.francis.radarpolitico.models.Voto;
 
@@ -49,7 +48,7 @@ public class VotacoesRecyclerViewAdapter extends SectionedRecyclerViewAdapter<Vo
         Votacao key = (Votacao) this.datasource.keySet().toArray()[section];
 
         holder.title.setText(key.getResumo());
-        holder.subtitle.setText(key.getDataVotacao());
+        holder.subtitle.setText(key.getData());
 
         if (holder.indexPath == null){
             holder.indexPath = new IndexPath(section, -1);
@@ -62,8 +61,8 @@ public class VotacoesRecyclerViewAdapter extends SectionedRecyclerViewAdapter<Vo
         ArrayList<Voto> votos = this.datasource.get(key);
         Voto voto = votos.get(relativePosition);
 
-        holder.title.setText(voto.getDeputado().getNome());
-        holder.subtitle.setText(voto.getValue().toUpperCase());
+        holder.title.setText(voto.getNome());
+        holder.subtitle.setText(voto.getVoto().toUpperCase());
         holder.setBackgroundColor(voto);
 
         if (holder.indexPath == null){
@@ -117,10 +116,10 @@ public class VotacoesRecyclerViewAdapter extends SectionedRecyclerViewAdapter<Vo
         public void setBackgroundColor(Voto v) {
             int color = this.itemView.getResources().getColor(R.color.colorBackground);
 
-            if(v.getValue().toLowerCase().equals("sim")) {
+            if(v.getVoto().toLowerCase().equals("sim")) {
                 color = this.itemView.getResources().getColor(R.color.colorVoteYes);
             }
-            else if (v.getValue().toLowerCase().equals("não")) {
+            else if (v.getVoto().toLowerCase().equals("não")) {
                 color = this.itemView.getResources().getColor(R.color.colorVoteNo);
             }
 
