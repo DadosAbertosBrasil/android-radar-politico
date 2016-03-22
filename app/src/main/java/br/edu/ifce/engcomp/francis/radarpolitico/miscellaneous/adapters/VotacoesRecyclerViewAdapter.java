@@ -50,9 +50,8 @@ public class VotacoesRecyclerViewAdapter extends SectionedRecyclerViewAdapter<Vo
         holder.title.setText(key.getResumo());
         holder.subtitle.setText(key.getData());
 
-        if (holder.indexPath == null){
-            holder.indexPath = new IndexPath(section, -1);
-        }
+        holder.indexPath.setSection(section);
+        holder.indexPath.setRow(-1);
     }
 
     @Override
@@ -65,9 +64,10 @@ public class VotacoesRecyclerViewAdapter extends SectionedRecyclerViewAdapter<Vo
         holder.subtitle.setText(voto.getVoto().toUpperCase());
         holder.setBackgroundColor(voto);
 
-        if (holder.indexPath == null){
-            holder.indexPath = new IndexPath(section, relativePosition);
-        }
+        Log.i("SECTION", String.valueOf(section));
+
+        holder.indexPath.setSection(section);
+        holder.indexPath.setRow(relativePosition);
     }
 
     @Override
@@ -101,6 +101,7 @@ public class VotacoesRecyclerViewAdapter extends SectionedRecyclerViewAdapter<Vo
             this.itemView   = itemView;
 
             this.itemView.setOnClickListener(this);
+            this.indexPath = new IndexPath();
         }
 
         @Override
