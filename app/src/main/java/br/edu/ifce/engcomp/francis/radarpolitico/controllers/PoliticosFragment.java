@@ -1,9 +1,11 @@
 package br.edu.ifce.engcomp.francis.radarpolitico.controllers;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -61,7 +63,8 @@ public class PoliticosFragment extends Fragment {
         this.addDeputadoFAB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getActivity(), "Add a politician...", Toast.LENGTH_SHORT).show();
+                Intent intentAddPoliticosActivity = new Intent (getActivity(), AddPoliticiansActivity.class);
+                startActivity(intentAddPoliticosActivity);
             }
         });
     }

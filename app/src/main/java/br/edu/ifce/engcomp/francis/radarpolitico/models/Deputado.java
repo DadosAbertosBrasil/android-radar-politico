@@ -62,6 +62,12 @@ public class Deputado {
         this.condicao = condicao;
     }
 
+    public Deputado(String nome, String partido, String uf){
+        this.nome = nome;
+        this.partido = partido;
+        this.uf = uf;
+    }
+
     public String getNome() {
         return nome;
     }
