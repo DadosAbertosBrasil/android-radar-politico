@@ -9,9 +9,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.apache.commons.lang3.text.WordUtils;
+
 import java.util.ArrayList;
 
 import br.edu.ifce.engcomp.francis.radarpolitico.R;
+import br.edu.ifce.engcomp.francis.radarpolitico.miscellaneous.helpers.IndexPath;
 import br.edu.ifce.engcomp.francis.radarpolitico.models.Deputado;
 
 /**
@@ -42,8 +45,10 @@ public class AddDeputadoRecyclerViewAdapter extends RecyclerView.Adapter<AddDepu
     public void onBindViewHolder(AddDeputadoRecyclerViewAdapter.ViewHolder holder, int position) {
         Deputado deputado = this.dataSource.get(position);
 
-        holder.nomePoliticoTextView.setText(deputado.getNomeParlamentar());
-        holder.partidoPoliticoTextView.setText(deputado.getPartido() + " - " + deputado.getUf());
+        holder.nomePoliticoTextView.setText(WordUtils.capitalize(deputado.getNomeParlamentar().toLowerCase()));
+        holder.partidoPoliticoTextView.setText(String.format("%s - %s", deputado.getPartido(), deputado.getUf()));
+
+        holder.indexPath.setPath(0, position);
     }
 
     @Override
@@ -56,6 +61,8 @@ public class AddDeputadoRecyclerViewAdapter extends RecyclerView.Adapter<AddDepu
         private TextView partidoPoliticoTextView;
         private ImageView fotoPoliticoImageView;
 
+        private IndexPath indexPath;
+
 
         public ViewHolder(View itemView){
             super(itemView);
@@ -63,6 +70,7 @@ public class AddDeputadoRecyclerViewAdapter extends RecyclerView.Adapter<AddDepu
             this.nomePoliticoTextView    = (TextView) itemView.findViewById(R.id.add_politico_nome_text_view);
             this.partidoPoliticoTextView = (TextView) itemView.findViewById(R.id.add_politico_partido_text_view);
             this.fotoPoliticoImageView   = (ImageView) itemView.findViewById(R.id.add_politico_image_view);
+            this.indexPath = new IndexPath();
 
             itemView.setOnClickListener(this);
         }

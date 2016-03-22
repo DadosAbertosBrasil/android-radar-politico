@@ -44,8 +44,6 @@ public class DeputadosAsyncTask extends AsyncTask<String, Void, ArrayList<Deputa
 
     @Override
     protected void onPostExecute(ArrayList<Deputado> deputados) {
-        Log.i("DEPUTADOS-TASK", String.valueOf(deputados.size()));
-
         super.onPostExecute(deputados);
         this.progressDialog.dismiss();
 

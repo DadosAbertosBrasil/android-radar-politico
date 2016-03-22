@@ -74,7 +74,7 @@ public class DeputadosParser {
                                 deputadoAtual.setPartido(parser.getText());
                                 break;
                             case "gabinete":
-                                deputadoAtual.setPartido(parser.getText());
+                                deputadoAtual.setGabinete(parser.getText());
                                 break;
                             case "anexo":
                                 deputadoAtual.setAnexo(parser.getText());

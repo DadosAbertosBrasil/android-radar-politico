@@ -39,8 +39,6 @@ public class DeputadoService {
                 InputStream stream = connection.getInputStream();
                 deputados = DeputadosParser.parseDeputadosFromXML(stream);
 
-                Log.i("DEPUTADOS", String.valueOf(deputados.size()));
-
                 stream.close();
                 connection.disconnect();
             }

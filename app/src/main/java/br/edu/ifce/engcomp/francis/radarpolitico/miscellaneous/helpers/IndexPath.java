@@ -15,6 +15,11 @@ public class IndexPath {
     public IndexPath() {
     }
 
+    public void setPath(int section, int row){
+        this.section = section;
+        this.row = row;
+    }
+
     public int getSection() {
         return section;
     }
