@@ -2,6 +2,7 @@ package br.edu.ifce.engcomp.francis.radarpolitico.controllers;
 
 import android.app.Activity;
 import android.app.SearchManager;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
@@ -62,8 +63,9 @@ public class SearchViewActivity extends Activity {
 
         searchView.setQueryHint("procurar deputado");
 
-        //ComponentName cn = new ComponentName(this, AddPoliticiansActivity.class);
-        //searchView.setSearchableInfo(searchManager.getSearchableInfo(cn));
+        ComponentName cn = new ComponentName(this, SearchViewActivity.class);
+        searchView.setSearchableInfo(searchManager.getSearchableInfo(cn));
+
         return onCreateOptionsMenu(menu);
     }
 

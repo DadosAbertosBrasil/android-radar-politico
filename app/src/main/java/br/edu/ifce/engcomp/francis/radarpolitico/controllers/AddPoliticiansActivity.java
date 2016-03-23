@@ -42,11 +42,16 @@ public class AddPoliticiansActivity extends AppCompatActivity {
         setContentView(R.layout.activity_add_politicians);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        if(toolbar!=null){
+            setSupportActionBar(toolbar);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setDisplayShowHomeEnabled(true);
+        }
 
         this.recyclerView   = (RecyclerView) findViewById(R.id.add_politicos_recyler_view);
         initRecyclerView();
     }
+
 
     private void initRecyclerView() {
         LinearLayoutManager layoutManager   = new LinearLayoutManager(this);
