@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="br.edu.ifce.engcomp.francis.radarpolitico.controllers.DeputadoActivity"
+    tools:showIn="@layout/activity_deputado">
+
+    <ImageView
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:id="@+id/foto_deputado_image_view"
+        android:src="@drawable/ic_smile"
+        android:background="@color/colorPrimary" />
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_marginLeft="95dp"
+        android:layout_marginTop="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Nome Deputado"
+            android:id="@+id/nome_deputado_text_view"
+            android:textColor="#000000" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="Partido/UF"
+            android:id="@+id/partido_deputado_text_view"
+            android:layout_gravity="center_vertical" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="Profissão Deputado"
+            android:id="@+id/profissao_deputado_text_view"
+            android:layout_gravity="center_vertical" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="00/00/0000"
+            android:id="@+id/data_nasc_deputado_text_view"
+            android:layout_gravity="center_vertical" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:textSize="18sp"
+            android:text="Entre em contato com o deputado (email)"
+            android:background="@color/colorBackground"
+            android:id="@+id/email_deputado_text_view"
+            android:layout_gravity="center_vertical" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="90dp"
+            android:textSize="16dp"
+            android:text="Telefone: 99-9999-9999"
+            android:id="@+id/telefone_deputado_text_view"
+            android:layout_gravity="center_vertical" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="40dp"
+            android:layout_height="2dp"
+
+            android:layout_marginTop="20dp"
+            android:background="@android:color/darker_gray"/>
+
+    </LinearLayout>
+
+
+
+</RelativeLayout>
