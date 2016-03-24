@@ -1,5 +1,6 @@
 package br.edu.ifce.engcomp.francis.radarpolitico.controllers;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -11,17 +12,20 @@ import java.util.ArrayList;
 
 import br.edu.ifce.engcomp.francis.radarpolitico.R;
 import br.edu.ifce.engcomp.francis.radarpolitico.miscellaneous.adapters.AddDeputadoRecyclerViewAdapter;
+import br.edu.ifce.engcomp.francis.radarpolitico.miscellaneous.connection.interfaces.OnLoadDeputadosHasFinished;
+import br.edu.ifce.engcomp.francis.radarpolitico.miscellaneous.connection.tasks.DeputadosAsyncTask;
 import br.edu.ifce.engcomp.francis.radarpolitico.models.Deputado;
 
-public class AddPoliticiansActivity extends AppCompatActivity {
+public class AddPoliticiansActivity extends AppCompatActivity implements OnLoadDeputadosHasFinished {
     RecyclerView recyclerView;
     ArrayList<Deputado> datasource;
+    AddDeputadoRecyclerViewAdapter adapter;
+
 
     public AddPoliticiansActivity(){
-        datasource = generateDataSourceMock();
+        this.datasource = new ArrayList<>();
     }
 
-    
     public ArrayList<Deputado> generateDataSourceMock(){
         ArrayList<Deputado> deputados = new ArrayList<>();
 
@@ -50,12 +54,32 @@ public class AddPoliticiansActivity extends AppCompatActivity {
 
         this.recyclerView   = (RecyclerView) findViewById(R.id.add_politicos_recyler_view);
         initRecyclerView();
+
+        DeputadosAsyncTask task = new DeputadosAsyncTask(this, this);
+        task.execute();
+    }
+
+    @Override
+    public void onDeputadosFinishedLoading(ArrayList<Deputado> deputados) {
+        this.datasource.clear();
+        this.datasource.addAll(deputados);
+        this.adapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+
+        Intent resultIntent = new Intent();
+        resultIntent.putExtra("DEPUTADO_ADD", adapter.deputadoFoiAdicioando);
+
+        setResult(RESULT_OK, resultIntent);
     }
 
 
     private void initRecyclerView() {
         LinearLayoutManager layoutManager   = new LinearLayoutManager(this);
-        AddDeputadoRecyclerViewAdapter adapter = new AddDeputadoRecyclerViewAdapter(this.datasource, this);
+        this.adapter = new AddDeputadoRecyclerViewAdapter(this.datasource, this);
 
         this.recyclerView.setHasFixedSize(false);
         this.recyclerView.setLayoutManager(layoutManager);

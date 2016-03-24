@@ -29,7 +29,7 @@ public class Deputado {
     private String ufRepresentacaoAtual;
     private String nomeProfissao;
 
-    private ArrayList<Falta> faltas;
+    private Frequencia frequencia;
 
     public Deputado() {
     }
@@ -174,6 +174,14 @@ public class Deputado {
 
     public void setNomeProfissao(String nomeProfissao) {
         this.nomeProfissao = nomeProfissao;
+    }
+
+    public Frequencia getFrequencia() {
+        return frequencia;
+    }
+
+    public void setFrequencia(Frequencia frequencia) {
+        this.frequencia = frequencia;
     }
 
     @Override

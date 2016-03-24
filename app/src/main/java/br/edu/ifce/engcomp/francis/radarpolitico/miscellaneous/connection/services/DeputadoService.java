@@ -1,5 +1,7 @@
 package br.edu.ifce.engcomp.francis.radarpolitico.miscellaneous.connection.services;
 
+import android.util.Log;
+
 import org.xmlpull.v1.XmlPullParserException;
 
 import java.io.IOException;
@@ -21,6 +23,7 @@ public class DeputadoService {
         ArrayList<Deputado> deputados = new ArrayList<>();
 
         try {
+
             URL url = new URL(CDUrlFormatter.obterDeputados());
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
 
@@ -43,6 +46,8 @@ public class DeputadoService {
         } catch (IOException | XmlPullParserException e) {
             e.printStackTrace();
         }
+
+        Log.i("DEPUTADOS", String.valueOf(deputados.size()));
 
         return deputados;
     }

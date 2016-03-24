@@ -3,12 +3,15 @@ package br.edu.ifce.engcomp.francis.radarpolitico.miscellaneous.adapters;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+
+import org.apache.commons.lang3.text.WordUtils;
 
 import java.util.ArrayList;
 
@@ -44,10 +47,15 @@ public class DeputadoRecyclerViewAdapter extends RecyclerView.Adapter<DeputadoRe
     public void onBindViewHolder(DeputadoRecyclerViewAdapter.ViewHolder holder, int position) {
         Deputado deputado = this.dataSource.get(position);
 
-        holder.nomePoliticoTextView.setText(deputado.getNome());
+        holder.nomePoliticoTextView.setText(WordUtils.capitalize(deputado.getNomeParlamentar().toLowerCase()));
         holder.partidoPoliticoTextView.setText(deputado.getPartido());
 
-        //TODO implemente aqui a atribuição dos demais valores...
+        if (deputado.getFrequencia() != null) {
+            double percentualFrequencia = deputado.getFrequencia().getPercentualPresenca();
+            holder.frasePresencasTextView.setText(String.format("%4.1f%% de Presença no mês atual", percentualFrequencia));
+            holder.presencaMensalProgressBar.setProgress((int) Math.round(percentualFrequencia));
+            holder.numeroVotacoesTextView.setText(String.valueOf(deputado.getFrequencia().getNumeroSessoes()));
+        }
     }
 
     @Override

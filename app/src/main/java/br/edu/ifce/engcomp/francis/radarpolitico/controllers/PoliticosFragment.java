@@ -1,6 +1,7 @@
 package br.edu.ifce.engcomp.francis.radarpolitico.controllers;
 
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -18,14 +19,16 @@ import java.util.ArrayList;
 
 import br.edu.ifce.engcomp.francis.radarpolitico.R;
 import br.edu.ifce.engcomp.francis.radarpolitico.miscellaneous.adapters.DeputadoRecyclerViewAdapter;
+import br.edu.ifce.engcomp.francis.radarpolitico.miscellaneous.connection.database.DeputadoDAO;
+import br.edu.ifce.engcomp.francis.radarpolitico.miscellaneous.connection.interfaces.OnLoadFrequenciasHasFinished;
+import br.edu.ifce.engcomp.francis.radarpolitico.miscellaneous.connection.tasks.FrequenciaMensalAsyncTask;
 import br.edu.ifce.engcomp.francis.radarpolitico.models.Deputado;
 
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class PoliticosFragment extends Fragment {
-
+public class PoliticosFragment extends Fragment implements OnLoadFrequenciasHasFinished{
     RecyclerView recyclerView;
     ArrayList<Deputado> datasource;
     FloatingActionButton addDeputadoFAB;
@@ -34,6 +37,12 @@ public class PoliticosFragment extends Fragment {
         datasource = new ArrayList<>();
     }
 
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        populateDataSource();
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -42,9 +51,6 @@ public class PoliticosFragment extends Fragment {
 
         this.recyclerView   = (RecyclerView) rootView.findViewById(R.id.politicos_recyler_view);
         this.addDeputadoFAB = (FloatingActionButton) rootView.findViewById(R.id.fab_add_politico);
-
-        initRecyclerView();
-        initAddDeputadoFAB();
 
         return rootView;
     }
@@ -63,10 +69,26 @@ public class PoliticosFragment extends Fragment {
         this.addDeputadoFAB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intentAddPoliticosActivity = new Intent (getActivity(), AddPoliticiansActivity.class);
+                Intent intentAddPoliticosActivity = new Intent(getActivity(), AddPoliticiansActivity.class);
                 startActivity(intentAddPoliticosActivity);
             }
         });
     }
 
+    private void populateDataSource() {
+        DeputadoDAO deputadoDAO = new DeputadoDAO(getActivity());
+        ArrayList<Deputado> deputados = deputadoDAO.listAll();
+
+        FrequenciaMensalAsyncTask task = new FrequenciaMensalAsyncTask(getActivity(), this);
+        task.execute(deputados);
+
+        this.datasource.clear();
+        this.datasource.addAll(deputados);
+    }
+
+    @Override
+    public void onLoadFrequenciasHasFinished() {
+        initAddDeputadoFAB();
+        initRecyclerView();
+    }
 }

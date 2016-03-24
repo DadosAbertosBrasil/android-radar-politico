@@ -12,11 +12,35 @@ public class IndexPath {
         this.row = row;
     }
 
+    public IndexPath() {
+    }
+
+    public void setPath(int section, int row){
+        this.section = section;
+        this.row = row;
+    }
+
     public int getSection() {
         return section;
     }
 
     public int getRow() {
         return row;
+    }
+
+    public void setSection(int section) {
+        this.section = section;
+    }
+
+    public void setRow(int row) {
+        this.row = row;
+    }
+
+    @Override
+    public String toString() {
+        return "IndexPath{" +
+                "section=" + section +
+                ", row=" + row +
+                '}';
     }
 }
