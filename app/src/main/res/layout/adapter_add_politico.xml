@@ -58,10 +58,11 @@
                 android:layout_height="match_parent"
                 android:gravity="center">
 
-                <ImageView
+                <ImageButton
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:id="@+id/add_politico_button"
+                    android:background="@null"
                     android:src="@drawable/ic_plus" />
 
             </LinearLayout>

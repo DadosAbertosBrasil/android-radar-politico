@@ -18,6 +18,7 @@ import java.util.ArrayList;
 
 import br.edu.ifce.engcomp.francis.radarpolitico.R;
 import br.edu.ifce.engcomp.francis.radarpolitico.miscellaneous.adapters.DeputadoRecyclerViewAdapter;
+import br.edu.ifce.engcomp.francis.radarpolitico.miscellaneous.connection.database.DeputadoDAO;
 import br.edu.ifce.engcomp.francis.radarpolitico.models.Deputado;
 
 
@@ -34,6 +35,12 @@ public class PoliticosFragment extends Fragment {
         datasource = new ArrayList<>();
     }
 
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        populateDataSource();
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -63,10 +70,16 @@ public class PoliticosFragment extends Fragment {
         this.addDeputadoFAB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intentAddPoliticosActivity = new Intent (getActivity(), AddPoliticiansActivity.class);
+                Intent intentAddPoliticosActivity = new Intent(getActivity(), AddPoliticiansActivity.class);
                 startActivity(intentAddPoliticosActivity);
             }
         });
     }
 
+    private void populateDataSource() {
+        DeputadoDAO deputadoDAO = new DeputadoDAO(getActivity());
+        ArrayList<Deputado> deputados = deputadoDAO.listAll();
+
+        this.datasource.addAll(deputados);
+    }
 }

@@ -35,4 +35,12 @@ public class IndexPath {
     public void setRow(int row) {
         this.row = row;
     }
+
+    @Override
+    public String toString() {
+        return "IndexPath{" +
+                "section=" + section +
+                ", row=" + row +
+                '}';
+    }
 }

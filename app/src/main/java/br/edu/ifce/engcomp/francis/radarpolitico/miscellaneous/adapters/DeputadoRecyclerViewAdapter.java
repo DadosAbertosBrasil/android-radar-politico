@@ -10,6 +10,9 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.text.WordUtils;
+
 import java.util.ArrayList;
 
 import br.edu.ifce.engcomp.francis.radarpolitico.R;
@@ -43,7 +46,7 @@ public class DeputadoRecyclerViewAdapter extends RecyclerView.Adapter<DeputadoRe
     public void onBindViewHolder(DeputadoRecyclerViewAdapter.ViewHolder holder, int position) {
         Deputado deputado = this.dataSource.get(position);
 
-        holder.nomePoliticoTextView.setText(deputado.getNome());
+        holder.nomePoliticoTextView.setText(WordUtils.capitalize(deputado.getNomeParlamentar().toLowerCase()));
         holder.partidoPoliticoTextView.setText(deputado.getPartido());
 
         //TODO implemente aqui a atribuição dos demais valores...
