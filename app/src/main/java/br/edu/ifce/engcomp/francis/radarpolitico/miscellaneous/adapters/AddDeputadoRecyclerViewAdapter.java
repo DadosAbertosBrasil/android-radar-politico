@@ -25,6 +25,7 @@ import br.edu.ifce.engcomp.francis.radarpolitico.models.Deputado;
 public class AddDeputadoRecyclerViewAdapter extends RecyclerView.Adapter<AddDeputadoRecyclerViewAdapter.ViewHolder>  {
     private ArrayList<Deputado> dataSource;
     private Context context;
+    public boolean deputadoFoiAdicioando = false;
 
     public AddDeputadoRecyclerViewAdapter(ArrayList<Deputado> dataSource, Context context) {
         this.dataSource = dataSource;
@@ -88,10 +89,14 @@ public class AddDeputadoRecyclerViewAdapter extends RecyclerView.Adapter<AddDepu
             return new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+
+                    deputadoFoiAdicioando = true;
                     Deputado deputado = dataSource.get(indexPath.getRow());
                     DeputadoDAO deputadoDAO = new DeputadoDAO(v.getContext());
 
                     deputadoDAO.create(deputado);
+
+                    Toast.makeText(v.getContext(), "Seguindo Deputado " + deputado.getNomeParlamentar(), Toast.LENGTH_SHORT).show();
                 }
             };
         }

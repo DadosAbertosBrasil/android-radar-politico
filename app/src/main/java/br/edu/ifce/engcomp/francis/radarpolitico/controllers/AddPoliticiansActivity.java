@@ -1,5 +1,6 @@
 package br.edu.ifce.engcomp.francis.radarpolitico.controllers;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -20,13 +21,11 @@ public class AddPoliticiansActivity extends AppCompatActivity implements OnLoadD
     ArrayList<Deputado> datasource;
     AddDeputadoRecyclerViewAdapter adapter;
 
-    public AddPoliticiansActivity(){
-        //datasource = generateDataSourceMock();
 
+    public AddPoliticiansActivity(){
         this.datasource = new ArrayList<>();
     }
 
-    
     public ArrayList<Deputado> generateDataSourceMock(){
         ArrayList<Deputado> deputados = new ArrayList<>();
 
@@ -61,6 +60,16 @@ public class AddPoliticiansActivity extends AppCompatActivity implements OnLoadD
         this.datasource.clear();
         this.datasource.addAll(deputados);
         this.adapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+
+        Intent resultIntent = new Intent();
+        resultIntent.putExtra("DEPUTADO_ADD", adapter.deputadoFoiAdicioando);
+
+        setResult(RESULT_OK, resultIntent);
     }
 
     private void initRecyclerView() {
