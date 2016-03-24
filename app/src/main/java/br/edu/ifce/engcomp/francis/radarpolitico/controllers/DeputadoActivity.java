@@ -14,7 +14,9 @@ import java.util.ArrayList;
 
 import br.edu.ifce.engcomp.francis.radarpolitico.R;
 import br.edu.ifce.engcomp.francis.radarpolitico.miscellaneous.adapters.DeputadoFaltasRecyclerViewAdapter;
+import br.edu.ifce.engcomp.francis.radarpolitico.miscellaneous.adapters.DeputadoVotacoesRecyclerViewAdapter;
 import br.edu.ifce.engcomp.francis.radarpolitico.models.Falta;
+import br.edu.ifce.engcomp.francis.radarpolitico.models.VotacaoDeputado;
 import br.edu.ifce.engcomp.francis.radarpolitico.models.Voto;
 
 public class DeputadoActivity extends AppCompatActivity {
@@ -23,9 +25,13 @@ public class DeputadoActivity extends AppCompatActivity {
     String deputado;
     RecyclerView recyclerViewFaltas;
     ArrayList<Falta> datasourceFaltas;
+    RecyclerView recyclerViewVotacoes;
+    ArrayList<VotacaoDeputado> datasourceVotacoes;
+
 
     public DeputadoActivity(){
         this.datasourceFaltas = generateDataSourceFaltasMock();
+        this.datasourceVotacoes = generateDataSourceVotacoesMock();
     }
 
     public ArrayList<Falta> generateDataSourceFaltasMock(){
@@ -42,6 +48,20 @@ public class DeputadoActivity extends AppCompatActivity {
         return faltas;
     }
 
+    public ArrayList<VotacaoDeputado> generateDataSourceVotacoesMock(){
+        ArrayList<VotacaoDeputado> votacoes = new ArrayList<>();
+
+        VotacaoDeputado teste1 = new VotacaoDeputado("PEC00/1969", "02/02/2016", "SIM");
+        VotacaoDeputado teste2 = new VotacaoDeputado("PL99/1932", "15/02/2016", "SIM");
+        VotacaoDeputado teste3 = new VotacaoDeputado("ADV24/1944", "12/03/2016", "NÃO");
+
+        votacoes.add(teste1);
+        votacoes.add(teste2);
+        votacoes.add(teste3);
+
+        return votacoes;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,7 +76,9 @@ public class DeputadoActivity extends AppCompatActivity {
 
         init();
         this.recyclerViewFaltas   = (RecyclerView) findViewById(R.id.deputado_faltas_recyler_view);
+        this.recyclerViewVotacoes   = (RecyclerView) findViewById(R.id.deputado_votacoes_recyler_view);
         initRecyclerViewFaltas();
+        initRecyclerViewVotacoes();
     }
 
     public void init(){
@@ -88,5 +110,15 @@ public class DeputadoActivity extends AppCompatActivity {
         this.recyclerViewFaltas.setLayoutManager(layoutManager);
         this.recyclerViewFaltas.setAdapter(adapter);
         this.recyclerViewFaltas.setItemAnimator(new DefaultItemAnimator());
+    }
+
+    public void initRecyclerViewVotacoes(){
+        LinearLayoutManager layoutManager   = new LinearLayoutManager(this);
+        DeputadoVotacoesRecyclerViewAdapter adapter = new DeputadoVotacoesRecyclerViewAdapter(this.datasourceVotacoes, this);
+
+        this.recyclerViewVotacoes.setHasFixedSize(false);
+        this.recyclerViewVotacoes.setLayoutManager(layoutManager);
+        this.recyclerViewVotacoes.setAdapter(adapter);
+        this.recyclerViewVotacoes.setItemAnimator(new DefaultItemAnimator());
     }
 }
