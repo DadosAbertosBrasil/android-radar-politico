@@ -6,6 +6,7 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_add_politicians">AddPoliticiansActivity</string>
     <string name="title_activity_search_view">SearchViewActivity</string>
+    <string name="title_activity_deputado">DeputadoActivity</string>
 
     <!-- TODO: Remove or change this placeholder text -->
 </resources>

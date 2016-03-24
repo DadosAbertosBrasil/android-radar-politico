@@ -62,5 +62,4 @@ public class AddPoliticiansActivity extends AppCompatActivity {
         this.recyclerView.setAdapter(adapter);
         this.recyclerView.setItemAnimator(new DefaultItemAnimator());
     }
-
 }

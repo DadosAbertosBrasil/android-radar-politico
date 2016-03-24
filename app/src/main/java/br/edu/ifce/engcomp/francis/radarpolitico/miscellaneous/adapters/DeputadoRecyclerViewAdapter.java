@@ -1,6 +1,7 @@
 package br.edu.ifce.engcomp.francis.radarpolitico.miscellaneous.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,17 +9,17 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
 import br.edu.ifce.engcomp.francis.radarpolitico.R;
+import br.edu.ifce.engcomp.francis.radarpolitico.controllers.DeputadoActivity;
 import br.edu.ifce.engcomp.francis.radarpolitico.models.Deputado;
 
 /**
  * Created by francisco on 11/03/16.
  */
-public class DeputadoRecyclerViewAdapter extends RecyclerView.Adapter<DeputadoRecyclerViewAdapter.ViewHolder> {
+public class DeputadoRecyclerViewAdapter extends RecyclerView.Adapter<DeputadoRecyclerViewAdapter.ViewHolder>{
     private ArrayList<Deputado> dataSource;
     private Context context;
 
@@ -79,7 +80,8 @@ public class DeputadoRecyclerViewAdapter extends RecyclerView.Adapter<DeputadoRe
 
         @Override
         public void onClick(View v) {
-            Toast.makeText(context, "Cliked", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(v.getContext(), DeputadoActivity.class);
+            v.getContext().startActivity(intent);
         }
     }
 }

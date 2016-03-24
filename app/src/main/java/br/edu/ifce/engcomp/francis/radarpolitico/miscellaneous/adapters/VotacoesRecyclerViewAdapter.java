@@ -1,7 +1,7 @@
 package br.edu.ifce.engcomp.francis.radarpolitico.miscellaneous.adapters;
 
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import br.edu.ifce.engcomp.francis.radarpolitico.R;
+import br.edu.ifce.engcomp.francis.radarpolitico.controllers.DeputadoActivity;
 import br.edu.ifce.engcomp.francis.radarpolitico.miscellaneous.helpers.IndexPath;
 import br.edu.ifce.engcomp.francis.radarpolitico.models.Votacao;
 import br.edu.ifce.engcomp.francis.radarpolitico.models.Voto;
@@ -25,6 +26,7 @@ import br.edu.ifce.engcomp.francis.radarpolitico.models.Voto;
 public class VotacoesRecyclerViewAdapter extends SectionedRecyclerViewAdapter<VotacoesRecyclerViewAdapter.ViewHolder> {
 
     private HashMap<Votacao, ArrayList<Voto>> datasource;
+    ArrayList<Voto> votos;
 
     public VotacoesRecyclerViewAdapter(HashMap<Votacao, ArrayList<Voto>> datasource) {
         this.datasource = datasource;
@@ -58,7 +60,7 @@ public class VotacoesRecyclerViewAdapter extends SectionedRecyclerViewAdapter<Vo
     @Override
     public void onBindViewHolder(VotacoesRecyclerViewAdapter.ViewHolder holder, int section, int relativePosition, int absolutePosition) {
         Votacao key = (Votacao) this.datasource.keySet().toArray()[section];
-        ArrayList<Voto> votos = this.datasource.get(key);
+        votos = this.datasource.get(key);
         Voto voto = votos.get(relativePosition);
 
         holder.title.setText(voto.getNome());
@@ -109,7 +111,12 @@ public class VotacoesRecyclerViewAdapter extends SectionedRecyclerViewAdapter<Vo
                 Toast.makeText(v.getContext(), "Header Click", Toast.LENGTH_SHORT).show();
             }
             else if(indexPath != null){
-                Toast.makeText(v.getContext(), String.format("Item cliked at: [%d, %d]", indexPath.getSection(), indexPath.getRow()), Toast.LENGTH_SHORT).show();
+                //Toast.makeText(v.getContext(), String.format("Item cliked at: [%d, %d]", indexPath.getSection(), indexPath.getRow()), Toast.LENGTH_SHORT).show();
+                Voto voto = votos.get(indexPath.getRow());
+
+                Intent intent = new Intent(v.getContext(), DeputadoActivity.class);
+                intent.putExtra("DEPUTADO_INFOS", voto.getNome());
+                v.getContext().startActivity(intent);
             }
         }
 
