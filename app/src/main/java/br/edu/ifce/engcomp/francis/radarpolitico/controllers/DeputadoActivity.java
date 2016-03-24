@@ -2,13 +2,16 @@ package br.edu.ifce.engcomp.francis.radarpolitico.controllers;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -27,6 +30,7 @@ public class DeputadoActivity extends AppCompatActivity {
     ArrayList<Falta> datasourceFaltas;
     RecyclerView recyclerViewVotacoes;
     ArrayList<VotacaoDeputado> datasourceVotacoes;
+    FloatingActionButton addDeputadoButton;
 
 
     public DeputadoActivity(){
@@ -67,16 +71,15 @@ public class DeputadoActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_deputado);
 
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
-        if(toolbar!=null){
-            setSupportActionBar(toolbar);
+        this.toolbar = (Toolbar) findViewById(R.id.toolbar);
+        if(this.toolbar!=null){
+            setSupportActionBar(this.toolbar);
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setDisplayShowHomeEnabled(true);
         }
 
         init();
-        this.recyclerViewFaltas   = (RecyclerView) findViewById(R.id.deputado_faltas_recyler_view);
-        this.recyclerViewVotacoes   = (RecyclerView) findViewById(R.id.deputado_votacoes_recyler_view);
+        initAddDeputadoButton();
         initRecyclerViewFaltas();
         initRecyclerViewVotacoes();
     }
@@ -86,7 +89,8 @@ public class DeputadoActivity extends AppCompatActivity {
         //deputadoAtual = (Voto) currentIntent.getSerializableExtra("DEPUTADO_INFOS");
         deputado = currentIntent.getStringExtra("DEPUTADO_INFOS");
 
-        toolbar.setTitle(deputado);
+        this.toolbar.setTitle(deputado);
+        this.addDeputadoButton = (FloatingActionButton) findViewById(R.id.fab_add_deputado);
 
         ImageView fotoPoliticoImageView = (ImageView) findViewById(R.id.foto_deputado_image_view);
         TextView nomeDeputadoTextView = (TextView) findViewById(R.id.nome_deputado_text_view);
@@ -94,6 +98,9 @@ public class DeputadoActivity extends AppCompatActivity {
         TextView profissaoDeputadoTextView = (TextView) findViewById(R.id.profissao_deputado_text_view);
         TextView dataNascDeputadoTextView = (TextView) findViewById(R.id.data_nasc_deputado_text_view);
         TextView telefoneDeputadoTextView = (TextView) findViewById(R.id.telefone_deputado_text_view);
+
+        this.recyclerViewFaltas   = (RecyclerView) findViewById(R.id.deputado_faltas_recyler_view);
+        this.recyclerViewVotacoes   = (RecyclerView) findViewById(R.id.deputado_votacoes_recyler_view);
 
         nomeDeputadoTextView.setText(deputado);
         //partidoDeputadoTextView.setText(deputadoAtual.getPartido() + "/" + deputadoAtual.getUf());
@@ -120,5 +127,14 @@ public class DeputadoActivity extends AppCompatActivity {
         this.recyclerViewVotacoes.setLayoutManager(layoutManager);
         this.recyclerViewVotacoes.setAdapter(adapter);
         this.recyclerViewVotacoes.setItemAnimator(new DefaultItemAnimator());
+    }
+
+    private void initAddDeputadoButton() {
+        this.addDeputadoButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getBaseContext(), "Seguindo deputado!", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }
