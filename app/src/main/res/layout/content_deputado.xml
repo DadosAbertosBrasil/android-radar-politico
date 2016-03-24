@@ -88,9 +88,23 @@
             android:layout_marginLeft="40dp"
             android:layout_marginRight="40dp"
             android:layout_height="2dp"
-
             android:layout_marginTop="20dp"
             android:background="@android:color/darker_gray"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:layout_marginLeft="10dp"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Últimas Faltas"
+            android:id="@+id/title_deputado_faltas_text_view"
+            android:layout_gravity="center_vertical" />
+
+        <android.support.v7.widget.RecyclerView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/deputado_faltas_recyler_view"/>
 
     </LinearLayout>
 

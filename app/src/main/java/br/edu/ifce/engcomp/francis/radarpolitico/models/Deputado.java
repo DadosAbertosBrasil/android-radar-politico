@@ -1,5 +1,7 @@
 package br.edu.ifce.engcomp.francis.radarpolitico.models;
 
+import java.util.ArrayList;
+
 /**
  * Created by francisco on 11/03/16.
  */
@@ -26,6 +28,8 @@ public class Deputado {
     private String situacaoLegislaturaAtual;
     private String ufRepresentacaoAtual;
     private String nomeProfissao;
+
+    private ArrayList<Falta> faltas;
 
     public Deputado() {
     }
