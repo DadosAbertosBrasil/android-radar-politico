@@ -41,7 +41,7 @@ public class VotacoesFragment extends Fragment implements OnVotedPropositionsHas
         ProposicoesVotadasAsyncTask task = new ProposicoesVotadasAsyncTask(getActivity(), this);
         int year = Calendar.getInstance().get(Calendar.YEAR);
 
-        //task.execute(String.valueOf(year));
+        task.execute(String.valueOf(year));
     }
 
     @Override

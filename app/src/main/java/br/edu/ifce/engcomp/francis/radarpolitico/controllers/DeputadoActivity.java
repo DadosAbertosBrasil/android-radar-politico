@@ -8,6 +8,7 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -23,7 +24,6 @@ import br.edu.ifce.engcomp.francis.radarpolitico.models.VotacaoDeputado;
 import br.edu.ifce.engcomp.francis.radarpolitico.models.Voto;
 
 public class DeputadoActivity extends AppCompatActivity {
-    Toolbar toolbar;
     Voto deputadoAtual;
     String deputado;
     RecyclerView recyclerViewFaltas;
@@ -71,9 +71,13 @@ public class DeputadoActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_deputado);
 
-        this.toolbar = (Toolbar) findViewById(R.id.toolbar);
-        if(this.toolbar!=null){
-            setSupportActionBar(this.toolbar);
+        Intent currentIntent = getIntent();
+        deputado = currentIntent.getStringExtra("DEPUTADO_INFOS");
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        if(toolbar!=null){
+            setSupportActionBar(toolbar);
+            getSupportActionBar().setTitle(deputado);
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setDisplayShowHomeEnabled(true);
         }
@@ -82,14 +86,11 @@ public class DeputadoActivity extends AppCompatActivity {
         initAddDeputadoButton();
         initRecyclerViewFaltas();
         initRecyclerViewVotacoes();
+
+        Log.i("TOOLBAR", (String) toolbar.getTitle());
     }
 
     public void init(){
-        Intent currentIntent = getIntent();
-        //deputadoAtual = (Voto) currentIntent.getSerializableExtra("DEPUTADO_INFOS");
-        deputado = currentIntent.getStringExtra("DEPUTADO_INFOS");
-
-        this.toolbar.setTitle(deputado);
         this.addDeputadoButton = (FloatingActionButton) findViewById(R.id.fab_add_deputado);
 
         ImageView fotoPoliticoImageView = (ImageView) findViewById(R.id.foto_deputado_image_view);

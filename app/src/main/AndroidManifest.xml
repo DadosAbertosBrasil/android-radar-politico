@@ -52,7 +52,8 @@
         <activity
             android:name=".controllers.DeputadoActivity"
             android:launchMode="singleTop"
-            android:label="@string/title_activity_deputado"
+            android:label="Deputado"
+            android:parentActivityName=".controllers.SearchViewActivity"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 

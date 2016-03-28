@@ -26,20 +26,6 @@ public class AddPoliticiansActivity extends AppCompatActivity implements OnLoadD
         this.datasource = new ArrayList<>();
     }
 
-    public ArrayList<Deputado> generateDataSourceMock(){
-        ArrayList<Deputado> deputados = new ArrayList<>();
-
-        Deputado teste1 = new Deputado("Joamila Brito", "PVDC", "CE");
-        Deputado teste2 = new Deputado("Francisco Souza", "PVDC", "CE");
-        Deputado teste3 = new Deputado("Ulysses Rocha", "PVDC", "RJ");
-
-        deputados.add(teste1);
-        deputados.add(teste2);
-        deputados.add(teste3);
-
-        return deputados;
-    }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
