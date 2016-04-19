@@ -1,4 +1,4 @@
-package br.ifce.engcomp.francis.radarpolitico.controllers
+package br.edu.ifce.engcomp.francis.radarpolitico.controllers
 
 
 import android.content.Intent
@@ -15,7 +15,7 @@ import br.edu.ifce.engcomp.francis.radarpolitico.R
 import br.edu.ifce.engcomp.francis.radarpolitico.controllers.AddPoliticiansActivity
 import br.edu.ifce.engcomp.francis.radarpolitico.miscellaneous.adapters.DeputadoRecyclerViewAdapter
 import br.edu.ifce.engcomp.francis.radarpolitico.miscellaneous.connection.database.DeputadoDAO
-import br.ifce.engcomp.francis.radarpolitico.models.Deputado
+import br.edu.ifce.engcomp.francis.radarpolitico.models.Deputado
 import java.util.*
 
 

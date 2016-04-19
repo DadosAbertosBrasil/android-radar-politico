@@ -1,4 +1,4 @@
-package br.ifce.engcomp.francis.radarpolitico.controllers
+package br.edu.ifce.engcomp.francis.radarpolitico.controllers
 
 
 import android.os.Bundle

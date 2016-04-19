@@ -1,7 +1,7 @@
-package br.edu.ifce.engcomp.francis.radarpolitico.miscellaneous.connection;
+package br.edu.ifce.engcomp.francis.radarpolitico.miscellaneous;
 
 /**
- * Created by francisco on 14/03/16.
+ * Created by francisco on 19/04/16.
  */
 public class CDUrlFormatter {
 
@@ -47,22 +47,22 @@ public class CDUrlFormatter {
         return ORGAOS_BASE_URL +
                 "ListarCargosOrgaosLegislativosCD";
     }
-    
+
     public static String listarTiposOrgao() {
         return ORGAOS_BASE_URL +
                 "ListarTiposOrgaos";
     }
-    
+
     public static String obterAndamento(String sigla, String numeroDoAno, String dataInicio, String codigoOrgao) {
         return ORGAOS_BASE_URL +
                 String.format("ObterAndamento?sigla=%s&numero=%s&ano=%s&dataIni=%s&codOrgao=%s", sigla, numeroDoAno, dataInicio, codigoOrgao);
     }
-    
+
     public static String obterEmendasSubstitutivoRedacaoFinal(String tipo, String numero, String ano) {
         return ORGAOS_BASE_URL +
                 String.format("ObterEmendasSubstitutivoRedacaoFinal?tipo=%s&numero=%s&ano=%s", tipo, numero, ano);
     }
-    
+
     public static String obterIntegraComissoesRelatorPorTipo(String tipo, String numero, String ano) {
         return ORGAOS_BASE_URL +
                 String.format("ObterIntegraComissoesRelator?tipo=%s&numero=%s&ano=%s", tipo, numero, ano);
@@ -80,7 +80,7 @@ public class CDUrlFormatter {
 
     public static String obterPauta(String idOrgao, String dataInicio, String dataFim) {
         return ORGAOS_BASE_URL +
-              String.format("ObterPauta?IDOrgao=%s&datIni=%s&datFim=%s", idOrgao, dataInicio, dataFim);
+                String.format("ObterPauta?IDOrgao=%s&datIni=%s&datFim=%s", idOrgao, dataInicio, dataFim);
     }
 
     public static String obterRegimeTramitacaoDeDespacho(String tipo, String numero, String ano) {
@@ -95,7 +95,7 @@ public class CDUrlFormatter {
 
         return PROPOSICOES_BASE_URL +
                 String.format("ListarProposicoes?sigla=%s&numero=%s&ano=%s&datApresentacaoIni=%s&datApresentacaoFim=%s&parteNomeAutor=%s" +
-                        "&idTipoAutor=%s&siglaPartidoAutor=%s&siglaUFAutor=%s&generoAutor=%s&codEstado=%s&codOrgaoEstado=%s&emTramitacao=%s",
+                                "&idTipoAutor=%s&siglaPartidoAutor=%s&siglaUFAutor=%s&generoAutor=%s&codEstado=%s&codOrgaoEstado=%s&emTramitacao=%s",
                         sigla, numero, ano, dataApresentacaoInicial, dataApresentacaoFinal, idTipoAutor, parteNomeAutor, siglaPartidoAutor, siglaUFAutor,
                         generoAutor, idSituacaoProposicao, idOrgaoProposicao, tramitacao);
     }

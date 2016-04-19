@@ -11,7 +11,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".controllers.MainActivity"
+            android:name="br.edu.ifce.engcomp.francis.radarpolitico.controllers.MainActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -28,7 +28,7 @@
                 android:resource="@xml/searchable" />
         </activity>
         <activity
-            android:name=".controllers.AddPoliticiansActivity"
+            android:name="br.edu.ifce.engcomp.francis.radarpolitico.controllers.AddPoliticiansActivity"
             android:label="Deputados"
             android:launchMode="singleTop"
             android:parentActivityName=".controllers.SearchViewActivity"

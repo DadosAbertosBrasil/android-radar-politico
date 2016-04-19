@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 
-import br.ifce.engcomp.francis.radarpolitico.models.Deputado;
+import br.edu.ifce.engcomp.francis.radarpolitico.models.Deputado;
 
 /**
  * Created by francisco on 15/03/16.

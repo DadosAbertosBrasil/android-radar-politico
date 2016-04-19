@@ -8,7 +8,7 @@ import android.util.Log;
 
 import java.util.ArrayList;
 
-import br.ifce.engcomp.francis.radarpolitico.models.Deputado;
+import br.edu.ifce.engcomp.francis.radarpolitico.models.Deputado;
 
 /**
  * Created by francisco on 24/03/16.

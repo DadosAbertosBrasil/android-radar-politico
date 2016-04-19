@@ -1,6 +1,6 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".controllers.MainActivity">
+    tools:context="br.ifce.engcomp.francis.radarpolitico.controllers.MainActivity">
 
     <item
         android:id="@+id/action_add_politico"

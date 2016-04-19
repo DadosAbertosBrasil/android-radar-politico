@@ -16,7 +16,7 @@ import java.util.ArrayList;
 
 import br.edu.ifce.engcomp.francis.radarpolitico.R;
 import br.edu.ifce.engcomp.francis.radarpolitico.controllers.DeputadoActivity;
-import br.ifce.engcomp.francis.radarpolitico.models.Deputado;
+import br.edu.ifce.engcomp.francis.radarpolitico.models.Deputado;
 
 /**
  * Created by francisco on 11/03/16.

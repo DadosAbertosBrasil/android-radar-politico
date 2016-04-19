@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import br.edu.ifce.engcomp.francis.radarpolitico.R;
 import br.edu.ifce.engcomp.francis.radarpolitico.miscellaneous.connection.database.DeputadoDAO;
 import br.edu.ifce.engcomp.francis.radarpolitico.miscellaneous.helpers.IndexPath;
-import br.ifce.engcomp.francis.radarpolitico.models.Deputado;
+import br.edu.ifce.engcomp.francis.radarpolitico.models.Deputado;
 
 /**
  * Created by Joamila on 16/03/2016.
