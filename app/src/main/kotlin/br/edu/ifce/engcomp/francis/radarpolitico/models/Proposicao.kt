@@ -6,12 +6,12 @@ import br.edu.ifce.engcomp.francis.radarpolitico.models.Votacao
  * Created by francisco on 14/03/16.
  */
 data class Proposicao (
-    var id: String = "",
-    var nome: String = "",
+    var id: String? = "",
+    var nome: String? = "",
 
-    var sigla: String = "",
-    var numero: String = "",
-    var ano: String = "",
+    var sigla: String? = "",
+    var numero: String? = "",
+    var ano: String? = "",
 
     var tipoProposicao: String? = "",
     var tema: String? = "",
