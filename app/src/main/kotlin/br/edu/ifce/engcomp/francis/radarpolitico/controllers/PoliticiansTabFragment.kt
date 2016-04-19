@@ -12,32 +12,19 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import br.edu.ifce.engcomp.francis.radarpolitico.R
-import br.edu.ifce.engcomp.francis.radarpolitico.controllers.AddPoliticiansActivity
 import br.edu.ifce.engcomp.francis.radarpolitico.miscellaneous.adapters.DeputadoRecyclerViewAdapter
 import br.edu.ifce.engcomp.francis.radarpolitico.miscellaneous.connection.database.DeputadoDAO
 import br.edu.ifce.engcomp.francis.radarpolitico.models.Deputado
 import java.util.*
 
-
-/**
- * A simple [Fragment] subclass.
- */
-class PoliticosFragment : Fragment() {
+class PoliticiansTabFragment : Fragment() {
     lateinit var politicosRecyclerView: RecyclerView
     lateinit var fabAddDeputado: FloatingActionButton
 
     internal var datasource: ArrayList<Deputado>
 
-    var x:String? = null
-
     init {
         datasource = ArrayList<Deputado>()
-    }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        this.populateDataSource()
     }
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -68,13 +55,5 @@ class PoliticosFragment : Fragment() {
             val intentAddPoliticosActivity = Intent(activity, AddPoliticiansActivity::class.java)
             startActivity(intentAddPoliticosActivity)
         }
-    }
-
-    private fun populateDataSource() {
-        val deputadoDAO = DeputadoDAO(activity)
-        val deputados = deputadoDAO.listAll()
-
-        this.datasource.clear()
-        this.datasource.addAll(deputados)
     }
 }

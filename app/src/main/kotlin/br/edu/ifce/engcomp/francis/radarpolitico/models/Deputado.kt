@@ -1,11 +1,5 @@
 package br.edu.ifce.engcomp.francis.radarpolitico.models
 
-import br.edu.ifce.engcomp.francis.radarpolitico.models.Frequencia
-
-/**
- * Created by francisco on 11/03/16.
- */
-
 data class Deputado(
     var idCadastro: String? = "",
     var matricula: String? = "",

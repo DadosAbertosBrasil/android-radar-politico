@@ -1,8 +1,6 @@
 package br.edu.ifce.engcomp.francis.radarpolitico.models
 
-import java.util.ArrayList
-
-import br.edu.ifce.engcomp.francis.radarpolitico.models.Dia
+import java.util.*
 
 /**
  * Created by francisco on 24/03/16.

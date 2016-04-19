@@ -6,13 +6,9 @@ import android.support.v4.app.FragmentTabHost
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
 import android.view.View
-import android.widget.TabHost
 import android.widget.TabWidget
 import android.widget.TextView
-
 import br.edu.ifce.engcomp.francis.radarpolitico.R
-import br.edu.ifce.engcomp.francis.radarpolitico.controllers.PoliticosFragment
-import br.edu.ifce.engcomp.francis.radarpolitico.controllers.VotacoesFragment
 
 class MainActivity : AppCompatActivity() {
 
@@ -39,8 +35,8 @@ class MainActivity : AppCompatActivity() {
         votacoesTab.setIndicator("VOTAÇÕES")
         politicosTab.setIndicator("POLÍTICOS")
 
-        mainTabHost.addTab(votacoesTab, VotacoesFragment::class.java, null)
-        mainTabHost.addTab(politicosTab, PoliticosFragment::class.java, null)
+        mainTabHost.addTab(votacoesTab, VotationsTabFragment::class.java, null)
+        mainTabHost.addTab(politicosTab, PoliticiansTabFragment::class.java, null)
 
         mainTabHost.currentTab = 0
 

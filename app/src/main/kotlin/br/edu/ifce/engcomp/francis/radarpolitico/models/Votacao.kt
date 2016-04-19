@@ -1,8 +1,6 @@
 package br.edu.ifce.engcomp.francis.radarpolitico.models
 
-import java.util.ArrayList
-
-import br.edu.ifce.engcomp.francis.radarpolitico.models.Voto
+import java.util.*
 
 /**
  * Created by francisco on 12/03/16.

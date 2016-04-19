@@ -15,7 +15,7 @@ import br.edu.ifce.engcomp.francis.radarpolitico.models.Votacao
 import br.edu.ifce.engcomp.francis.radarpolitico.models.Voto
 import java.util.*
 
-class VotacoesFragment : Fragment() {
+class VotationsTabFragment : Fragment() {
     lateinit var adapter: VotacoesRecyclerViewAdapter
     lateinit var votacoesRecyclerView: RecyclerView
 

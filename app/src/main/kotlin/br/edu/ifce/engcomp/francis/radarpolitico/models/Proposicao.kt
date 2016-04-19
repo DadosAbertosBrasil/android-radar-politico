@@ -1,7 +1,5 @@
 package br.edu.ifce.engcomp.francis.radarpolitico.models
 
-import br.edu.ifce.engcomp.francis.radarpolitico.models.Votacao
-
 /**
  * Created by francisco on 14/03/16.
  */
