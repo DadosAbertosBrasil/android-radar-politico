@@ -1,8 +1,5 @@
 package br.edu.ifce.engcomp.francis.radarpolitico.miscellaneous.connection.parsers;
 
-import android.util.Log;
-import android.util.Xml;
-
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 import org.xmlpull.v1.XmlPullParserFactory;
@@ -11,7 +8,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 
-import br.edu.ifce.engcomp.francis.radarpolitico.models.Deputado;
+import br.ifce.engcomp.francis.radarpolitico.models.Deputado;
 
 /**
  * Created by francisco on 15/03/16.

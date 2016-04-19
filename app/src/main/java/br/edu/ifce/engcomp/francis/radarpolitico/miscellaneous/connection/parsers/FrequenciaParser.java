@@ -8,7 +8,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 
-import br.edu.ifce.engcomp.francis.radarpolitico.models.Deputado;
 import br.edu.ifce.engcomp.francis.radarpolitico.models.Dia;
 
 /**

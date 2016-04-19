@@ -11,6 +11,8 @@ import android.widget.TabWidget;
 import android.widget.TextView;
 
 import br.edu.ifce.engcomp.francis.radarpolitico.R;
+import br.ifce.engcomp.francis.radarpolitico.controllers.PoliticosFragment;
+import br.ifce.engcomp.francis.radarpolitico.controllers.VotacoesFragment;
 
 public class MainActivity extends AppCompatActivity {
 

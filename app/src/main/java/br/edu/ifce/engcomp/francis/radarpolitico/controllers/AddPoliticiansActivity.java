@@ -12,11 +12,9 @@ import java.util.ArrayList;
 
 import br.edu.ifce.engcomp.francis.radarpolitico.R;
 import br.edu.ifce.engcomp.francis.radarpolitico.miscellaneous.adapters.AddDeputadoRecyclerViewAdapter;
-import br.edu.ifce.engcomp.francis.radarpolitico.miscellaneous.connection.interfaces.OnLoadDeputadosHasFinished;
-import br.edu.ifce.engcomp.francis.radarpolitico.miscellaneous.connection.tasks.DeputadosAsyncTask;
-import br.edu.ifce.engcomp.francis.radarpolitico.models.Deputado;
+import br.ifce.engcomp.francis.radarpolitico.models.Deputado;
 
-public class AddPoliticiansActivity extends AppCompatActivity implements OnLoadDeputadosHasFinished {
+public class AddPoliticiansActivity extends AppCompatActivity {
     RecyclerView recyclerView;
     ArrayList<Deputado> datasource;
     AddDeputadoRecyclerViewAdapter adapter;
@@ -40,16 +38,6 @@ public class AddPoliticiansActivity extends AppCompatActivity implements OnLoadD
 
         this.recyclerView   = (RecyclerView) findViewById(R.id.add_politicos_recyler_view);
         initRecyclerView();
-
-        DeputadosAsyncTask task = new DeputadosAsyncTask(this, this);
-        task.execute();
-    }
-
-    @Override
-    public void onDeputadosFinishedLoading(ArrayList<Deputado> deputados) {
-        this.datasource.clear();
-        this.datasource.addAll(deputados);
-        this.adapter.notifyDataSetChanged();
     }
 
     @Override

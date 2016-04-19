@@ -1,7 +1,5 @@
 package br.edu.ifce.engcomp.francis.radarpolitico.models;
 
-import android.util.Log;
-
 import java.util.ArrayList;
 
 /**
