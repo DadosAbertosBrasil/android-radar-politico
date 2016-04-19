@@ -50,7 +50,7 @@ public class VotacoesRecyclerViewAdapter extends SectionedRecyclerViewAdapter<Vo
     public void onBindHeaderViewHolder(VotacoesRecyclerViewAdapter.ViewHolder holder, int section) {
         Votacao key = (Votacao) this.datasource.keySet().toArray()[section];
 
-        holder.title.setText(key.getResumo());
+        holder.title.setText(key.getObjetoVotacao());
         holder.subtitle.setText(key.getData());
 
         holder.indexPath.setSection(section);

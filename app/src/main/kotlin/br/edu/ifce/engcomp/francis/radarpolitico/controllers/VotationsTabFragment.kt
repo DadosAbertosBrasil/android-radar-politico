@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ProgressBar
 import br.edu.ifce.engcomp.francis.radarpolitico.R
 import br.edu.ifce.engcomp.francis.radarpolitico.miscellaneous.adapters.VotacoesRecyclerViewAdapter
 import br.edu.ifce.engcomp.francis.radarpolitico.models.Votacao
@@ -18,6 +19,7 @@ import java.util.*
 class VotationsTabFragment : Fragment() {
     lateinit var adapter: VotacoesRecyclerViewAdapter
     lateinit var votacoesRecyclerView: RecyclerView
+    lateinit var votacoesProgressBar: ProgressBar
 
     internal var datasource: HashMap<Votacao, ArrayList<Voto>>
 
@@ -29,6 +31,11 @@ class VotationsTabFragment : Fragment() {
         val rootView = inflater!!.inflate(R.layout.fragment_votacoes, container, false)
 
         this.votacoesRecyclerView = rootView.findViewById(R.id.votacoesRecyclerView) as RecyclerView
+        this.votacoesProgressBar  = rootView.findViewById(R.id.votacoesProgressBar) as ProgressBar
+
+        //Essa linha de código deve ser removida quando se fizer a requisição via Volley
+        this.votacoesProgressBar.visibility = View.INVISIBLE
+
         this.initRecyclerView()
 
         return rootView

@@ -11,6 +11,7 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ProgressBar
 import br.edu.ifce.engcomp.francis.radarpolitico.R
 import br.edu.ifce.engcomp.francis.radarpolitico.miscellaneous.adapters.DeputadoRecyclerViewAdapter
 import br.edu.ifce.engcomp.francis.radarpolitico.miscellaneous.connection.database.DeputadoDAO
@@ -19,6 +20,7 @@ import java.util.*
 
 class PoliticiansTabFragment : Fragment() {
     lateinit var politicosRecyclerView: RecyclerView
+    lateinit var politicosProgressBar: ProgressBar
     lateinit var fabAddDeputado: FloatingActionButton
 
     internal var datasource: ArrayList<Deputado>
@@ -32,7 +34,11 @@ class PoliticiansTabFragment : Fragment() {
         val rootView = inflater!!.inflate(R.layout.fragment_politicos, container, false)
 
         this.politicosRecyclerView = rootView.findViewById(R.id.politicos_recyler_view) as RecyclerView
+        this.politicosProgressBar  = rootView.findViewById(R.id.politicosProgressBar) as ProgressBar
         this.fabAddDeputado = rootView.findViewById(R.id.fab_add_politico) as FloatingActionButton
+
+        //Essa linha de código deve ser removida quando se fizer a requisição via Volley
+        this.politicosProgressBar.visibility = View.INVISIBLE
 
         this.initFabAddDeputado();
         this.initRecyclerView();

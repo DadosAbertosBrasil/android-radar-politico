@@ -16,7 +16,8 @@
             android:layout_height="50dp"
             android:id="@+id/add_politico_image_view"
             android:src="@drawable/ic_smile"
-            android:background="@color/colorPrimary" />
+            android:background="@color/colorPrimary"
+            android:scaleType="centerCrop" />
 
         <LinearLayout
             android:orientation="horizontal"
