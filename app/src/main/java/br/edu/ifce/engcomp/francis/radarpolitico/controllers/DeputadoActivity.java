@@ -86,8 +86,6 @@ public class DeputadoActivity extends AppCompatActivity {
         initAddDeputadoButton();
         initRecyclerViewFaltas();
         initRecyclerViewVotacoes();
-
-        Log.i("TOOLBAR", (String) toolbar.getTitle());
     }
 
     public void init(){

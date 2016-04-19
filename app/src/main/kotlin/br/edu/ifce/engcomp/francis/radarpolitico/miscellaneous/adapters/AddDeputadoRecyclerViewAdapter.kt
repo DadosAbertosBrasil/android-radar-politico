@@ -36,7 +36,6 @@ class AddDeputadoRecyclerViewAdapter(private val dataSource: ArrayList<Deputado>
     }
 
     fun ImageView.loadImage(url: String?){
-
         if (!url.isNullOrBlank()) {
             Picasso.with(this.context).load(url).into(this)
         }

@@ -10,6 +10,7 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.Toast
 import br.edu.ifce.engcomp.francis.radarpolitico.R
+import br.edu.ifce.engcomp.francis.radarpolitico.helpers.VolleySharedQueue
 import br.edu.ifce.engcomp.francis.radarpolitico.miscellaneous.CDUrlFormatter
 import br.edu.ifce.engcomp.francis.radarpolitico.miscellaneous.adapters.AddDeputadoRecyclerViewAdapter
 import br.edu.ifce.engcomp.francis.radarpolitico.miscellaneous.connection.parsers.DeputadosParser
@@ -78,6 +79,6 @@ class AddPoliticiansActivity : AppCompatActivity() {
             Toast.makeText(this, "Ocorreu algum erro de rede. Tente mais tarde. :/", Toast.LENGTH_SHORT).show()
         })
 
-        Volley.newRequestQueue(this).add(request);
+        VolleySharedQueue.getQueue(this)?.add(request)
     }
 }

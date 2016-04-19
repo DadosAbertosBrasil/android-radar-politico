@@ -29,6 +29,12 @@ class PoliticiansTabFragment : Fragment() {
         datasource = ArrayList<Deputado>()
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        this.retrieveDeputiesFromInternalDatabase()
+    }
+
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
         val rootView = inflater!!.inflate(R.layout.fragment_politicos, container, false)
@@ -48,7 +54,7 @@ class PoliticiansTabFragment : Fragment() {
 
     private fun initRecyclerView() {
         val layoutManager = LinearLayoutManager(activity)
-        val adapter = DeputadoRecyclerViewAdapter(this.datasource, activity)
+        val adapter = DeputadoRecyclerViewAdapter(this.datasource)
 
         this.politicosRecyclerView.setHasFixedSize(false)
         this.politicosRecyclerView.layoutManager = layoutManager
@@ -61,5 +67,13 @@ class PoliticiansTabFragment : Fragment() {
             val intentAddPoliticosActivity = Intent(activity, AddPoliticiansActivity::class.java)
             startActivity(intentAddPoliticosActivity)
         }
+    }
+
+    fun retrieveDeputiesFromInternalDatabase() {
+        val deputyDAO = DeputadoDAO(activity)
+        val deputies  = deputyDAO.listAll()
+
+        this.datasource.clear()
+        this.datasource.addAll(deputies)
     }
 }
