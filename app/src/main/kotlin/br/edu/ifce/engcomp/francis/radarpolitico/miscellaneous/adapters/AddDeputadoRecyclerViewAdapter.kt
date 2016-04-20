@@ -9,16 +9,13 @@ import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
-
-import org.apache.commons.lang3.text.WordUtils
-
-import java.util.ArrayList
-
 import br.edu.ifce.engcomp.francis.radarpolitico.R
 import br.edu.ifce.engcomp.francis.radarpolitico.miscellaneous.connection.database.DeputadoDAO
 import br.edu.ifce.engcomp.francis.radarpolitico.miscellaneous.helpers.IndexPath
 import br.edu.ifce.engcomp.francis.radarpolitico.models.Deputado
 import com.squareup.picasso.Picasso
+import org.apache.commons.lang3.text.WordUtils
+import java.util.*
 
 /**
  * Created by Joamila on 16/03/2016.

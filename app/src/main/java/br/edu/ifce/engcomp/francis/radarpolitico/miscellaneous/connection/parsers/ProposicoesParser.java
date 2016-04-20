@@ -45,6 +45,9 @@ public class ProposicoesParser {
                         if (tagAtual.equals("codProposicao")){
                             proposicao.setId(parser.getText());
                         }
+                        else if (tagAtual.equals("dataVotacao")){
+                            proposicao.setDataVotacao(parser.getText());
+                        }
                     }
 
                     break;
