@@ -12,7 +12,7 @@ data class Votacao(
     var hora: String? = "",
 
     var objetoVotacao: String? = "",
-    var codigoSessao: String? = "",
+    var codigoSessao:  String? = "",
 
     var totalVotosSim: String = "",
     var totalVotosNao: String = "",
@@ -29,9 +29,8 @@ data class Votacao(
         this.data = if(vt.data == null) this.data else vt.data
         this.hora = if(vt.hora == null) this.hora else vt.hora
 
-        this.objetoVotacao  = if(vt.objetoVotacao == null) this.objetoVotacao else vt.objetoVotacao
-        this.codigoSessao   = if(vt.codigoSessao == null) this.codigoSessao else vt.codigoSessao
-
+        this.objetoVotacao = if(vt.objetoVotacao == null) this.objetoVotacao else vt.objetoVotacao
+        this.codigoSessao  = if(vt.codigoSessao == null) this.codigoSessao else vt.codigoSessao
         this.totalVotosSim = if(vt.totalVotosSim == null) this.totalVotosSim else vt.totalVotosSim
         this.totalVotosNao = if(vt.totalVotosNao == null) this.totalVotosNao else vt.totalVotosNao
 

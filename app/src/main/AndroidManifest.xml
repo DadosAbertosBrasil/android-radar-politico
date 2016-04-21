@@ -11,7 +11,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name="br.edu.ifce.engcomp.francis.radarpolitico.controllers.MainActivity"
+            android:name=".controllers.MainActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -28,7 +28,7 @@
                 android:resource="@xml/searchable" />
         </activity>
         <activity
-            android:name="br.edu.ifce.engcomp.francis.radarpolitico.controllers.AddPoliticiansActivity"
+            android:name=".controllers.AddPoliticiansActivity"
             android:label="Deputados"
             android:launchMode="singleTop"
             android:parentActivityName=".controllers.SearchViewActivity"
@@ -51,10 +51,19 @@
         </activity>
         <activity
             android:name=".controllers.DeputadoActivity"
-            android:launchMode="singleTop"
             android:label="Deputado"
+            android:launchMode="singleTop"
             android:parentActivityName=".controllers.SearchViewActivity"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".controllers.ProposicaoVotadaActivity"
+            android:label="@string/title_activity_proposicao_votada"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="MainActivity" />
+        </activity>
     </application>
 
 </manifest>
