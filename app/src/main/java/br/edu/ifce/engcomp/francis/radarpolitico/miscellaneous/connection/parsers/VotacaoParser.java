@@ -1,5 +1,8 @@
 package br.edu.ifce.engcomp.francis.radarpolitico.miscellaneous.connection.parsers;
 
+import android.util.Log;
+
+import org.apache.commons.lang3.StringUtils;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 import org.xmlpull.v1.XmlPullParserFactory;
@@ -41,6 +44,28 @@ public class VotacaoParser {
                         votacao = new Votacao();
 
                         votacao.setResumo(parser.getAttributeValue(null, "Resumo"));
+
+                        Log.i("PARSER", votacao.getResumo());
+
+                        String totalVotosSim = StringUtils.substringBetween(votacao.getResumo(), "Sim:", ";");
+                        String totalVotosNao = StringUtils.substringBetween(votacao.getResumo(), "não:", ";");
+                        String totalVotosAbstencoes = StringUtils.substringBetween(votacao.getResumo(), "abstenções:", ";");
+
+                        if(totalVotosAbstencoes == null){
+                            totalVotosAbstencoes = StringUtils.substringBetween(votacao.getResumo(), "abstenção:", ";");
+
+                            if(totalVotosAbstencoes == null){
+                                totalVotosAbstencoes = "0";
+                            }
+                        }
+
+                        String totalVotos = StringUtils.substringBetween(votacao.getResumo(), "total: ", ".");
+
+                        votacao.setTotalVotosSim(totalVotosSim);
+                        votacao.setTotalVotosNao(totalVotosNao);
+                        votacao.setTotalVotosAbstencao(totalVotosAbstencoes);
+                        votacao.setTotalVotosSessao(totalVotos);
+
                         votacao.setData(parser.getAttributeValue(null, "Data").replaceAll("\\s", ""));
                         votacao.setHora(parser.getAttributeValue(null, "Hora").replaceAll("\\s", ""));
                         votacao.setObjetoVotacao(parser.getAttributeValue(null, "ObjVotacao"));

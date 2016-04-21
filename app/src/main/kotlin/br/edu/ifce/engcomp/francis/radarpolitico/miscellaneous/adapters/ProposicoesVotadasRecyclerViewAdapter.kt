@@ -15,6 +15,7 @@ import java.util.HashMap
 
 import br.edu.ifce.engcomp.francis.radarpolitico.R
 import br.edu.ifce.engcomp.francis.radarpolitico.controllers.DeputadoActivity
+import br.edu.ifce.engcomp.francis.radarpolitico.controllers.ProposicaoVotadaActivity
 import br.edu.ifce.engcomp.francis.radarpolitico.helpers.VolleySharedQueue
 import br.edu.ifce.engcomp.francis.radarpolitico.miscellaneous.CDUrlFormatter
 import br.edu.ifce.engcomp.francis.radarpolitico.miscellaneous.connection.database.DeputadoDAO
@@ -33,7 +34,7 @@ import com.squareup.picasso.Picasso
 /**
  * Created by francisco on 12/03/16.
  */
-class VotacoesRecyclerViewAdapter(private val context: Context, private val datasource: ArrayList<Proposicao>) : RecyclerView.Adapter<VotacoesRecyclerViewAdapter.ViewHolder>() {
+class ProposicoesVotadasRecyclerViewAdapter(private val context: Context, private val datasource: ArrayList<Proposicao>) : RecyclerView.Adapter<ProposicoesVotadasRecyclerViewAdapter.ViewHolder>() {
 
     fun getItem(position: Int): Proposicao {
         return datasource[position]
@@ -60,7 +61,7 @@ class VotacoesRecyclerViewAdapter(private val context: Context, private val data
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VotacoesRecyclerViewAdapter.ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProposicoesVotadasRecyclerViewAdapter.ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
         val itemView = inflater.inflate(R.layout.adapter_proposicao_votada, parent, false)
 
@@ -109,6 +110,11 @@ class VotacoesRecyclerViewAdapter(private val context: Context, private val data
 
         override fun onClick(v: View) {
             Log.i("ITEM_CLIK", "Item clicked @ ${indexPath.toString()}")
+
+            val intent = Intent(v.context, ProposicaoVotadaActivity::class.java)
+            intent.putExtra("PROPOSICAO_EXTRA", datasource[indexPath.row])
+
+            v.context.startActivity(intent)
         }
     }
 

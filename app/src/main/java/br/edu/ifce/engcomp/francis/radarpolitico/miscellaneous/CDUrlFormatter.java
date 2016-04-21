@@ -1,7 +1,7 @@
 package br.edu.ifce.engcomp.francis.radarpolitico.miscellaneous;
 
 /**
- * Created by francisco on 19/04/16.
+ * Created by francisco on 21/04/16.
  */
 public class CDUrlFormatter {
 

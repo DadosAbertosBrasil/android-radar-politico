@@ -15,7 +15,7 @@ import android.widget.Toast
 import br.edu.ifce.engcomp.francis.radarpolitico.R
 import br.edu.ifce.engcomp.francis.radarpolitico.helpers.VolleySharedQueue
 import br.edu.ifce.engcomp.francis.radarpolitico.miscellaneous.CDUrlFormatter
-import br.edu.ifce.engcomp.francis.radarpolitico.miscellaneous.adapters.VotacoesRecyclerViewAdapter
+import br.edu.ifce.engcomp.francis.radarpolitico.miscellaneous.adapters.ProposicoesVotadasRecyclerViewAdapter
 import br.edu.ifce.engcomp.francis.radarpolitico.miscellaneous.connection.parsers.ProposicaoParser
 import br.edu.ifce.engcomp.francis.radarpolitico.miscellaneous.connection.parsers.ProposicoesParser
 import br.edu.ifce.engcomp.francis.radarpolitico.miscellaneous.connection.parsers.VotacaoParser
@@ -28,7 +28,7 @@ import com.android.volley.toolbox.StringRequest
 import java.util.*
 
 class VotationsTabFragment : Fragment() {
-    lateinit var adapter: VotacoesRecyclerViewAdapter
+    lateinit var adapter: ProposicoesVotadasRecyclerViewAdapter
     lateinit var votacoesRecyclerView: RecyclerView
     lateinit var votacoesProgressBar: ProgressBar
 
@@ -61,7 +61,7 @@ class VotationsTabFragment : Fragment() {
     private fun initRecyclerView() {
         val layoutManager = LinearLayoutManager(activity)
 
-        this.adapter = VotacoesRecyclerViewAdapter(activity, this.datasource)
+        this.adapter = ProposicoesVotadasRecyclerViewAdapter(activity, this.datasource)
 
         this.votacoesRecyclerView.setHasFixedSize(false)
         this.votacoesRecyclerView.layoutManager = layoutManager

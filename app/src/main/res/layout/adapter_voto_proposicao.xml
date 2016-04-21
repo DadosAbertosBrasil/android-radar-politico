@@ -13,7 +13,7 @@
     <ImageView
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:id="@+id/icon"
+        android:id="@+id/fotoDeputadoImageView"
         android:background="@color/colorPrimary" />
 
     <LinearLayout
@@ -27,7 +27,7 @@
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="Nome Deputado"
-            android:id="@+id/title"
+            android:id="@+id/nomeDeputadoTextView"
             android:textColor="#000000" />
 
         <TextView
@@ -35,7 +35,7 @@
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:text="SIM"
-            android:id="@+id/subtitle"
+            android:id="@+id/partidoDeputadoTextView"
             android:layout_gravity="center_vertical" />
     </LinearLayout>
 </LinearLayout>

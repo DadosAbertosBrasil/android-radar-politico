@@ -1,10 +1,12 @@
 package br.edu.ifce.engcomp.francis.radarpolitico.models
 
+import java.io.Serializable
+
 /**
  * Created by francisco on 14/03/16.
  */
 data class Proposicao (
-    var id: String? = "",
+    var id: String = "",
     var nome: String? = "",
 
     var sigla: String? = "",
@@ -21,15 +23,14 @@ data class Proposicao (
     var situacao: String? = "",
 
     var urlInteiroTeor: String? = "",
-
     var quantidadeAutores: String? = "",
 
     var idAutor: String? = "",
     var nomeAutor: String? = "",
 
     var dataVotacao: String = "",
-    var ultimaVotacao: Votacao? = null
-){
+    var ultimaVotacao: Votacao? = null) : Serializable{
+
     fun merge(p: Proposicao){
         this.nome               = if (p.nome == null) this.nome else p.nome;
         this.numero             = if (p.numero == null) this.numero else p.numero;

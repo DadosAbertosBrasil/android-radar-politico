@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
 
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
 
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
 
@@ -173,7 +173,6 @@
                         android:layout_height="wrap_content">
 
                         <TextView
-                            android:id="@+id/title3"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_column="0"
@@ -260,16 +259,66 @@
                             android:layout_marginBottom="12dp"
                             android:layout_marginRight="8dp"
                             android:layout_row="0"
+                            android:text="Projeto na Íntegra"
+                            android:textAppearance="?android:attr/textAppearanceMedium"
+                            android:textStyle="bold" />
+                    </GridLayout>
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:text="http://www.google.com"
+                        android:id="@+id/urlInteiroTeorTextView"
+                        android:autoLink="web" />
+
+                </LinearLayout>
+
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginBottom="4dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:orientation="vertical"
+                    android:gravity="center_horizontal">
+
+                    <GridLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_column="0"
+                            android:layout_marginBottom="12dp"
+                            android:layout_marginRight="8dp"
+                            android:layout_row="0"
                             android:text="Resultado da Votação"
                             android:textAppearance="?android:attr/textAppearanceMedium"
                             android:textStyle="bold" />
                     </GridLayout>
 
+                    <ProgressBar
+                        style="?android:attr/progressBarStyleLarge"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/loadingResultadoProgressBar"
+                        android:indeterminate="true" />
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:orientation="vertical"
-                        android:layout_marginTop="8dp">
+                        android:layout_marginTop="8dp"
+                        android:id="@+id/resultadosLinearLayout">
 
                         <GridLayout
                             android:layout_width="match_parent"
@@ -294,7 +343,7 @@
                                 android:layout_marginLeft="8dp"
                                 android:layout_marginRight="8dp"
                                 android:layout_row="0"
-                                android:text="12"
+                                android:text="0"
                                 android:textAppearance="?android:attr/textAppearanceMedium"
                                 android:textStyle="bold"
                                 android:textColor="@android:color/holo_green_dark" />
@@ -315,7 +364,7 @@
                                 android:textAppearance="?android:attr/textAppearanceMedium" />
 
                             <TextView
-                                android:id="@+id/VotosNaoTextView"
+                                android:id="@+id/votosNaoTextView"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_column="16"
@@ -323,7 +372,7 @@
                                 android:layout_marginLeft="8dp"
                                 android:layout_marginRight="8dp"
                                 android:layout_row="0"
-                                android:text="12"
+                                android:text="0"
                                 android:textAppearance="?android:attr/textAppearanceMedium"
                                 android:textStyle="bold"
                                 android:textColor="@android:color/holo_red_dark" />
@@ -352,36 +401,7 @@
                                 android:layout_marginLeft="8dp"
                                 android:layout_marginRight="8dp"
                                 android:layout_row="0"
-                                android:text="12"
-                                android:textAppearance="?android:attr/textAppearanceMedium"
-                                android:textStyle="bold"
-                                android:textColor="@color/bright_foreground_disabled_material_light" />
-                        </GridLayout>
-
-                        <GridLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_column="0"
-                                android:layout_marginBottom="12dp"
-                                android:layout_marginRight="8dp"
-                                android:layout_row="0"
-                                android:text="Obstruções"
-                                android:textAppearance="?android:attr/textAppearanceMedium" />
-
-                            <TextView
-                                android:id="@+id/obstrucoesTextView"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_column="16"
-                                android:layout_marginBottom="12dp"
-                                android:layout_marginLeft="8dp"
-                                android:layout_marginRight="8dp"
-                                android:layout_row="0"
-                                android:text="12"
+                                android:text="0"
                                 android:textAppearance="?android:attr/textAppearanceMedium"
                                 android:textStyle="bold"
                                 android:textColor="@color/bright_foreground_disabled_material_light" />
@@ -410,7 +430,7 @@
                                 android:layout_marginLeft="8dp"
                                 android:layout_marginRight="8dp"
                                 android:layout_row="0"
-                                android:text="568"
+                                android:text="0"
                                 android:textAppearance="?android:attr/textAppearanceMedium"
                                 android:textStyle="bold"
                                 android:textColor="@color/colorPrimaryDark" />
@@ -432,13 +452,14 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="8dp"
-                    android:orientation="vertical">
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:gravity="fill_horizontal">
 
                     <GridLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:layout_margin="8dp">
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -452,10 +473,19 @@
                             android:textStyle="bold" />
                     </GridLayout>
 
+                    <ProgressBar
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/loadingVotosProgressBar"
+                        android:indeterminate="true"
+                        style="?android:attr/progressBarStyleLarge" />
+
                     <android.support.v7.widget.RecyclerView
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/votosDeputadosRecyclerView"/>
+                        android:layout_height="match_parent"
+                        android:minHeight="500dp"
+                        android:id="@+id/votosDeputadosRecyclerView"
+                        android:visibility="visible" />
 
                 </LinearLayout>
 
@@ -464,4 +494,5 @@
         </LinearLayout>
 
     </ScrollView>
+
 </RelativeLayout>

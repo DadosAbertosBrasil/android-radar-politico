@@ -1,5 +1,6 @@
 package br.edu.ifce.engcomp.francis.radarpolitico.models
 
+import java.io.Serializable
 import java.util.*
 
 /**
@@ -20,8 +21,7 @@ data class Votacao(
     var totalVotosObstrucao: String = "",
     var totalVotosSessao: String =  "",
 
-    var votos: ArrayList<Voto> = ArrayList<Voto>()
-){
+    var votos: ArrayList<Voto> = ArrayList<Voto>()) : Serializable{
 
     fun merge(vt: Votacao){
         this.resumo = if(vt.resumo == null) this.resumo else vt.resumo
