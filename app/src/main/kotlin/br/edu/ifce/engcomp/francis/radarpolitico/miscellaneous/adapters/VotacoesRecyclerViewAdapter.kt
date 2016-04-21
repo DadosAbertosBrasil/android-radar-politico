@@ -7,9 +7,8 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
-import android.widget.Toast
+import android.view.animation.Animation
+import android.widget.*
 
 import java.util.ArrayList
 import java.util.HashMap
@@ -22,6 +21,7 @@ import br.edu.ifce.engcomp.francis.radarpolitico.miscellaneous.connection.databa
 import br.edu.ifce.engcomp.francis.radarpolitico.miscellaneous.connection.parsers.ProposicaoParser
 import br.edu.ifce.engcomp.francis.radarpolitico.miscellaneous.connection.parsers.VotacaoParser
 import br.edu.ifce.engcomp.francis.radarpolitico.miscellaneous.helpers.IndexPath
+import br.edu.ifce.engcomp.francis.radarpolitico.models.Deputado
 import br.edu.ifce.engcomp.francis.radarpolitico.models.Proposicao
 import br.edu.ifce.engcomp.francis.radarpolitico.models.Votacao
 import br.edu.ifce.engcomp.francis.radarpolitico.models.Voto
@@ -34,24 +34,37 @@ import com.squareup.picasso.Picasso
  * Created by francisco on 12/03/16.
  */
 class VotacoesRecyclerViewAdapter(private val context: Context, private val datasource: ArrayList<Proposicao>) : RecyclerView.Adapter<VotacoesRecyclerViewAdapter.ViewHolder>() {
+
+    fun getItem(position: Int): Proposicao {
+        return datasource[position]
+    }
+
     override fun getItemCount(): Int {
+        Log.i("VOLLEY SIZE", datasource.size.toString())
         return datasource.size
     }
 
-    override fun onBindViewHolder(holder: ViewHolder?, position: Int) {
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val proposicao = datasource[position]
 
+        holder.indexPath.section = 0
+        holder.indexPath.row = position
+
         if(proposicao.nome.isNullOrBlank()) {
-            retrievePropositionFromServer(proposicao, holder!!)
+            retrievePropositionFromServer(proposicao, holder)
+        }
+        else {
+            holder.title.text    = proposicao.nome
+            holder.subtitle.text = proposicao.dataVotacao
+            holder.ementa.text   = if (proposicao.ementa.isNullOrBlank()) "Ementa Indisponível" else proposicao.ementa
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VotacoesRecyclerViewAdapter.ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
-        val itemView = inflater.inflate(R.layout.list_item_header, parent, false)
-        val holder = ViewHolder(itemView, viewType)
+        val itemView = inflater.inflate(R.layout.adapter_proposicao_votada, parent, false)
 
-        return holder
+        return ViewHolder(itemView)
     }
 
     private fun retrievePropositionFromServer(proposicao: Proposicao, holder: ViewHolder){
@@ -62,9 +75,12 @@ class VotacoesRecyclerViewAdapter(private val context: Context, private val data
             val p = ProposicaoParser.parserProposicaoFromXML(stringResponse.byteInputStream())
             proposicao.merge(p)
 
+            Log.i("VOLLEY", proposicao.toString())
+
+
             holder.title.text    = proposicao.nome
             holder.subtitle.text = proposicao.dataVotacao
-            holder.view.visibility = View.VISIBLE
+            holder.ementa.text   = if (proposicao.ementa.isNullOrBlank()) "Ementa Indisponível" else proposicao.ementa
         },{
             volleyError: VolleyError ->
             volleyError.printStackTrace()
@@ -73,23 +89,26 @@ class VotacoesRecyclerViewAdapter(private val context: Context, private val data
         VolleySharedQueue.getQueue(context)?.add(request)
     }
 
-    inner class ViewHolder(val view: View, val viewType: Int) : RecyclerView.ViewHolder(view), View.OnClickListener {
-        val indexPath: IndexPath
+    inner class ViewHolder(val view: View) : RecyclerView.ViewHolder(view), View.OnClickListener {
         val title: TextView
         val subtitle: TextView
+        val ementa: TextView
+        val seeMoreButton: Button
+        val indexPath: IndexPath
 
         init {
 
-            this.title     = view.findViewById(R.id.title) as TextView
-            this.subtitle  = view.findViewById(R.id.subtitle) as TextView
+            this.title    = view.findViewById(R.id.title) as TextView
+            this.subtitle = view.findViewById(R.id.subtitle) as TextView
+            this.ementa   = view.findViewById(R.id.ementaTextView) as TextView
+            this.seeMoreButton = view.findViewById(R.id.seeMoreButton) as Button
             this.indexPath = IndexPath()
 
-            this.view.setOnClickListener(this)
-            this.view.visibility = View.INVISIBLE
+            this.seeMoreButton.setOnClickListener(this)
         }
 
         override fun onClick(v: View) {
-
+            Log.i("ITEM_CLIK", "Item clicked @ ${indexPath.toString()}")
         }
     }
 
