@@ -49,6 +49,10 @@ class VotationsTabFragment : Fragment() {
         this.votacoesRecyclerView = rootView.findViewById(R.id.votacoesRecyclerView) as RecyclerView
         this.votacoesProgressBar  = rootView.findViewById(R.id.votacoesProgressBar) as ProgressBar
 
+        if(datasource.size > 0) {
+            votacoesProgressBar.visibility = View.INVISIBLE
+        }
+
         this.initRecyclerView()
 
         return rootView
