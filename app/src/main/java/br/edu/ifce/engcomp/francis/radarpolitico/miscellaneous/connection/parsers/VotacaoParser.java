@@ -53,18 +53,37 @@ public class VotacaoParser {
 
                         if(totalVotosAbstencoes == null){
                             totalVotosAbstencoes = StringUtils.substringBetween(votacao.getResumo(), "abstenção:", ";");
-
-                            if(totalVotosAbstencoes == null){
-                                totalVotosAbstencoes = "0";
-                            }
                         }
 
                         String totalVotos = StringUtils.substringBetween(votacao.getResumo(), "total: ", ".");
 
-                        votacao.setTotalVotosSim(totalVotosSim);
-                        votacao.setTotalVotosNao(totalVotosNao);
-                        votacao.setTotalVotosAbstencao(totalVotosAbstencoes);
-                        votacao.setTotalVotosSessao(totalVotos);
+                        if (totalVotosSim != null) {
+                            votacao.setTotalVotosSim(totalVotosSim);
+                        }
+                        else {
+                            votacao.setTotalVotosSessao("0");
+                        }
+
+                        if (totalVotosNao != null) {
+                            votacao.setTotalVotosNao(totalVotosNao);
+                        }
+                        else {
+                            votacao.setTotalVotosNao("0");
+                        }
+
+                        if (totalVotosAbstencoes != null) {
+                            votacao.setTotalVotosAbstencao(totalVotosAbstencoes);
+                        }
+                        else {
+                            votacao.setTotalVotosAbstencao("0");
+                        }
+
+                        if (totalVotos != null) {
+                            votacao.setTotalVotosSessao(totalVotos);
+                        }
+                        else {
+                            votacao.setTotalVotosSessao("0");
+                        }
 
                         votacao.setData(parser.getAttributeValue(null, "Data").replaceAll("\\s", ""));
                         votacao.setHora(parser.getAttributeValue(null, "Hora").replaceAll("\\s", ""));

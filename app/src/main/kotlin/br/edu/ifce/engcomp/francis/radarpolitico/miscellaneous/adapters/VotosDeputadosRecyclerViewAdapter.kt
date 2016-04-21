@@ -9,7 +9,9 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import br.edu.ifce.engcomp.francis.radarpolitico.R
+import br.edu.ifce.engcomp.francis.radarpolitico.miscellaneous.connection.database.DeputadoDAO
 import br.edu.ifce.engcomp.francis.radarpolitico.models.Voto
+import com.squareup.picasso.Picasso
 import java.util.*
 
 /**
@@ -30,9 +32,24 @@ class VotosDeputadosRecyclerViewAdapter(private val context: Context, private va
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val voto = datasource[position]
 
+        val deputado = DeputadoDAO(context).queryById(voto.idCadastro)
+
         holder.nomeDeputadoTextView.text = voto.nome
         holder.partidoDeputadoTextView.text = voto.partido
         holder.setBackgroundColorWithVote(voto.voto)
+
+        if (deputado != null) {
+            holder.fotoDeputadoTextView.loadImage(deputado.urlFoto)
+        }
+    }
+
+    fun ImageView.loadImage(url: String?){
+        if (!url.isNullOrBlank()) {
+            Picasso.with(this.context).load(url).into(this)
+        }
+        else {
+            this.setImageDrawable(resources.getDrawable(R.drawable.ic_smile))
+        }
     }
 
 

@@ -29,15 +29,6 @@ class AddDeputadoRecyclerViewAdapter(private val dataSource: ArrayList<Deputado>
         return ViewHolder(itemView)
     }
 
-    fun ImageView.loadImage(url: String?){
-        if (!url.isNullOrBlank()) {
-            Picasso.with(this.context).load(url).into(this)
-        }
-        else {
-            this.setImageDrawable(resources.getDrawable(R.drawable.ic_smile))
-        }
-    }
-
     override fun onBindViewHolder(holder: AddDeputadoRecyclerViewAdapter.ViewHolder, position: Int) {
         val deputado = this.dataSource[position]
 
@@ -49,6 +40,15 @@ class AddDeputadoRecyclerViewAdapter(private val dataSource: ArrayList<Deputado>
 
     override fun getItemCount(): Int {
         return this.dataSource.size
+    }
+
+    fun ImageView.loadImage(url: String?){
+        if (!url.isNullOrBlank()) {
+            Picasso.with(this.context).load(url).into(this)
+        }
+        else {
+            this.setImageDrawable(resources.getDrawable(R.drawable.ic_smile))
+        }
     }
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {

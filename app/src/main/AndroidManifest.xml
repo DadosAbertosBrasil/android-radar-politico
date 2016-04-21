@@ -58,11 +58,11 @@
         <activity
             android:name=".controllers.ProposicaoVotadaActivity"
             android:label="@string/title_activity_proposicao_votada"
-            android:parentActivityName=".MainActivity"
+            android:parentActivityName="br.edu.ifce.engcomp.francis.radarpolitico.controllers.MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="MainActivity" />
+                android:value="br.edu.ifce.engcomp.francis.radarpolitico.controllers.MainActivity" />
         </activity>
     </application>
 

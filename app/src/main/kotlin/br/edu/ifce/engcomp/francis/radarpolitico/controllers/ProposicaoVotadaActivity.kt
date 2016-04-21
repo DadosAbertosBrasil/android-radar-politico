@@ -14,6 +14,7 @@ import br.edu.ifce.engcomp.francis.radarpolitico.R
 import br.edu.ifce.engcomp.francis.radarpolitico.helpers.VolleySharedQueue
 import br.edu.ifce.engcomp.francis.radarpolitico.miscellaneous.CDUrlFormatter
 import br.edu.ifce.engcomp.francis.radarpolitico.miscellaneous.adapters.VotosDeputadosRecyclerViewAdapter
+import br.edu.ifce.engcomp.francis.radarpolitico.miscellaneous.connection.database.DeputadoDAO
 import br.edu.ifce.engcomp.francis.radarpolitico.miscellaneous.connection.parsers.VotacaoParser
 import br.edu.ifce.engcomp.francis.radarpolitico.models.Proposicao
 import br.edu.ifce.engcomp.francis.radarpolitico.models.Votacao
@@ -88,8 +89,16 @@ class ProposicaoVotadaActivity : AppCompatActivity() {
             abstencoesTextView.text = votacao.totalVotosAbstencao
             totalVotosTextView.text = votacao.totalVotosSessao
 
+            val deputados = DeputadoDAO(this).listAll()
+            val filteredVotos = ArrayList<Voto>()
+
+            for(deputado in deputados){
+                val votos = votacao.votos.filter { it.idCadastro.equals(deputado.idCadastro) }
+                filteredVotos.addAll(votos)
+            }
+
             votosDatasource.clear()
-            votosDatasource.addAll(votacao.votos)
+            votosDatasource.addAll(filteredVotos)
             adapter.notifyDataSetChanged()
 
             loadingResultadoProgressBar.hideView()
