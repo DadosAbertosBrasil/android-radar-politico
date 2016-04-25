@@ -24,5 +24,4 @@ data class Deputado(
     var ufRepresentacaoAtual: String? = "",
     var nomeProfissao: String? = "",
 
-    var frequencia: Frequencia? = null
-)
+    var frequencia: Frequencia? = null)

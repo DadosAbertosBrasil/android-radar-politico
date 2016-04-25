@@ -79,7 +79,6 @@ class VotationsTabFragment : Fragment() {
 
             datasource.clear()
             datasource.addAll(proposicoes)
-            datasource.sortBy { it.nome }
 
             adapter.notifyDataSetChanged()
             this.votacoesProgressBar.visibility = View.INVISIBLE

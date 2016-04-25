@@ -41,7 +41,7 @@ class ProposicaoVotadaActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_proposicao_votada)
 
-        proposicao = intent.getSerializableExtra("PROPOSICAO_EXTRA") as Proposicao
+        proposicao = intent.getParcelableExtra<Proposicao>("PROPOSICAO_EXTRA")
 
         resultadosLinearLayout.hideView()
         votosDeputadosRecyclerView.hideView()
