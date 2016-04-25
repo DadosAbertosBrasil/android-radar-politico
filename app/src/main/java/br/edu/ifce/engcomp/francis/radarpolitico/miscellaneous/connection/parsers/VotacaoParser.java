@@ -2,6 +2,7 @@ package br.edu.ifce.engcomp.francis.radarpolitico.miscellaneous.connection.parse
 
 import android.util.Log;
 
+import org.apache.commons.lang3.StringUtils;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 import org.xmlpull.v1.XmlPullParserFactory;
@@ -10,7 +11,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 
-import br.edu.ifce.engcomp.francis.radarpolitico.models.Proposicao;
 import br.edu.ifce.engcomp.francis.radarpolitico.models.Votacao;
 import br.edu.ifce.engcomp.francis.radarpolitico.models.Voto;
 
@@ -44,6 +44,47 @@ public class VotacaoParser {
                         votacao = new Votacao();
 
                         votacao.setResumo(parser.getAttributeValue(null, "Resumo"));
+
+                        Log.i("PARSER", votacao.getResumo());
+
+                        String totalVotosSim = StringUtils.substringBetween(votacao.getResumo(), "Sim:", ";");
+                        String totalVotosNao = StringUtils.substringBetween(votacao.getResumo(), "não:", ";");
+                        String totalVotosAbstencoes = StringUtils.substringBetween(votacao.getResumo(), "abstenções:", ";");
+
+                        if(totalVotosAbstencoes == null){
+                            totalVotosAbstencoes = StringUtils.substringBetween(votacao.getResumo(), "abstenção:", ";");
+                        }
+
+                        String totalVotos = StringUtils.substringBetween(votacao.getResumo(), "total: ", ".");
+
+                        if (totalVotosSim != null) {
+                            votacao.setTotalVotosSim(totalVotosSim);
+                        }
+                        else {
+                            votacao.setTotalVotosSessao("0");
+                        }
+
+                        if (totalVotosNao != null) {
+                            votacao.setTotalVotosNao(totalVotosNao);
+                        }
+                        else {
+                            votacao.setTotalVotosNao("0");
+                        }
+
+                        if (totalVotosAbstencoes != null) {
+                            votacao.setTotalVotosAbstencao(totalVotosAbstencoes);
+                        }
+                        else {
+                            votacao.setTotalVotosAbstencao("0");
+                        }
+
+                        if (totalVotos != null) {
+                            votacao.setTotalVotosSessao(totalVotos);
+                        }
+                        else {
+                            votacao.setTotalVotosSessao("0");
+                        }
+
                         votacao.setData(parser.getAttributeValue(null, "Data").replaceAll("\\s", ""));
                         votacao.setHora(parser.getAttributeValue(null, "Hora").replaceAll("\\s", ""));
                         votacao.setObjetoVotacao(parser.getAttributeValue(null, "ObjVotacao"));

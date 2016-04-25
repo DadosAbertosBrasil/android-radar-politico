@@ -51,10 +51,19 @@
         </activity>
         <activity
             android:name=".controllers.DeputadoActivity"
-            android:launchMode="singleTop"
             android:label="Deputado"
+            android:launchMode="singleTop"
             android:parentActivityName=".controllers.SearchViewActivity"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".controllers.ProposicaoVotadaActivity"
+            android:label="@string/title_activity_proposicao_votada"
+            android:parentActivityName="br.edu.ifce.engcomp.francis.radarpolitico.controllers.MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="br.edu.ifce.engcomp.francis.radarpolitico.controllers.MainActivity" />
+        </activity>
     </application>
 
 </manifest>

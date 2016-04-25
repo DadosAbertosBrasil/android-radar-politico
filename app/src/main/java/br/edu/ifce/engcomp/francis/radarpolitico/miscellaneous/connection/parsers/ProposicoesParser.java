@@ -1,7 +1,5 @@
 package br.edu.ifce.engcomp.francis.radarpolitico.miscellaneous.connection.parsers;
 
-import android.util.Log;
-
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 import org.xmlpull.v1.XmlPullParserFactory;
@@ -46,6 +44,9 @@ public class ProposicoesParser {
                     if (!parser.getText().contains("\n")){
                         if (tagAtual.equals("codProposicao")){
                             proposicao.setId(parser.getText());
+                        }
+                        else if (tagAtual.equals("dataVotacao")){
+                            proposicao.setDataVotacao(parser.getText());
                         }
                     }
 

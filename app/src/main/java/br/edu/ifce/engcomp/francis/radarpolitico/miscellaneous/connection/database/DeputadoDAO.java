@@ -94,6 +94,42 @@ public class DeputadoDAO {
 
     }
 
+    public Deputado queryById(String idCadastro){
+        String query = "select * from deputado where idCadastro = " + idCadastro;
+        Cursor cursor = database.rawQuery(query, null);
+
+        if (cursor.moveToFirst()){
+            Deputado deputado = new Deputado();
+
+            deputado.setIdCadastro(cursor.getString(0));
+            deputado.setMatricula(cursor.getString(1));
+            deputado.setIdParlamentar(cursor.getString(2));
+
+            deputado.setCondicao(cursor.getString(3));
+            deputado.setNome(cursor.getString(4));
+            deputado.setNomeParlamentar(cursor.getString(5));
+            deputado.setUrlFoto(cursor.getString(6));
+
+            deputado.setPartido(cursor.getString(7));
+
+            deputado.setGabinete(cursor.getString(8));
+            deputado.setAnexo(cursor.getString(9));
+
+            deputado.setUf(cursor.getString(10));
+            deputado.setFone(cursor.getString(11));
+            deputado.setEmail(cursor.getString(12));
+
+            deputado.setDataNascimento(cursor.getString(13));
+            deputado.setSituacaoLegislaturaAtual(cursor.getString(14));
+            deputado.setUfRepresentacaoAtual(cursor.getString(15));
+            deputado.setNomeProfissao(cursor.getString(16));
+
+            return deputado;
+        }
+
+        return null;
+    }
+
     public void delete(String idCadastro){
         String tableName = "deputados";
         String whereClause = "idCadastro=?";

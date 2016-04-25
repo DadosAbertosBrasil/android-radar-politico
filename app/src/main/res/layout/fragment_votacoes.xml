@@ -2,11 +2,20 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".controllers.VotacoesFragment">
+    tools:context="br.edu.ifce.engcomp.francis.radarpolitico.controllers.VotacoesFragment">
+
+    <ProgressBar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:indeterminate="true"
+        android:visibility="visible"
+        android:id="@+id/votacoesProgressBar"
+        style="@style/Base.Widget.AppCompat.ProgressBar.Horizontal"
+        />
 
     <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/votacoes_recycler_view"/>
+        android:id="@+id/votacoesRecyclerView"/>
 
 </FrameLayout>
