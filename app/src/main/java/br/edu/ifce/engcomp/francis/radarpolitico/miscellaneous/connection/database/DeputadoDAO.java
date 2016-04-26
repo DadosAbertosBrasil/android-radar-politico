@@ -131,7 +131,7 @@ public class DeputadoDAO {
     }
 
     public void delete(String idCadastro){
-        String tableName = "deputados";
+        String tableName = "deputado";
         String whereClause = "idCadastro=?";
         String[] whereArgs = new String[] {idCadastro};
 

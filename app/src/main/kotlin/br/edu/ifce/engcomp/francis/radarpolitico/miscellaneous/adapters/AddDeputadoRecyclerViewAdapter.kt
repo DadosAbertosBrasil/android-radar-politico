@@ -17,7 +17,8 @@ import java.util.*
 /**
  * Created by Joamila on 16/03/2016.
  */
-class AddDeputadoRecyclerViewAdapter(private val dataSource: ArrayList<Deputado>, private val context: Context) : RecyclerView.Adapter<AddDeputadoRecyclerViewAdapter.ViewHolder>() {
+class AddDeputadoRecyclerViewAdapter(private val dataSource: ArrayList<Deputado>, private val context: Context) : RecyclerView.Adapter<AddDeputadoRecyclerViewAdapter.ViewHolder>(){
+
     fun getItem(position: Int): Deputado {
         return this.dataSource[position]
     }
@@ -31,11 +32,20 @@ class AddDeputadoRecyclerViewAdapter(private val dataSource: ArrayList<Deputado>
 
     override fun onBindViewHolder(holder: AddDeputadoRecyclerViewAdapter.ViewHolder, position: Int) {
         val deputado = this.dataSource[position]
+        val deputadoDAO = DeputadoDAO(context)
 
         holder.nomePoliticoTextView.text = WordUtils.capitalize(deputado.nomeParlamentar!!.toLowerCase())
         holder.partidoPoliticoTextView.text = "${deputado.partido} - ${deputado.uf}"
         holder.fotoPoliticoImageView.loadImage(deputado.urlFoto)
+
         holder.indexPath.setPath(0, position)
+
+        if(deputadoDAO.queryById(deputado.idCadastro)!=null){
+            holder.followPoliticoSwitch.isChecked = true
+        }
+        else{
+            holder.followPoliticoSwitch.isChecked = false
+        }
     }
 
     override fun getItemCount(): Int {
@@ -51,10 +61,11 @@ class AddDeputadoRecyclerViewAdapter(private val dataSource: ArrayList<Deputado>
         }
     }
 
-    inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView), CompoundButton.OnCheckedChangeListener {
+
         val nomePoliticoTextView: TextView
         val partidoPoliticoTextView: TextView
-        val addPoliticoButton: Button
+        val followPoliticoSwitch: Switch
         val fotoPoliticoImageView: ImageView
 
         val indexPath: IndexPath
@@ -64,20 +75,20 @@ class AddDeputadoRecyclerViewAdapter(private val dataSource: ArrayList<Deputado>
             this.nomePoliticoTextView    = itemView.findViewById(R.id.add_politico_nome_text_view) as TextView
             this.partidoPoliticoTextView = itemView.findViewById(R.id.add_politico_partido_text_view) as TextView
             this.fotoPoliticoImageView   = itemView.findViewById(R.id.add_politico_image_view) as ImageView
-            this.addPoliticoButton       = itemView.findViewById(R.id.followButton) as Button
+            this.followPoliticoSwitch = itemView.findViewById(R.id.seguir_switch) as Switch
             this.indexPath = IndexPath()
 
-            this.addPoliticoButton.setOnClickListener(this.makeAddPoliticoListener())
+            followPoliticoSwitch.setOnCheckedChangeListener(this);
         }
 
-        private fun makeAddPoliticoListener(): View.OnClickListener {
-            return View.OnClickListener { v ->
-                val deputado = dataSource[indexPath.row]
-                val deputadoDAO = DeputadoDAO(v.context)
-
+        override fun onCheckedChanged(buttonView: CompoundButton?, isChecked: Boolean) {
+            val deputado = dataSource[indexPath.row]
+            val deputadoDAO = DeputadoDAO(itemView.context)
+            if(isChecked){
                 deputadoDAO.create(deputado)
-
-                Toast.makeText(v.context, "Seguindo Deputado " + deputado.nomeParlamentar!!, Toast.LENGTH_SHORT).show()
+            }
+            else{
+                deputadoDAO.delete(deputado.idCadastro)
             }
         }
     }
