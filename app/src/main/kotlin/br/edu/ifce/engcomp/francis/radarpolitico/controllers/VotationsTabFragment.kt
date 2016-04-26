@@ -25,13 +25,14 @@ import br.edu.ifce.engcomp.francis.radarpolitico.models.Voto
 import com.android.volley.Request
 import com.android.volley.VolleyError
 import com.android.volley.toolbox.StringRequest
+import java.text.SimpleDateFormat
 import java.util.*
 
 class VotationsTabFragment : Fragment() {
     lateinit var adapter: ProposicoesVotadasRecyclerViewAdapter
     lateinit var votacoesRecyclerView: RecyclerView
-    lateinit var votacoesProgressBar: ProgressBar
 
+    internal var votacoesProgressBar: ProgressBar? = null
     internal var datasource: ArrayList<Proposicao>
 
     init {
@@ -40,6 +41,8 @@ class VotationsTabFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        this.adapter = ProposicoesVotadasRecyclerViewAdapter(activity, this.datasource)
         retrieveVotedPropositionsOfCurrentYearFromServer()
     }
 
@@ -50,7 +53,7 @@ class VotationsTabFragment : Fragment() {
         this.votacoesProgressBar  = rootView.findViewById(R.id.votacoesProgressBar) as ProgressBar
 
         if(datasource.size > 0) {
-            votacoesProgressBar.visibility = View.INVISIBLE
+            votacoesProgressBar?.visibility = View.INVISIBLE
         }
 
         this.initRecyclerView()
@@ -60,8 +63,6 @@ class VotationsTabFragment : Fragment() {
 
     private fun initRecyclerView() {
         val layoutManager = LinearLayoutManager(activity)
-
-        this.adapter = ProposicoesVotadasRecyclerViewAdapter(activity, this.datasource)
 
         this.votacoesRecyclerView.setHasFixedSize(false)
         this.votacoesRecyclerView.layoutManager = layoutManager
@@ -77,11 +78,15 @@ class VotationsTabFragment : Fragment() {
             stringRespose: String ->
             val proposicoes = ProposicoesParser.parseProposicoesFromXML(stringRespose.byteInputStream())
 
+            proposicoes.sortByDescending { it.dataVotacao }
             datasource.clear()
             datasource.addAll(proposicoes)
 
             adapter.notifyDataSetChanged()
-            this.votacoesProgressBar.visibility = View.INVISIBLE
+
+            if (this.votacoesProgressBar != null) {
+                this.votacoesProgressBar?.visibility = View.INVISIBLE
+            }
 
         }, {
             volleyError: VolleyError ->

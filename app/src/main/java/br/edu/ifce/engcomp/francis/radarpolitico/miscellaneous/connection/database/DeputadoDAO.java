@@ -54,7 +54,7 @@ public class DeputadoDAO {
     public ArrayList<Deputado> listAll(){
         ArrayList<Deputado> deputados = new ArrayList<>();
 
-        String query = "select * from deputado";
+        String query = "select * from deputado order by nomeParlamentar asc";
         Cursor cursor = database.rawQuery(query, null);
 
         if (cursor.moveToFirst()){

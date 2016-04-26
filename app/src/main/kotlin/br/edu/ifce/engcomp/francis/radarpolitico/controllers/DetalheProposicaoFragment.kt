@@ -7,6 +7,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.ProgressBar
 import android.widget.TextView
@@ -22,6 +23,8 @@ import br.edu.ifce.engcomp.francis.radarpolitico.models.Voto
 import com.android.volley.Request
 import com.android.volley.VolleyError
 import com.android.volley.toolbox.StringRequest
+import com.squareup.picasso.Picasso
+import java.text.SimpleDateFormat
 import java.util.*
 
 /**
@@ -38,6 +41,8 @@ class DetalheProposicaoFragment : Fragment() {
     private lateinit var tipoProposicaoTextView: TextView
     private lateinit var urlInteiroTeorTextView: TextView
 
+    private lateinit var politicoImageView: ImageView
+
     private lateinit var resultadosLinearLayout: LinearLayout
 
     private lateinit var votosSimTextView: TextView
@@ -47,6 +52,7 @@ class DetalheProposicaoFragment : Fragment() {
     private lateinit var loadingResultadoProgressBar: ProgressBar
 
     private var votacao: Votacao? = null
+    private val formatter = SimpleDateFormat("dd/MM/yyyy")
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -72,6 +78,8 @@ class DetalheProposicaoFragment : Fragment() {
         votosNaoTextView    = view.findViewById(R.id.votosNaoTextView) as TextView
         abstencoesTextView  = view.findViewById(R.id.abstencoesTextView) as TextView
         totalVotosTextView  = view.findViewById(R.id.totalVotosTextView) as TextView
+
+        politicoImageView   = view.findViewById(R.id.politicoImageView) as ImageView
 
         loadingResultadoProgressBar = view.findViewById(R.id.loadingResultadoProgressBar) as ProgressBar
 
@@ -121,13 +129,25 @@ class DetalheProposicaoFragment : Fragment() {
     }
 
     private fun populateProposicaoComponents(){
+        val urlFoto = "http://www.camara.gov.br/internet/deputado/bandep/${proposicao.idAutor}.jpg"
+        politicoImageView.loadImage(urlFoto)
+
         nomeProposicaoTextView.text   = proposicao.nome
         ementaProposicaoTextView.text = proposicao.ementa
-        dataVotacaoTextView.text    = proposicao.dataVotacao
+        dataVotacaoTextView.text    = formatter.format(proposicao.dataVotacao)
         politicoNomeTextView.text   = proposicao.nomeAutor
         temaProposicaoTextView.text = proposicao.tema
         tipoProposicaoTextView.text = proposicao.tipoProposicao
         urlInteiroTeorTextView.text = proposicao.urlInteiroTeor
+    }
+
+    fun ImageView.loadImage(url: String?){
+        if (!url.isNullOrBlank()) {
+            Picasso.with(this.context).load(url).into(this)
+        }
+        else {
+            this.setImageDrawable(resources.getDrawable(R.drawable.ic_smile))
+        }
     }
 
     fun View.hideView() {

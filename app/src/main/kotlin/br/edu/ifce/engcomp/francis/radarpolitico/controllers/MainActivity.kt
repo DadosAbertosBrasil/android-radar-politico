@@ -36,7 +36,7 @@ class MainActivity : AppCompatActivity() {
         politicosTab.setIndicator("POLÍTICOS")
 
         mainTabHost.addTab(votacoesTab, VotationsTabFragment::class.java, null)
-        mainTabHost.addTab(politicosTab, PoliticiansTabFragment::class.java, null)
+        mainTabHost.addTab(politicosTab, PoliticosFragment::class.java, null)
 
         mainTabHost.currentTab = 0
 

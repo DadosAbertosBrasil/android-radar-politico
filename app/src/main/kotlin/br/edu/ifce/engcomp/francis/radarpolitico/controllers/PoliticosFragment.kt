@@ -1,6 +1,7 @@
 package br.edu.ifce.engcomp.francis.radarpolitico.controllers
 
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.FloatingActionButton
@@ -8,6 +9,7 @@ import android.support.v4.app.Fragment
 import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,21 +20,16 @@ import br.edu.ifce.engcomp.francis.radarpolitico.miscellaneous.connection.databa
 import br.edu.ifce.engcomp.francis.radarpolitico.models.Deputado
 import java.util.*
 
-class PoliticiansTabFragment : Fragment() {
+class PoliticosFragment : Fragment() {
     lateinit var politicosRecyclerView: RecyclerView
-    lateinit var politicosProgressBar: ProgressBar
     lateinit var fabAddDeputado: FloatingActionButton
+    lateinit var adapter: DeputadoRecyclerViewAdapter
 
     internal var datasource: ArrayList<Deputado>
+    private val addPoliticoIntentCode = 2011
 
     init {
         datasource = ArrayList<Deputado>()
-    }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        this.retrieveDeputiesFromInternalDatabase()
     }
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -40,21 +37,30 @@ class PoliticiansTabFragment : Fragment() {
         val rootView = inflater!!.inflate(R.layout.fragment_politicos, container, false)
 
         this.politicosRecyclerView = rootView.findViewById(R.id.politicos_recyler_view) as RecyclerView
-        this.politicosProgressBar  = rootView.findViewById(R.id.politicosProgressBar) as ProgressBar
         this.fabAddDeputado = rootView.findViewById(R.id.fab_add_politico) as FloatingActionButton
 
-        //Essa linha de código deve ser removida quando se fizer a requisição via Volley
-        this.politicosProgressBar.visibility = View.INVISIBLE
-
-        this.initFabAddDeputado();
-        this.initRecyclerView();
+        this.initFabAddDeputado()
+        this.initRecyclerView()
+        this.retrieveDeputiesFromInternalDatabase()
 
         return rootView
     }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if (requestCode == addPoliticoIntentCode && resultCode == Activity.RESULT_OK){
+            val deputadoAdded = data?.getBooleanExtra("DEPUTADO_ADDED", false)
+
+            if (deputadoAdded == true){
+                retrieveDeputiesFromInternalDatabase()
+            }
+        }
+    }
+
     private fun initRecyclerView() {
         val layoutManager = LinearLayoutManager(activity)
-        val adapter = DeputadoRecyclerViewAdapter(this.datasource)
+        adapter = DeputadoRecyclerViewAdapter(activity, this.datasource)
 
         this.politicosRecyclerView.setHasFixedSize(false)
         this.politicosRecyclerView.layoutManager = layoutManager
@@ -65,7 +71,7 @@ class PoliticiansTabFragment : Fragment() {
     private fun initFabAddDeputado() {
         this.fabAddDeputado.setOnClickListener {
             val intentAddPoliticosActivity = Intent(activity, AddPoliticiansActivity::class.java)
-            startActivity(intentAddPoliticosActivity)
+            startActivityForResult(intentAddPoliticosActivity, addPoliticoIntentCode)
         }
     }
 
@@ -75,5 +81,7 @@ class PoliticiansTabFragment : Fragment() {
 
         this.datasource.clear()
         this.datasource.addAll(deputies)
+
+        this.adapter.notifyDataSetChanged()
     }
 }

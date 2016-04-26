@@ -30,18 +30,20 @@ import com.android.volley.Request
 import com.android.volley.VolleyError
 import com.android.volley.toolbox.StringRequest
 import com.squareup.picasso.Picasso
+import java.text.SimpleDateFormat
 
 /**
  * Created by francisco on 12/03/16.
  */
 class ProposicoesVotadasRecyclerViewAdapter(private val context: Context, private val datasource: ArrayList<Proposicao>) : RecyclerView.Adapter<ProposicoesVotadasRecyclerViewAdapter.ViewHolder>() {
 
+    private val formatter = SimpleDateFormat("dd/MM/yyyy")
+
     fun getItem(position: Int): Proposicao {
         return datasource[position]
     }
 
     override fun getItemCount(): Int {
-        Log.i("VOLLEY SIZE", datasource.size.toString())
         return datasource.size
     }
 
@@ -56,7 +58,7 @@ class ProposicoesVotadasRecyclerViewAdapter(private val context: Context, privat
         }
         else {
             holder.title.text    = proposicao.nome
-            holder.subtitle.text = proposicao.dataVotacao
+            holder.subtitle.text = formatter.format(proposicao.dataVotacao)
             holder.ementa.text   = if (proposicao.ementa.isNullOrBlank()) "Ementa Indisponível" else proposicao.ementa
         }
     }
@@ -76,11 +78,8 @@ class ProposicoesVotadasRecyclerViewAdapter(private val context: Context, privat
             val p = ProposicaoParser.parserProposicaoFromXML(stringResponse.byteInputStream())
             proposicao.merge(p)
 
-            Log.i("VOLLEY", proposicao.toString())
-
-
             holder.title.text    = proposicao.nome
-            holder.subtitle.text = proposicao.dataVotacao
+            holder.subtitle.text = formatter.format(proposicao.dataVotacao)
             holder.ementa.text   = if (proposicao.ementa.isNullOrBlank()) "Ementa Indisponível" else proposicao.ementa
         },{
             volleyError: VolleyError ->
@@ -109,8 +108,6 @@ class ProposicoesVotadasRecyclerViewAdapter(private val context: Context, privat
         }
 
         override fun onClick(v: View) {
-            Log.i("ITEM_CLIK", "Item clicked @ ${indexPath.toString()}")
-
             val intent = Intent(v.context, ProposicaoVotadaActivity::class.java)
             intent.putExtra("PROPOSICAO_EXTRA", datasource[indexPath.row])
 

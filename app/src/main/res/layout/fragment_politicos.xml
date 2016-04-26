@@ -7,15 +7,6 @@
 
     tools:context="br.edu.ifce.engcomp.francis.radarpolitico.controllers.PoliticosFragment">
 
-    <ProgressBar
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:indeterminate="true"
-        android:visibility="visible"
-        android:id="@+id/politicosProgressBar"
-        style="@style/Base.Widget.AppCompat.ProgressBar.Horizontal"
-        />
-
     <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"

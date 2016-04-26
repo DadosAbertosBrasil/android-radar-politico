@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.LinearLayoutManager
 import android.util.Log
+import android.view.MenuItem
 import android.view.View
 import android.widget.ImageView
 import android.widget.Toast
@@ -48,7 +49,19 @@ class AddPoliticiansActivity : AppCompatActivity() {
     }
 
     override fun onBackPressed() {
+        val intent = Intent()
+        intent.putExtra("DEPUTADO_ADDED", adapter.deputadoAdded)
+        setResult(RESULT_OK, intent)
+
         super.onBackPressed()
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        if (item?.itemId == android.R.id.home){
+            onBackPressed()
+        }
+
+        return super.onOptionsItemSelected(item)
     }
 
     private fun initRecyclerView() {
@@ -68,6 +81,7 @@ class AddPoliticiansActivity : AppCompatActivity() {
             stringResponse: String ->
 
             val deputados = DeputadosParser.parseDeputadosFromXML(stringResponse.byteInputStream())
+            deputados.sortBy { it.nomeParlamentar }
 
             datasource.clear()
             datasource.addAll(deputados)

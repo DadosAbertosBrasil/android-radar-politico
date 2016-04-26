@@ -18,6 +18,8 @@ import java.util.*
  * Created by Joamila on 16/03/2016.
  */
 class AddDeputadoRecyclerViewAdapter(private val dataSource: ArrayList<Deputado>, private val context: Context) : RecyclerView.Adapter<AddDeputadoRecyclerViewAdapter.ViewHolder>() {
+    var deputadoAdded = false
+
     fun getItem(position: Int): Deputado {
         return this.dataSource[position]
     }
@@ -75,6 +77,7 @@ class AddDeputadoRecyclerViewAdapter(private val dataSource: ArrayList<Deputado>
                 val deputado = dataSource[indexPath.row]
                 val deputadoDAO = DeputadoDAO(v.context)
 
+                deputadoAdded = true
                 deputadoDAO.create(deputado)
 
                 Toast.makeText(v.context, "Seguindo Deputado " + deputado.nomeParlamentar!!, Toast.LENGTH_SHORT).show()

@@ -13,7 +13,8 @@
         <activity
             android:name=".controllers.MainActivity"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -32,7 +33,8 @@
             android:label="Deputados"
             android:launchMode="singleTop"
             android:parentActivityName=".controllers.SearchViewActivity"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.app.default_searchable"
                 android:value=".controllers.SearchViewActivity" />
@@ -40,7 +42,8 @@
         <activity
             android:name=".controllers.SearchViewActivity"
             android:label="@string/title_activity_search_view"
-            android:launchMode="singleTop">
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH" />
             </intent-filter>
@@ -54,12 +57,15 @@
             android:label="Deputado"
             android:launchMode="singleTop"
             android:parentActivityName=".controllers.SearchViewActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="portrait"/>
+
         <activity
             android:name=".controllers.ProposicaoVotadaActivity"
             android:label="@string/title_activity_proposicao_votada"
             android:parentActivityName="br.edu.ifce.engcomp.francis.radarpolitico.controllers.MainActivity"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="br.edu.ifce.engcomp.francis.radarpolitico.controllers.MainActivity" />
