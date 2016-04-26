@@ -14,11 +14,7 @@
             android:name=".controllers.MainActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH" />
             </intent-filter>
@@ -58,11 +54,20 @@
         <activity
             android:name=".controllers.ProposicaoVotadaActivity"
             android:label="@string/title_activity_proposicao_votada"
-            android:parentActivityName="br.edu.ifce.engcomp.francis.radarpolitico.controllers.MainActivity"
+            android:parentActivityName=".controllers.MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="br.edu.ifce.engcomp.francis.radarpolitico.controllers.MainActivity" />
+        </activity>
+        <activity
+            android:name=".controllers.SplashActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
     </application>
 
