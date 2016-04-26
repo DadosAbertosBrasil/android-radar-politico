@@ -9,7 +9,7 @@
 
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
 
-    tools:context=".controllers.MainActivity"
+    tools:context="br.edu.ifce.engcomp.francis.radarpolitico.controllers.MainActivity"
     tools:showIn="@layout/activity_main">
 
     <android.support.v4.app.FragmentTabHost
