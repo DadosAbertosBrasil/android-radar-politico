@@ -37,6 +37,7 @@ class DetalheProposicaoFragment : Fragment() {
     private lateinit var ementaProposicaoTextView: TextView
     private lateinit var dataVotacaoTextView: TextView
     private lateinit var politicoNomeTextView: TextView
+    private lateinit var partidoTextView: TextView
     private lateinit var temaProposicaoTextView: TextView
     private lateinit var tipoProposicaoTextView: TextView
     private lateinit var urlInteiroTeorTextView: TextView
@@ -69,6 +70,8 @@ class DetalheProposicaoFragment : Fragment() {
         ementaProposicaoTextView = view.findViewById(R.id.ementaProposicaoTextView) as TextView
         dataVotacaoTextView      = view.findViewById(R.id.dataVotacaoTextView) as TextView
         politicoNomeTextView     = view.findViewById(R.id.politicoNomeTextView) as TextView
+        partidoTextView = view.findViewById(R.id.partidoTextView) as TextView
+
 
         temaProposicaoTextView = view.findViewById(R.id.temaProposicaoTextView) as TextView
         tipoProposicaoTextView = view.findViewById(R.id.tipoProposicaoTextView) as TextView
