@@ -72,15 +72,10 @@
                 android:layout_marginBottom="4dp"
                 android:layout_marginRight="8dp">
 
-                <Button
+                <Switch
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="SEGUIR"
-                    android:id="@+id/followButton"
-                    android:textColor="@color/colorPrimary"
-                    android:background="@android:color/transparent"
-                    android:paddingLeft="8dp"
-                    android:paddingRight="8dp" />
+                    android:id="@+id/seguir_switch"/>
             </LinearLayout>
 
         </LinearLayout>

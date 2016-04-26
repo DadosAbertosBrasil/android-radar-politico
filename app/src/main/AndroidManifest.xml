@@ -70,6 +70,16 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="br.edu.ifce.engcomp.francis.radarpolitico.controllers.MainActivity" />
         </activity>
+        <activity
+            android:name=".controllers.SplashActivity"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>
