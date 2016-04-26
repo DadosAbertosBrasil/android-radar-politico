@@ -66,7 +66,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:layout_marginRight="8dp"
-                android:layout_marginLeft="8dp">
+                android:layout_marginLeft="8dp"
+                android:id="@+id/votacoesGridLayout"
+                android:visibility="gone">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -99,12 +101,14 @@
                 android:layout_marginBottom="8dp">
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:text="XXX% de Presença em Mês"
+                    android:text="Carregando Frequência..."
                     android:id="@+id/politico_percentual_presenca_text_view"
-                    android:layout_gravity="center_horizontal" />
+                    android:layout_gravity="center_horizontal"
+                    android:textAlignment="center"
+                    android:visibility="visible" />
 
                 <ProgressBar
                     style="?android:attr/progressBarStyleHorizontal"
@@ -112,7 +116,8 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/politico_presenca_progressbar"
                     android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="8dp" />
+                    android:layout_marginTop="8dp"
+                    android:indeterminate="true" />
 
             </LinearLayout>
 
