@@ -20,7 +20,9 @@
 
             <GridLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="match_parent"
+                android:rowCount="1"
+                android:columnCount="3">
 
                 <TextView
                     android:id="@+id/title"
@@ -40,14 +42,15 @@
                     android:id="@+id/subtitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_column="16"
                     android:layout_marginBottom="12dp"
                     android:layout_marginLeft="8dp"
                     android:layout_marginRight="8dp"
                     android:layout_marginTop="12dp"
                     android:layout_row="0"
                     android:text="12/12/12"
-                    android:textAppearance="?android:attr/textAppearanceSmall" />
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:textAlignment="textEnd"
+                    android:layout_column="2" />
             </GridLayout>
 
             <TextView

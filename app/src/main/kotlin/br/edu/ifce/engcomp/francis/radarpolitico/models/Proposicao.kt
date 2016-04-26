@@ -10,30 +10,30 @@ import java.io.Serializable
  * Created by francisco on 14/03/16.
  */
 data class Proposicao (
-    var id: String = "",
-    var nome: String? = "",
+        var id: String = "",
+        var nome: String? = "",
 
-    var sigla: String? = "",
-    var numero: String? = "",
-    var ano: String? = "",
+        var sigla: String? = "",
+        var numero: String? = "",
+        var ano: String? = "",
 
-    var tipoProposicao: String? = "",
-    var tema: String? = "",
-    var ementa: String? = "",
-    var explicacaoEmenta: String? = "",
-    var indexacao: String? = "",
+        var tipoProposicao: String? = "",
+        var tema: String? = "",
+        var ementa: String? = "",
+        var explicacaoEmenta: String? = "",
+        var indexacao: String? = "",
 
-    var regimeTramitacao: String? = "",
-    var situacao: String? = "",
+        var regimeTramitacao: String? = "",
+        var situacao: String? = "",
 
-    var urlInteiroTeor: String? = "",
-    var quantidadeAutores: String? = "",
+        var urlInteiroTeor: String? = "",
+        var quantidadeAutores: String? = "",
 
-    var idAutor: String? = "",
-    var nomeAutor: String? = "",
+        var idAutor: String? = "",
+        var nomeAutor: String? = "",
 
-    var dataVotacao: String = "",
-    var ultimaVotacao: Votacao? = null) : Parcelable {
+        var dataVotacao: Date? = null,
+        var ultimaVotacao: Votacao? = null) : Parcelable {
 
     constructor(source: Parcel): this(
             source.readString(),
@@ -52,7 +52,7 @@ data class Proposicao (
             source.readSerializable() as String?,
             source.readSerializable() as String?,
             source.readSerializable() as String?,
-            source.readString(),
+            source.readSerializable() as Date?,
             source.readParcelable<Votacao?>(Votacao::class.java.classLoader))
 
     override fun describeContents(): Int {
@@ -76,7 +76,7 @@ data class Proposicao (
         dest?.writeSerializable(quantidadeAutores)
         dest?.writeSerializable(idAutor)
         dest?.writeSerializable(nomeAutor)
-        dest?.writeString(dataVotacao)
+        dest?.writeSerializable(dataVotacao)
         dest?.writeParcelable(ultimaVotacao, 0)
     }
 

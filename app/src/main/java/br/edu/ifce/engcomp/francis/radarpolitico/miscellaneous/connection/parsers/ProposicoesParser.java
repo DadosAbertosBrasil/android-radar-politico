@@ -6,6 +6,8 @@ import org.xmlpull.v1.XmlPullParserFactory;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import br.edu.ifce.engcomp.francis.radarpolitico.models.Proposicao;
@@ -18,6 +20,7 @@ public class ProposicoesParser {
     public static ArrayList<Proposicao> parseProposicoesFromXML(InputStream xmlInputStream)  throws XmlPullParserException, IOException {
         XmlPullParserFactory xmlPullParserFactory = XmlPullParserFactory.newInstance();
         XmlPullParser parser = xmlPullParserFactory.newPullParser();
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
 
         ArrayList<Proposicao> proposicoes = new ArrayList<>();
 
@@ -46,7 +49,11 @@ public class ProposicoesParser {
                             proposicao.setId(parser.getText());
                         }
                         else if (tagAtual.equals("dataVotacao")){
-                            proposicao.setDataVotacao(parser.getText());
+                            try {
+                                proposicao.setDataVotacao(formatter.parse(parser.getText()));
+                            } catch (ParseException e) {
+                                e.printStackTrace();
+                            }
                         }
                     }
 
