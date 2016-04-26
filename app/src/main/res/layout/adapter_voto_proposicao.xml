@@ -36,7 +36,7 @@
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:text="SIM"
-            android:id="@+id/partidoDeputadoTextView"
+            android:id="@+id/votoDeputadoTextView"
             android:layout_gravity="center_vertical" />
     </LinearLayout>
 </LinearLayout>

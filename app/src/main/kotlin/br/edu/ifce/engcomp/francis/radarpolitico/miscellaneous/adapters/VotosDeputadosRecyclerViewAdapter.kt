@@ -35,7 +35,7 @@ class VotosDeputadosRecyclerViewAdapter(private val context: Context, private va
         val deputado = DeputadoDAO(context).queryById(voto.idCadastro)
 
         holder.nomeDeputadoTextView.text = voto.nome
-        holder.partidoDeputadoTextView.text = voto.partido
+        holder.votoDeputadoTextView.text = voto.voto?.toUpperCase()
         holder.setBackgroundColorWithVote(voto.voto)
 
         if (deputado != null) {
@@ -55,12 +55,12 @@ class VotosDeputadosRecyclerViewAdapter(private val context: Context, private va
 
     inner class ViewHolder(val view: View) : RecyclerView.ViewHolder(view){
         val nomeDeputadoTextView: TextView
-        val partidoDeputadoTextView: TextView
+        val votoDeputadoTextView: TextView
         val fotoDeputadoTextView: ImageView
 
         init {
             nomeDeputadoTextView = view.findViewById(R.id.nomeDeputadoTextView) as TextView
-            partidoDeputadoTextView = view.findViewById(R.id.partidoDeputadoTextView) as TextView
+            votoDeputadoTextView = view.findViewById(R.id.votoDeputadoTextView) as TextView
             fotoDeputadoTextView = view.findViewById(R.id.fotoDeputadoImageView) as ImageView
         }
 

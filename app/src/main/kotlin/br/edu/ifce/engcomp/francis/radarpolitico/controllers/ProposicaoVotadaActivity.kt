@@ -1,14 +1,19 @@
 package br.edu.ifce.engcomp.francis.radarpolitico.controllers
 
+import android.content.Intent
+import android.content.res.ColorStateList
 import android.os.Bundle
 import android.support.design.widget.FloatingActionButton
 import android.support.design.widget.Snackbar
+import android.support.v4.app.FragmentTabHost
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.Toolbar
 import android.util.Log
 import android.view.View
+import android.widget.TabWidget
+import android.widget.TextView
 
 import br.edu.ifce.engcomp.francis.radarpolitico.R
 import br.edu.ifce.engcomp.francis.radarpolitico.helpers.VolleySharedQueue
@@ -29,13 +34,7 @@ import java.util.*
 
 class ProposicaoVotadaActivity : AppCompatActivity() {
     lateinit var proposicao: Proposicao
-    val votosDatasource:ArrayList<Voto>
-    val adapter: VotosDeputadosRecyclerViewAdapter
 
-    init {
-        votosDatasource = ArrayList()
-        adapter = VotosDeputadosRecyclerViewAdapter(this, votosDatasource)
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,13 +42,8 @@ class ProposicaoVotadaActivity : AppCompatActivity() {
 
         proposicao = intent.getParcelableExtra<Proposicao>("PROPOSICAO_EXTRA")
 
-        resultadosLinearLayout.hideView()
-        votosDeputadosRecyclerView.hideView()
-
-        initToolbar()
-        initProposicaoComponents()
-        initVotosRecyclerView()
-        requestVotacaoAndInitVotacaoComponents()
+        initToolbar();
+        initTabHost();
     }
 
     override fun onBackPressed() {
@@ -64,72 +58,41 @@ class ProposicaoVotadaActivity : AppCompatActivity() {
         }
     }
 
-    private fun initProposicaoComponents(){
-        nomeProposicaoTextView.text = proposicao.nome
-        ementaProposicaoTextView.text = proposicao.ementa
-        dataVotacaoTextView.text    = proposicao.dataVotacao
-        politicoNomeTextView.text   = proposicao.nomeAutor
-        temaProposicaoTextView.text = proposicao.tema
-        tipoProposicaoTextView.text = proposicao.tipoProposicao
-        urlInteiroTeorTextView.text = proposicao.urlInteiroTeor
-    }
-    
-    private fun requestVotacaoAndInitVotacaoComponents() {
-        val urlString = CDUrlFormatter.obterVotacaoProposicao(proposicao.sigla, proposicao.numero, proposicao.ano)
+    private fun initTabHost() {
+        val mainTabHost = findViewById(R.id.votacoes_tabHost) as FragmentTabHost
+        mainTabHost.setup(this, supportFragmentManager, android.R.id.tabcontent)
 
-        val request = StringRequest(Request.Method.GET, urlString, {
-            stringResponse: String ->
+        val detalhesTab = mainTabHost.newTabSpec("votacoes")
+        val votosTab    = mainTabHost.newTabSpec("politicos")
 
-            val votacao = VotacaoParser.parseVotacaoFromXML(stringResponse.byteInputStream())
-            Log.i("Volley", votacao.toString())
+        detalhesTab.setIndicator("DETALHES")
+        votosTab.setIndicator("LISTA DE VOTOS")
 
-            votosSimTextView.text = votacao.totalVotosSim
-            votosNaoTextView.text = votacao.totalVotosNao
+        mainTabHost.addTab(detalhesTab, DetalheProposicaoFragment::class.java, null)
+        mainTabHost.addTab(votosTab, VotosDeputadosFragment::class.java, null)
 
-            abstencoesTextView.text = votacao.totalVotosAbstencao
-            totalVotosTextView.text = votacao.totalVotosSessao
+        mainTabHost.currentTab = 0
 
-            val deputados = DeputadoDAO(this).listAll()
-            val filteredVotos = ArrayList<Voto>()
-
-            for(deputado in deputados){
-                val votos = votacao.votos.filter { it.idCadastro.equals(deputado.idCadastro) }
-                filteredVotos.addAll(votos)
-            }
-
-            votosDatasource.clear()
-            votosDatasource.addAll(filteredVotos)
-            adapter.notifyDataSetChanged()
-
-            loadingResultadoProgressBar.hideView()
-            resultadosLinearLayout.showView()
-
-            loadingVotosProgressBar.hideView()
-            votosDeputadosRecyclerView.showView()
-
-        },{
-            volleyError: VolleyError ->
-            volleyError.printStackTrace()
-        })
-
-        VolleySharedQueue.getQueue(this)?.add(request)
-    }
-    
-    private fun initVotosRecyclerView() {
-        val layoutManager = LinearLayoutManager(this)
-
-        votosDeputadosRecyclerView.setHasFixedSize(true)
-        votosDeputadosRecyclerView.layoutManager = layoutManager
-        votosDeputadosRecyclerView.adapter = adapter
-        votosDeputadosRecyclerView.itemAnimator = DefaultItemAnimator()
+        stylizeTabs(mainTabHost)
     }
 
-    fun View.hideView() {
-        this.visibility = View.GONE
-    }
+    private fun stylizeTabs(tabHost: FragmentTabHost) {
+        val tabTextColors: ColorStateList
+        val tabWidget: TabWidget
+        var tabTextView: TextView
+        var tabView: View
 
-    fun View.showView() {
-        this.visibility = View.VISIBLE
+        val tabAmount: Int
+
+        tabWidget = tabHost.tabWidget
+        tabTextColors = this.resources.getColorStateList(R.color.tab_text_selector)
+        tabAmount = tabWidget.tabCount
+
+        for (i in 0..tabAmount - 1) {
+            tabView = tabWidget.getChildTabViewAt(i)
+            tabTextView = tabView.findViewById(android.R.id.title) as TextView
+            tabTextView.setTextColor(tabTextColors)
+        }
     }
 
 }
