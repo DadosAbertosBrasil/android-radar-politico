@@ -3,16 +3,12 @@ package br.edu.ifce.engcomp.francis.radarpolitico.miscellaneous.adapters
 import android.content.Context
 import android.content.Intent
 import android.support.v7.widget.RecyclerView
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
-
-import org.apache.commons.lang3.text.WordUtils
-
 import br.edu.ifce.engcomp.francis.radarpolitico.R
 import br.edu.ifce.engcomp.francis.radarpolitico.controllers.DeputadoActivity
 import br.edu.ifce.engcomp.francis.radarpolitico.helpers.VolleySharedQueue
@@ -23,6 +19,7 @@ import com.android.volley.Request
 import com.android.volley.VolleyError
 import com.android.volley.toolbox.StringRequest
 import com.squareup.picasso.Picasso
+import org.apache.commons.lang3.text.WordUtils
 import java.text.SimpleDateFormat
 import java.util.*
 

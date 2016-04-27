@@ -1,36 +1,15 @@
 package br.edu.ifce.engcomp.francis.radarpolitico.controllers
 
-import android.content.Intent
 import android.content.res.ColorStateList
 import android.os.Bundle
-import android.support.design.widget.FloatingActionButton
-import android.support.design.widget.Snackbar
 import android.support.v4.app.FragmentTabHost
 import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.DefaultItemAnimator
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.Toolbar
-import android.util.Log
 import android.view.View
 import android.widget.TabWidget
 import android.widget.TextView
-
 import br.edu.ifce.engcomp.francis.radarpolitico.R
-import br.edu.ifce.engcomp.francis.radarpolitico.helpers.VolleySharedQueue
-import br.edu.ifce.engcomp.francis.radarpolitico.miscellaneous.CDUrlFormatter
-import br.edu.ifce.engcomp.francis.radarpolitico.miscellaneous.adapters.VotosDeputadosRecyclerViewAdapter
-import br.edu.ifce.engcomp.francis.radarpolitico.miscellaneous.connection.database.DeputadoDAO
-import br.edu.ifce.engcomp.francis.radarpolitico.miscellaneous.connection.parsers.VotacaoParser
 import br.edu.ifce.engcomp.francis.radarpolitico.models.Proposicao
-import br.edu.ifce.engcomp.francis.radarpolitico.models.Votacao
-import br.edu.ifce.engcomp.francis.radarpolitico.models.Voto
-import com.android.volley.Request
-import com.android.volley.VolleyError
-import com.android.volley.toolbox.StringRequest
 import kotlinx.android.synthetic.main.activity_add_politicians.*
-import kotlinx.android.synthetic.main.content_proposicao_votada.*
-import kotlinx.android.synthetic.main.content_proposicao_votada.view.*
-import java.util.*
 
 class ProposicaoVotadaActivity : AppCompatActivity() {
     lateinit var proposicao: Proposicao

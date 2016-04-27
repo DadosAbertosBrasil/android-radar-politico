@@ -17,7 +17,7 @@ import br.edu.ifce.engcomp.francis.radarpolitico.helpers.VolleySharedQueue
 import br.edu.ifce.engcomp.francis.radarpolitico.miscellaneous.CDUrlFormatter
 import br.edu.ifce.engcomp.francis.radarpolitico.miscellaneous.adapters.VotosDeputadosRecyclerViewAdapter
 import br.edu.ifce.engcomp.francis.radarpolitico.miscellaneous.connection.database.DeputadoDAO
-import br.edu.ifce.engcomp.francis.radarpolitico.miscellaneous.connection.parsers.VotacaoParser
+import br.edu.ifce.engcomp.francis.radarpolitico.miscellaneous.connection.parsers.CDXmlParser
 import br.edu.ifce.engcomp.francis.radarpolitico.models.Proposicao
 import br.edu.ifce.engcomp.francis.radarpolitico.models.Voto
 import com.android.volley.Request
@@ -88,7 +88,7 @@ class VotosDeputadosFragment : Fragment() {
         val request = StringRequest(Request.Method.GET, urlString, {
             stringResponse: String ->
 
-            val votacao = VotacaoParser.parseVotacaoFromXML(stringResponse.byteInputStream())
+            val votacao = CDXmlParser.parseVotacaoFromXML(stringResponse.byteInputStream())
 
             val deputados = DeputadoDAO(activity).listAll()
             val filteredVotos = ArrayList<Voto>()

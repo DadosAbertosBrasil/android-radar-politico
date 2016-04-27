@@ -33,7 +33,7 @@ public class ProposicaoParser {
                     tagAtual = parser.getName();
 
                     if (tagAtual.equals("proposicao")) {
-                        proposicao.setSigla(parser.getAttributeValue(null, "tipo"));
+                        proposicao.setSigla(parser.getAttributeValue(null, "tipo").replaceAll("\\s+", ""));
                         proposicao.setNumero(parser.getAttributeValue(null, "numero"));
                         proposicao.setAno(parser.getAttributeValue(null, "ano"));
                     }

@@ -1,10 +1,8 @@
 package br.edu.ifce.engcomp.francis.radarpolitico.models
 
-import java.util.*
 import android.os.Parcel
 import android.os.Parcelable
-
-import java.io.Serializable
+import java.util.*
 
 /**
  * Created by francisco on 14/03/16.

@@ -5,7 +5,10 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.*
+import android.widget.CompoundButton
+import android.widget.ImageView
+import android.widget.Switch
+import android.widget.TextView
 import br.edu.ifce.engcomp.francis.radarpolitico.R
 import br.edu.ifce.engcomp.francis.radarpolitico.miscellaneous.connection.database.DeputadoDAO
 import br.edu.ifce.engcomp.francis.radarpolitico.miscellaneous.helpers.IndexPath
