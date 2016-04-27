@@ -6,7 +6,6 @@ import android.support.v4.app.Fragment
 import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,16 +15,11 @@ import br.edu.ifce.engcomp.francis.radarpolitico.R
 import br.edu.ifce.engcomp.francis.radarpolitico.helpers.VolleySharedQueue
 import br.edu.ifce.engcomp.francis.radarpolitico.miscellaneous.CDUrlFormatter
 import br.edu.ifce.engcomp.francis.radarpolitico.miscellaneous.adapters.ProposicoesVotadasRecyclerViewAdapter
-import br.edu.ifce.engcomp.francis.radarpolitico.miscellaneous.connection.parsers.ProposicaoParser
 import br.edu.ifce.engcomp.francis.radarpolitico.miscellaneous.connection.parsers.ProposicoesParser
-import br.edu.ifce.engcomp.francis.radarpolitico.miscellaneous.connection.parsers.VotacaoParser
 import br.edu.ifce.engcomp.francis.radarpolitico.models.Proposicao
-import br.edu.ifce.engcomp.francis.radarpolitico.models.Votacao
-import br.edu.ifce.engcomp.francis.radarpolitico.models.Voto
 import com.android.volley.Request
 import com.android.volley.VolleyError
 import com.android.volley.toolbox.StringRequest
-import java.text.SimpleDateFormat
 import java.util.*
 
 class VotationsTabFragment : Fragment() {
@@ -84,9 +78,7 @@ class VotationsTabFragment : Fragment() {
 
             adapter.notifyDataSetChanged()
 
-            if (this.votacoesProgressBar != null) {
-                this.votacoesProgressBar?.visibility = View.INVISIBLE
-            }
+            this.votacoesProgressBar?.visibility = View.INVISIBLE
 
         }, {
             volleyError: VolleyError ->

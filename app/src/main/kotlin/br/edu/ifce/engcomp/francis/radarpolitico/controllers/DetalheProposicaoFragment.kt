@@ -11,21 +11,18 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.ProgressBar
 import android.widget.TextView
-
 import br.edu.ifce.engcomp.francis.radarpolitico.R
 import br.edu.ifce.engcomp.francis.radarpolitico.helpers.VolleySharedQueue
 import br.edu.ifce.engcomp.francis.radarpolitico.miscellaneous.CDUrlFormatter
-import br.edu.ifce.engcomp.francis.radarpolitico.miscellaneous.connection.database.DeputadoDAO
-import br.edu.ifce.engcomp.francis.radarpolitico.miscellaneous.connection.parsers.VotacaoParser
+import br.edu.ifce.engcomp.francis.radarpolitico.miscellaneous.connection.parsers.CDXmlParser
+import br.edu.ifce.engcomp.francis.radarpolitico.miscellaneous.connection.parsers.DeputadoParser
 import br.edu.ifce.engcomp.francis.radarpolitico.models.Proposicao
 import br.edu.ifce.engcomp.francis.radarpolitico.models.Votacao
-import br.edu.ifce.engcomp.francis.radarpolitico.models.Voto
 import com.android.volley.Request
 import com.android.volley.VolleyError
 import com.android.volley.toolbox.StringRequest
 import com.squareup.picasso.Picasso
 import java.text.SimpleDateFormat
-import java.util.*
 
 /**
  * A simple [Fragment] subclass.
@@ -70,7 +67,7 @@ class DetalheProposicaoFragment : Fragment() {
         ementaProposicaoTextView = view.findViewById(R.id.ementaProposicaoTextView) as TextView
         dataVotacaoTextView      = view.findViewById(R.id.dataVotacaoTextView) as TextView
         politicoNomeTextView     = view.findViewById(R.id.politicoNomeTextView) as TextView
-        partidoTextView = view.findViewById(R.id.partidoTextView) as TextView
+        partidoTextView          = view.findViewById(R.id.partidoTextView) as TextView
 
 
         temaProposicaoTextView = view.findViewById(R.id.temaProposicaoTextView) as TextView
@@ -91,8 +88,25 @@ class DetalheProposicaoFragment : Fragment() {
 
         populateProposicaoComponents()
         requestVotacaoIfNeeded()
+        requestPartidoPolitico()
 
         return view
+    }
+
+    private fun requestPartidoPolitico(){
+        val urlString = CDUrlFormatter.obterDeputado(proposicao.idAutor, "");
+        val request = StringRequest(Request.Method.GET, urlString, {
+            stringResponse: String ->
+
+            val deputado = DeputadoParser.parseDeputadoFromXML(stringResponse.byteInputStream())
+            partidoTextView.text = deputado.partido
+
+        }, {
+            volleyError: VolleyError ->
+            volleyError.printStackTrace()
+        })
+
+        VolleySharedQueue.getQueue(activity)?.add(request)
     }
 
     private fun requestVotacaoIfNeeded(){
@@ -106,11 +120,12 @@ class DetalheProposicaoFragment : Fragment() {
 
     private fun requestVotacaoAndInitVotacaoComponents() {
         val urlString = CDUrlFormatter.obterVotacaoProposicao(proposicao.sigla, proposicao.numero, proposicao.ano)
+        Log.i("VOTACAO", urlString)
 
         val request = StringRequest(Request.Method.GET, urlString, {
             stringResponse: String ->
 
-            votacao = VotacaoParser.parseVotacaoFromXML(stringResponse.byteInputStream())
+            votacao = CDXmlParser.parseVotacaoFromXML(stringResponse.byteInputStream())
             populateVotacaoCompoenents()
 
         }, {

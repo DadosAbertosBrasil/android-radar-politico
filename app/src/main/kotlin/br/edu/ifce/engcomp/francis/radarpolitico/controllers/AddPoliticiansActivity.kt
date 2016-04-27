@@ -5,22 +5,18 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.LinearLayoutManager
-import android.util.Log
 import android.view.MenuItem
 import android.view.View
-import android.widget.ImageView
 import android.widget.Toast
 import br.edu.ifce.engcomp.francis.radarpolitico.R
 import br.edu.ifce.engcomp.francis.radarpolitico.helpers.VolleySharedQueue
 import br.edu.ifce.engcomp.francis.radarpolitico.miscellaneous.CDUrlFormatter
 import br.edu.ifce.engcomp.francis.radarpolitico.miscellaneous.adapters.AddDeputadoRecyclerViewAdapter
-import br.edu.ifce.engcomp.francis.radarpolitico.miscellaneous.connection.parsers.DeputadosParser
+import br.edu.ifce.engcomp.francis.radarpolitico.miscellaneous.connection.parsers.CDXmlParser
 import br.edu.ifce.engcomp.francis.radarpolitico.models.Deputado
 import com.android.volley.Request
 import com.android.volley.VolleyError
 import com.android.volley.toolbox.StringRequest
-import com.android.volley.toolbox.Volley
-import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_add_politicians.*
 import kotlinx.android.synthetic.main.content_add_politicians.*
 import java.util.*
@@ -80,7 +76,7 @@ class AddPoliticiansActivity : AppCompatActivity() {
         val request = StringRequest(Request.Method.GET, requestUrl, {
             stringResponse: String ->
 
-            val deputados = DeputadosParser.parseDeputadosFromXML(stringResponse.byteInputStream())
+            val deputados = CDXmlParser.parseDeputadosFromXML(stringResponse.byteInputStream())
             deputados.sortBy { it.nomeParlamentar }
 
             datasource.clear()
