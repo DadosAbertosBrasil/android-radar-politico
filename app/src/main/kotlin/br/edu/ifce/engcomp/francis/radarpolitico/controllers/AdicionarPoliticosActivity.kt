@@ -1,10 +1,18 @@
 package br.edu.ifce.engcomp.francis.radarpolitico.controllers
 
+import android.app.SearchManager
+import android.content.Context
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
+import android.support.v4.view.MenuCompat
+import android.support.v4.view.MenuItemCompat
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.SearchView
+import android.util.Log
+import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
@@ -21,12 +29,14 @@ import kotlinx.android.synthetic.main.activity_add_politicians.*
 import kotlinx.android.synthetic.main.content_add_politicians.*
 import java.util.*
 
-class AdicionarPoliticosActivity : AppCompatActivity() {
+class AdicionarPoliticosActivity : AppCompatActivity(), SearchView.OnQueryTextListener{
+
     var datasource: ArrayList<Deputado>
+
     lateinit var adapter: AddDeputadoRecyclerViewAdapter
 
     init {
-        this.datasource = ArrayList<Deputado>()
+        this.datasource = ArrayList()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -52,12 +62,46 @@ class AdicionarPoliticosActivity : AppCompatActivity() {
         super.onBackPressed()
     }
 
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.menu_add_deputado, menu)
+
+        val searchManager = getSystemService(Context.SEARCH_SERVICE) as SearchManager
+        val searchItem = menu.findItem(R.id.action_search)
+        var searchView: SearchView?
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB){
+            searchView = searchItem?.actionView as SearchView?
+        }
+        else {
+            searchView = MenuItemCompat.getActionView(searchItem) as SearchView?
+        }
+
+        searchView?.queryHint = "Pesquisar"
+        searchView?.setSearchableInfo(searchManager.getSearchableInfo(componentName))
+        searchView?.setOnQueryTextListener(this)
+        return true
+    }
+
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         if (item?.itemId == android.R.id.home){
             onBackPressed()
         }
 
         return super.onOptionsItemSelected(item)
+    }
+
+    override fun onQueryTextSubmit(query: String?): Boolean {
+        return false
+    }
+
+    override fun onQueryTextChange(newText: String?): Boolean {
+
+        if(newText!!.length > 3){
+            val politicos = datasource.filter { it.nomeParlamentar!!.contains(newText, true) }
+            Log.i("SEARCH", politicos.size.toString())
+        }
+
+        return false
     }
 
     private fun initRecyclerView() {
@@ -82,7 +126,7 @@ class AdicionarPoliticosActivity : AppCompatActivity() {
             datasource.clear()
             datasource.addAll(deputados)
             adapter.notifyDataSetChanged()
-            addDeputadoProgressBar.visibility = View.INVISIBLE
+            addDeputadoProgressBar.visibility = View.GONE
 
         }, {
             volleyError: VolleyError ->

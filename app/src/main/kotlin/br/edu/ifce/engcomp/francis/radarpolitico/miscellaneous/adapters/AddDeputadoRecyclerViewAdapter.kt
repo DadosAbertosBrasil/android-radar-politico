@@ -2,6 +2,7 @@ package br.edu.ifce.engcomp.francis.radarpolitico.miscellaneous.adapters
 
 import android.content.Context
 import android.support.v7.widget.RecyclerView
+import android.support.v7.widget.SearchView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -21,6 +22,7 @@ import java.util.*
  * Created by Joamila on 16/03/2016.
  */
 class AddDeputadoRecyclerViewAdapter(private val dataSource: ArrayList<Deputado>, private val context: Context) : RecyclerView.Adapter<AddDeputadoRecyclerViewAdapter.ViewHolder>() {
+
     var deputadoAdded = false
 
     fun getItem(position: Int): Deputado {
