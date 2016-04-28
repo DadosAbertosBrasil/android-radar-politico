@@ -18,6 +18,7 @@ import br.edu.ifce.engcomp.francis.radarpolitico.controllers.DeputadoActivity
 import br.edu.ifce.engcomp.francis.radarpolitico.helpers.VolleySharedQueue
 import br.edu.ifce.engcomp.francis.radarpolitico.miscellaneous.CDUrlFormatter
 import br.edu.ifce.engcomp.francis.radarpolitico.miscellaneous.connection.parsers.FrequenciaParser
+import br.edu.ifce.engcomp.francis.radarpolitico.miscellaneous.helpers.IndexPath
 import br.edu.ifce.engcomp.francis.radarpolitico.models.Deputado
 import com.android.volley.Request
 import com.android.volley.VolleyError
@@ -48,6 +49,7 @@ class DeputadoRecyclerViewAdapter(val context: Context, private val dataSource: 
         holder.nomePoliticoTextView.text = WordUtils.capitalize(deputado.nomeParlamentar!!.toLowerCase())
         holder.partidoPoliticoTextView.text = deputado.partido
         holder.fotoPoliticoImageView.loadImage(deputado.urlFoto)
+        holder.indexPath.setPath(0, position)
 
         val currentCalendar  = Calendar.getInstance()
         val firstDayCalendar = Calendar.getInstance()
@@ -102,6 +104,8 @@ class DeputadoRecyclerViewAdapter(val context: Context, private val dataSource: 
         val frasePresencasTextView: TextView
         val presencaMensalProgressBar: ProgressBar
 
+        val indexPath: IndexPath
+
         init {
 
             this.nomePoliticoTextView = itemView.findViewById(R.id.politico_nome_text_view) as TextView
@@ -112,11 +116,14 @@ class DeputadoRecyclerViewAdapter(val context: Context, private val dataSource: 
             this.frasePresencasTextView = itemView.findViewById(R.id.politico_percentual_presenca_text_view) as TextView
             this.presencaMensalProgressBar = itemView.findViewById(R.id.politico_presenca_progressbar) as ProgressBar
 
+            this.indexPath = IndexPath()
+
             itemView.setOnClickListener(this)
         }
 
         override fun onClick(v: View) {
             val intent = Intent(v.context, DeputadoActivity::class.java)
+            intent.putExtra("DEPUTADO_INFOS", dataSource[indexPath.row])
             v.context.startActivity(intent)
         }
     }

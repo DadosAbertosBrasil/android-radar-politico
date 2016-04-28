@@ -14,18 +14,21 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Target;
+
 import java.util.ArrayList;
 
 import br.edu.ifce.engcomp.francis.radarpolitico.R;
 import br.edu.ifce.engcomp.francis.radarpolitico.miscellaneous.adapters.DeputadoFaltasRecyclerViewAdapter;
 import br.edu.ifce.engcomp.francis.radarpolitico.miscellaneous.adapters.DeputadoVotacoesRecyclerViewAdapter;
+import br.edu.ifce.engcomp.francis.radarpolitico.models.Deputado;
 import br.edu.ifce.engcomp.francis.radarpolitico.models.Falta;
 import br.edu.ifce.engcomp.francis.radarpolitico.models.VotacaoDeputado;
 import br.edu.ifce.engcomp.francis.radarpolitico.models.Voto;
 
 public class DeputadoActivity extends AppCompatActivity {
-    Voto deputadoAtual;
-    String deputado;
+    Deputado deputado;
     RecyclerView recyclerViewFaltas;
     ArrayList<Falta> datasourceFaltas;
     RecyclerView recyclerViewVotacoes;
@@ -72,12 +75,12 @@ public class DeputadoActivity extends AppCompatActivity {
         setContentView(R.layout.activity_deputado);
 
         Intent currentIntent = getIntent();
-        deputado = currentIntent.getStringExtra("DEPUTADO_INFOS");
+        deputado = (Deputado) currentIntent.getSerializableExtra("DEPUTADO_INFOS");
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         if(toolbar!=null){
             setSupportActionBar(toolbar);
-            getSupportActionBar().setTitle(deputado);
+            getSupportActionBar().setTitle(deputado.getNomeParlamentar());
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setDisplayShowHomeEnabled(true);
         }
@@ -88,6 +91,7 @@ public class DeputadoActivity extends AppCompatActivity {
         initRecyclerViewVotacoes();
     }
 
+
     public void init(){
         this.addDeputadoButton = (FloatingActionButton) findViewById(R.id.fab_add_deputado);
 
@@ -97,15 +101,17 @@ public class DeputadoActivity extends AppCompatActivity {
         TextView profissaoDeputadoTextView = (TextView) findViewById(R.id.profissao_deputado_text_view);
         TextView dataNascDeputadoTextView = (TextView) findViewById(R.id.data_nasc_deputado_text_view);
         TextView telefoneDeputadoTextView = (TextView) findViewById(R.id.telefone_deputado_text_view);
+        TextView emailDeputadoTextView = (TextView) findViewById(R.id.email_deputado_text_view);
 
         this.recyclerViewFaltas   = (RecyclerView) findViewById(R.id.deputado_faltas_recyler_view);
         this.recyclerViewVotacoes   = (RecyclerView) findViewById(R.id.deputado_votacoes_recyler_view);
 
-        nomeDeputadoTextView.setText(deputado);
-        //partidoDeputadoTextView.setText(deputadoAtual.getPartido() + "/" + deputadoAtual.getUf());
-        //profissaoDeputadoTextView.setText(deputadoAtual.getNomeProfissao());
-        //dataNascDeputadoTextView.setText(deputadoAtual.getDataNascimento());
-        //telefoneDeputadoTextView.setText(deputadoAtual.getFone());
+        nomeDeputadoTextView.setText(deputado.getNomeParlamentar());
+        partidoDeputadoTextView.setText(deputado.getPartido() + "/" + deputado.getUf());
+        profissaoDeputadoTextView.setText(deputado.getNomeProfissao());
+        dataNascDeputadoTextView.setText(deputado.getDataNascimento());
+        emailDeputadoTextView.setText(deputado.getEmail());
+        telefoneDeputadoTextView.setText(deputado.getFone());
     }
 
     public void initRecyclerViewFaltas(){

@@ -1,5 +1,7 @@
 package br.edu.ifce.engcomp.francis.radarpolitico.models
 
+import java.io.Serializable
+
 data class Deputado(
     var idCadastro: String? = "",
     var matricula: String? = "",
@@ -24,4 +26,4 @@ data class Deputado(
     var ufRepresentacaoAtual: String? = "",
     var nomeProfissao: String? = "",
 
-    var frequencia: Frequencia? = null)
+    var frequencia: Frequencia? = null) : Serializable
