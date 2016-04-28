@@ -15,14 +15,14 @@ import br.edu.ifce.engcomp.francis.radarpolitico.R
 import br.edu.ifce.engcomp.francis.radarpolitico.helpers.VolleySharedQueue
 import br.edu.ifce.engcomp.francis.radarpolitico.miscellaneous.CDUrlFormatter
 import br.edu.ifce.engcomp.francis.radarpolitico.miscellaneous.adapters.ProposicoesVotadasRecyclerViewAdapter
-import br.edu.ifce.engcomp.francis.radarpolitico.miscellaneous.connection.parsers.ProposicoesParser
+import br.edu.ifce.engcomp.francis.radarpolitico.miscellaneous.connection.parsers.CDXmlParser
 import br.edu.ifce.engcomp.francis.radarpolitico.models.Proposicao
 import com.android.volley.Request
 import com.android.volley.VolleyError
 import com.android.volley.toolbox.StringRequest
 import java.util.*
 
-class VotationsTabFragment : Fragment() {
+class VotacoesTabFragment : Fragment() {
     lateinit var adapter: ProposicoesVotadasRecyclerViewAdapter
     lateinit var votacoesRecyclerView: RecyclerView
 
@@ -70,7 +70,7 @@ class VotationsTabFragment : Fragment() {
 
         val request = StringRequest(Request.Method.GET, requestUrl, {
             stringRespose: String ->
-            val proposicoes = ProposicoesParser.parseProposicoesFromXML(stringRespose.byteInputStream())
+            val proposicoes = CDXmlParser.parseProposicoesFromXML(stringRespose.byteInputStream())
 
             proposicoes.sortByDescending { it.dataVotacao }
             datasource.clear()

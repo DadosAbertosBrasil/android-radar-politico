@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
 
-    tools:context="br.edu.ifce.engcomp.francis.radarpolitico.controllers.PoliticosFragment">
+    tools:context="br.edu.ifce.engcomp.francis.radarpolitico.controllers.DeputadosSeguidosTabFragment">
 
     <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"

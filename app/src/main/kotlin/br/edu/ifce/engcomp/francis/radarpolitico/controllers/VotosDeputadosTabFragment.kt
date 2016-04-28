@@ -28,7 +28,7 @@ import java.util.*
 /**
  * A simple [Fragment] subclass.
  */
-class VotosDeputadosFragment : Fragment() {
+class VotosDeputadosTabFragment : Fragment() {
 
     private lateinit var votosDeputadosRecyclerView: RecyclerView
     private lateinit var loadingVotosProgressBar: ProgressBar

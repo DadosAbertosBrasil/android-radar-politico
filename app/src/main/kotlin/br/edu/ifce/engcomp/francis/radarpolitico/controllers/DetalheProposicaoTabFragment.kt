@@ -15,7 +15,6 @@ import br.edu.ifce.engcomp.francis.radarpolitico.R
 import br.edu.ifce.engcomp.francis.radarpolitico.helpers.VolleySharedQueue
 import br.edu.ifce.engcomp.francis.radarpolitico.miscellaneous.CDUrlFormatter
 import br.edu.ifce.engcomp.francis.radarpolitico.miscellaneous.connection.parsers.CDXmlParser
-import br.edu.ifce.engcomp.francis.radarpolitico.miscellaneous.connection.parsers.DeputadoParser
 import br.edu.ifce.engcomp.francis.radarpolitico.models.Proposicao
 import br.edu.ifce.engcomp.francis.radarpolitico.models.Votacao
 import com.android.volley.Request
@@ -27,7 +26,7 @@ import java.text.SimpleDateFormat
 /**
  * A simple [Fragment] subclass.
  */
-class DetalheProposicaoFragment : Fragment() {
+class DetalheProposicaoTabFragment : Fragment() {
     private lateinit var proposicao: Proposicao
 
     private lateinit var nomeProposicaoTextView: TextView
@@ -98,7 +97,7 @@ class DetalheProposicaoFragment : Fragment() {
         val request = StringRequest(Request.Method.GET, urlString, {
             stringResponse: String ->
 
-            val deputado = DeputadoParser.parseDeputadoFromXML(stringResponse.byteInputStream())
+            val deputado = CDXmlParser.parseDeputadoFromXML(stringResponse.byteInputStream())
             partidoTextView.text = deputado.partido
 
         }, {

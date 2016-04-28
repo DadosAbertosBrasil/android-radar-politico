@@ -18,7 +18,7 @@ import br.edu.ifce.engcomp.francis.radarpolitico.miscellaneous.connection.databa
 import br.edu.ifce.engcomp.francis.radarpolitico.models.Deputado
 import java.util.*
 
-class PoliticosFragment : Fragment() {
+class DeputadosSeguidosTabFragment : Fragment() {
     lateinit var politicosRecyclerView: RecyclerView
     lateinit var fabAddDeputado: FloatingActionButton
     lateinit var adapter: DeputadoRecyclerViewAdapter
@@ -68,7 +68,7 @@ class PoliticosFragment : Fragment() {
 
     private fun initFabAddDeputado() {
         this.fabAddDeputado.setOnClickListener {
-            val intentAddPoliticosActivity = Intent(activity, AddPoliticiansActivity::class.java)
+            val intentAddPoliticosActivity = Intent(activity, AdicionarPoliticosActivity::class.java)
             startActivityForResult(intentAddPoliticosActivity, addPoliticoIntentCode)
         }
     }

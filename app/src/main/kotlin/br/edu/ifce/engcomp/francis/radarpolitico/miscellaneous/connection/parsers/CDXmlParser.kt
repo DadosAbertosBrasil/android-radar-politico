@@ -226,7 +226,7 @@ object CDXmlParser {
 
                     tagAtual = parser.name
 
-                    if (tagAtual.equals("proposicao", ignoreCase = true)) {
+                    if (tagAtual.equals("proposicao", ignoreCase = true) && proposicao.sigla!!.isEmpty()) {
                         proposicao.sigla  = parser.getAttributeValue(null, "tipo")?.replace("\\s+".toRegex(), "")
                         proposicao.numero = parser.getAttributeValue(null, "numero")?.replace("\\s+".toRegex(), "")
                         proposicao.ano    = parser.getAttributeValue(null, "ano")?.replace("\\s+".toRegex(), "")

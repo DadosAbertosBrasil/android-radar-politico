@@ -28,10 +28,10 @@
                     android:minHeight="80dp"
                     android:minWidth="80dp"
                     android:id="@+id/politico_image_view"
+                    android:src="@drawable/image_icon"
                     android:layout_marginTop="8dp"
                     android:layout_marginLeft="8dp"
                     android:layout_marginRight="8dp"
-                    android:background="@color/colorPrimary"
                     android:scaleType="centerCrop" />
 
                 <LinearLayout

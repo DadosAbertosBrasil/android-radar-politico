@@ -13,7 +13,7 @@ import br.edu.ifce.engcomp.francis.radarpolitico.R
 import br.edu.ifce.engcomp.francis.radarpolitico.controllers.DeputadoActivity
 import br.edu.ifce.engcomp.francis.radarpolitico.helpers.VolleySharedQueue
 import br.edu.ifce.engcomp.francis.radarpolitico.miscellaneous.CDUrlFormatter
-import br.edu.ifce.engcomp.francis.radarpolitico.miscellaneous.connection.parsers.FrequenciaParser
+import br.edu.ifce.engcomp.francis.radarpolitico.miscellaneous.connection.parsers.CDXmlParser
 import br.edu.ifce.engcomp.francis.radarpolitico.models.Deputado
 import com.android.volley.Request
 import com.android.volley.VolleyError
@@ -59,7 +59,7 @@ class DeputadoRecyclerViewAdapter(val context: Context, private val dataSource: 
         val request = StringRequest(Request.Method.GET, urlRequest, {
             stringResponse: String ->
 
-            val dias = FrequenciaParser.parseFrequenciaFromXML(stringResponse.byteInputStream())
+            val dias = CDXmlParser.parseFrequenciaFromXML(stringResponse.byteInputStream())
             val diasPresente = dias.filter { it.frequencia!!.equals("Presença") }
             val percentualFrequencia = (diasPresente.size.toFloat() / dias.size) * 100
 

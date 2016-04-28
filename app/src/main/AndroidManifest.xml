@@ -25,7 +25,7 @@
                 android:resource="@xml/searchable" />
         </activity>
         <activity
-            android:name=".controllers.AddPoliticiansActivity"
+            android:name=".controllers.AdicionarPoliticosActivity"
             android:label="Deputados"
             android:launchMode="singleTop"
             android:parentActivityName=".controllers.SearchViewActivity"

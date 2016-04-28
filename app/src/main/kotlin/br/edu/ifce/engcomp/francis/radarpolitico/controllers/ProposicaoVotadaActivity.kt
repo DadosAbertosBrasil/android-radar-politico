@@ -47,8 +47,8 @@ class ProposicaoVotadaActivity : AppCompatActivity() {
         detalhesTab.setIndicator("DETALHES")
         votosTab.setIndicator("LISTA DE VOTOS")
 
-        mainTabHost.addTab(detalhesTab, DetalheProposicaoFragment::class.java, null)
-        mainTabHost.addTab(votosTab, VotosDeputadosFragment::class.java, null)
+        mainTabHost.addTab(detalhesTab, DetalheProposicaoTabFragment::class.java, null)
+        mainTabHost.addTab(votosTab, VotosDeputadosTabFragment::class.java, null)
 
         mainTabHost.currentTab = 0
 

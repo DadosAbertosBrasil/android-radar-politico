@@ -21,7 +21,7 @@ import kotlinx.android.synthetic.main.activity_add_politicians.*
 import kotlinx.android.synthetic.main.content_add_politicians.*
 import java.util.*
 
-class AddPoliticiansActivity : AppCompatActivity() {
+class AdicionarPoliticosActivity : AppCompatActivity() {
     var datasource: ArrayList<Deputado>
     lateinit var adapter: AddDeputadoRecyclerViewAdapter
 

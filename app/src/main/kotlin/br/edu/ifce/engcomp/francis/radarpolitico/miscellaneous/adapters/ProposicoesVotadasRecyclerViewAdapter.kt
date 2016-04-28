@@ -98,7 +98,9 @@ class ProposicoesVotadasRecyclerViewAdapter(private val context: Context, privat
 
         override fun onClick(v: View) {
             val intent = Intent(v.context, ProposicaoVotadaActivity::class.java)
-            intent.putExtra("PROPOSICAO_EXTRA", datasource[indexPath.row])
+            val proposicao = datasource[indexPath.row]
+
+            intent.putExtra("PROPOSICAO_EXTRA", proposicao)
 
             v.context.startActivity(intent)
         }

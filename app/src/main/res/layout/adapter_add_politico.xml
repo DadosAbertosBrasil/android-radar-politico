@@ -33,8 +33,7 @@
                     android:layout_width="60dp"
                     android:layout_height="60dp"
                     android:id="@+id/add_politico_image_view"
-                    android:src="@drawable/ic_smile"
-                    android:background="@color/colorPrimary"
+                    android:src="@drawable/image_icon"
                     android:scaleType="centerCrop" />
 
                 <LinearLayout

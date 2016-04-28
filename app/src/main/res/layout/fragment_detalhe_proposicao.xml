@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="br.edu.ifce.engcomp.francis.radarpolitico.controllers.DetalheProposicaoFragment">
+    tools:context="br.edu.ifce.engcomp.francis.radarpolitico.controllers.DetalheProposicaoTabFragment">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -112,8 +112,7 @@
                             android:layout_width="60dp"
                             android:layout_height="60dp"
                             android:id="@+id/politicoImageView"
-                            android:src="@drawable/ic_smile"
-                            android:background="@color/colorPrimary"
+                            android:src="@drawable/image_icon"
                             android:scaleType="centerCrop" />
 
                         <LinearLayout
