@@ -94,19 +94,25 @@ class AdicionarPoliticosActivity : AppCompatActivity(), SearchView.OnQueryTextLi
         return false
     }
 
-    override fun onQueryTextChange(newText: String?): Boolean {
+    override fun onQueryTextChange(newText: String): Boolean {
 
-        if(newText!!.length > 3){
+        if(newText.length > 3){
             val politicos = datasource.filter { it.nomeParlamentar!!.contains(newText, true) }
-            Log.i("SEARCH", politicos.size.toString())
+            adapter.changeDatasource(politicos as ArrayList<Deputado>                                                                                                                                   )
         }
+        else {
+            adapter.changeDatasource(datasource)
+        }
+
+        Log.i("SEARCH", datasource.count().toString())
 
         return false
     }
 
     private fun initRecyclerView() {
         val layoutManager = LinearLayoutManager(this)
-        this.adapter = AddDeputadoRecyclerViewAdapter(this.datasource, this)
+
+        this.adapter = AddDeputadoRecyclerViewAdapter(datasource, this)
 
         addDeputadoRecyclerView.setHasFixedSize(false)
         addDeputadoRecyclerView.layoutManager = layoutManager
@@ -125,7 +131,8 @@ class AdicionarPoliticosActivity : AppCompatActivity(), SearchView.OnQueryTextLi
 
             datasource.clear()
             datasource.addAll(deputados)
-            adapter.notifyDataSetChanged()
+            adapter.changeDatasource(deputados)
+
             addDeputadoProgressBar.visibility = View.GONE
 
         }, {

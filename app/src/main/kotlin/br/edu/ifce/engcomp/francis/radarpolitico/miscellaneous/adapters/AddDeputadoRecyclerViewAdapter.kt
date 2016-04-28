@@ -21,12 +21,20 @@ import java.util.*
 /**
  * Created by Joamila on 16/03/2016.
  */
-class AddDeputadoRecyclerViewAdapter(private val dataSource: ArrayList<Deputado>, private val context: Context) : RecyclerView.Adapter<AddDeputadoRecyclerViewAdapter.ViewHolder>() {
+class AddDeputadoRecyclerViewAdapter : RecyclerView.Adapter<AddDeputadoRecyclerViewAdapter.ViewHolder> {
 
-    var deputadoAdded = false
+    internal var deputadoAdded = false
+    internal val datasource: ArrayList<Deputado>
+    internal val context: Context
+
+    constructor(datasource: ArrayList<Deputado>, context: Context) {
+        this.datasource = ArrayList(datasource)
+        this.context = context
+
+    }
 
     fun getItem(position: Int): Deputado {
-        return this.dataSource[position]
+        return this.datasource[position]
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -37,7 +45,7 @@ class AddDeputadoRecyclerViewAdapter(private val dataSource: ArrayList<Deputado>
     }
 
     override fun onBindViewHolder(holder: AddDeputadoRecyclerViewAdapter.ViewHolder, position: Int) {
-        val deputado = this.dataSource[position]
+        val deputado = this.datasource[position]
         val deputadoDAO = DeputadoDAO(context)
 
         holder.nomePoliticoTextView.text = WordUtils.capitalize(deputado.nomeParlamentar!!.toLowerCase())
@@ -55,7 +63,13 @@ class AddDeputadoRecyclerViewAdapter(private val dataSource: ArrayList<Deputado>
     }
 
     override fun getItemCount(): Int {
-        return this.dataSource.size
+        return this.datasource.size
+    }
+
+    fun changeDatasource(deputados: ArrayList<Deputado>) {
+        datasource.clear()
+        datasource.addAll(deputados)
+        notifyDataSetChanged()
     }
 
     fun ImageView.loadImage(url: String?){
@@ -88,7 +102,7 @@ class AddDeputadoRecyclerViewAdapter(private val dataSource: ArrayList<Deputado>
         }
 
         override fun onCheckedChanged(buttonView: CompoundButton?, isChecked: Boolean) {
-            val deputado = dataSource[indexPath.row]
+            val deputado = datasource[indexPath.row]
             val deputadoDAO = DeputadoDAO(itemView.context)
             if(isChecked){
                 deputadoDAO.create(deputado)
