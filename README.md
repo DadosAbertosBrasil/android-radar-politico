@@ -61,14 +61,12 @@ Outras possibilidades
 <p align="left">
   <img src="https://cloud.githubusercontent.com/assets/6030656/14916756/d0c5de08-0df1-11e6-8e10-e6268ced4e21.png" width="500"/>
   <img src="https://cloud.githubusercontent.com/assets/6030656/14916755/d0c38e96-0df1-11e6-9a5e-9e4106608dac.png" width="500"/>
-  <img src="https://cloud.githubusercontent.com/assets/6030656/14916751/d0bfee9e-0df1-11e6-9ad6-bb7fd15e9b31.png" width="500"/>
 </p>
 
 
 **Veja os detalhes das votações e o voto de cada deputado**
 <p align="left">
-  <img src="https://cloud.githubusercontent.com/assets/6699862/14492563/8101f016-0156-11e6-95aa-3b5676224a82.png" width="500"/>
-  <img src="https://cloud.githubusercontent.com/assets/6699862/14492565/810dce0e-0156-11e6-9d2d-60d117159ee8.png" width="500"/>
+  <img src="https://cloud.githubusercontent.com/assets/6030656/14916751/d0bfee9e-0df1-11e6-9ad6-bb7fd15e9b31.png" width="500"/>
 </p>
 
 
