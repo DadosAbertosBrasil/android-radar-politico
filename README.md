@@ -8,12 +8,12 @@ Um projeto de cidadania feito para rastrear atividade parlamentar de Deputados F
 Acompanhe toda a atividade parlamentar com esse projeto!
 
 ## Instruções
-> Desenvolvido Android Studio 2.0
-> Android SDK >= 22
+- Desenvolvido Android Studio 2.0
+- Android SDK >= 22
 
 Após clonar o repositório, você deve instalar os seguintes plugins no Android Studio 2.0
-> Kotlin
-> Kotlin Android Extensions
+- Kotlin
+-  Kotlin Android Extensions
 
 
 Depois, basta instalar as dependencias do projeto e executá-lo.
