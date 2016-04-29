@@ -1,9 +1,9 @@
 package br.edu.ifce.engcomp.francis.radarpolitico.controllers;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 
 import br.edu.ifce.engcomp.francis.radarpolitico.R;
 

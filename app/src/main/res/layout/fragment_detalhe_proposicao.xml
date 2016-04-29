@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="br.edu.ifce.engcomp.francis.radarpolitico.controllers.DetalheProposicaoFragment">
+    tools:context="br.edu.ifce.engcomp.francis.radarpolitico.controllers.DetalheProposicaoTabFragment">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -112,8 +112,7 @@
                             android:layout_width="60dp"
                             android:layout_height="60dp"
                             android:id="@+id/politicoImageView"
-                            android:src="@drawable/ic_smile"
-                            android:background="@color/colorPrimary"
+                            android:src="@drawable/image_icon"
                             android:scaleType="centerCrop" />
 
                         <LinearLayout
@@ -134,7 +133,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:textAppearance="?android:attr/textAppearanceSmall"
-                                android:text="PDT-CE"
+                                android:text="Sem Partido"
                                 android:id="@+id/partidoTextView"
                                 android:layout_gravity="center_vertical" />
                         </LinearLayout>
@@ -178,7 +177,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:text="Tema da Votação"
+                        android:text="Não foi possível carregar tema"
                         android:id="@+id/temaProposicaoTextView" />
 
                 </LinearLayout>
@@ -218,7 +217,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:text="Tema da Votação"
+                        android:text="Não foi possível carregar tipo"
                         android:id="@+id/tipoProposicaoTextView" />
 
                 </LinearLayout>
@@ -258,7 +257,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:text="http://www.google.com"
+                        android:text="Não foi possível carregar url do projeto"
                         android:id="@+id/urlInteiroTeorTextView"
                         android:autoLink="web"
                         android:textColorLink="@color/colorPrimary" />

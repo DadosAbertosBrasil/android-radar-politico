@@ -3,26 +3,23 @@ package br.edu.ifce.engcomp.francis.radarpolitico.miscellaneous.adapters
 import android.content.Context
 import android.content.Intent
 import android.support.v7.widget.RecyclerView
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
-
-import org.apache.commons.lang3.text.WordUtils
-
 import br.edu.ifce.engcomp.francis.radarpolitico.R
 import br.edu.ifce.engcomp.francis.radarpolitico.controllers.DeputadoActivity
 import br.edu.ifce.engcomp.francis.radarpolitico.helpers.VolleySharedQueue
 import br.edu.ifce.engcomp.francis.radarpolitico.miscellaneous.CDUrlFormatter
-import br.edu.ifce.engcomp.francis.radarpolitico.miscellaneous.connection.parsers.FrequenciaParser
+import br.edu.ifce.engcomp.francis.radarpolitico.miscellaneous.connection.parsers.CDXmlParser
 import br.edu.ifce.engcomp.francis.radarpolitico.models.Deputado
 import com.android.volley.Request
 import com.android.volley.VolleyError
 import com.android.volley.toolbox.StringRequest
 import com.squareup.picasso.Picasso
+import org.apache.commons.lang3.text.WordUtils
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -62,7 +59,7 @@ class DeputadoRecyclerViewAdapter(val context: Context, private val dataSource: 
         val request = StringRequest(Request.Method.GET, urlRequest, {
             stringResponse: String ->
 
-            val dias = FrequenciaParser.parseFrequenciaFromXML(stringResponse.byteInputStream())
+            val dias = CDXmlParser.parseFrequenciaFromXML(stringResponse.byteInputStream())
             val diasPresente = dias.filter { it.frequencia!!.equals("Presença") }
             val percentualFrequencia = (diasPresente.size.toFloat() / dias.size) * 100
 
@@ -74,7 +71,11 @@ class DeputadoRecyclerViewAdapter(val context: Context, private val dataSource: 
 
         }, {
             volleyError: VolleyError ->
-            volleyError.printStackTrace()
+
+            holder.frasePresencasTextView.text = "Não foi possível carregar frequencias"
+            holder.presencaMensalProgressBar.isIndeterminate =false
+            holder.presencaMensalProgressBar.progress = 0
+            holder.numeroVotacoesTextView.text = ""
         })
 
         VolleySharedQueue.getQueue(context)?.add(request)
@@ -86,7 +87,7 @@ class DeputadoRecyclerViewAdapter(val context: Context, private val dataSource: 
 
     fun ImageView.loadImage(url: String?){
         if (!url.isNullOrBlank()) {
-            Picasso.with(this.context).load(url).into(this)
+            Picasso.with(this.context).load(url).error(R.drawable.image_icon).into(this)
         }
         else {
             this.setImageDrawable(resources.getDrawable(R.drawable.ic_smile))

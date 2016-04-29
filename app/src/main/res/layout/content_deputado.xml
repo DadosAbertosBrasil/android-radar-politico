@@ -17,8 +17,7 @@
         android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
         android:id="@+id/foto_deputado_image_view"
-        android:src="@drawable/ic_smile"
-        android:background="@color/colorPrimary" />
+        android:src="@drawable/image_icon"/>
 
     <LinearLayout
         android:orientation="vertical"

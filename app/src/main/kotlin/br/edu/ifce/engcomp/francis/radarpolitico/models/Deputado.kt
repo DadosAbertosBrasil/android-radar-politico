@@ -19,6 +19,7 @@ data class Deputado(
     var fone: String? = "",
     var email: String? = "",
 
+    var numeroLegislatura: Int = 0,
     var dataNascimento: String? = "",
     var situacaoLegislaturaAtual: String? = "",
     var ufRepresentacaoAtual: String? = "",

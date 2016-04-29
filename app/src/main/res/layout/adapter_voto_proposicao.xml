@@ -14,7 +14,7 @@
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:id="@+id/fotoDeputadoImageView"
-        android:background="@color/colorPrimary"
+        android:src="@drawable/image_icon"
         android:scaleType="centerCrop" />
 
     <LinearLayout

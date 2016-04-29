@@ -10,49 +10,38 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
         <activity
             android:name=".controllers.MainActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar"
             android:screenOrientation="portrait">
 
-            <intent-filter>
-                <action android:name="android.intent.action.SEARCH" />
-            </intent-filter>
-
-            <meta-data
-                android:name="android.app.searchable"
-                android:resource="@xml/searchable" />
         </activity>
         <activity
-            android:name=".controllers.AddPoliticiansActivity"
+            android:name=".controllers.AdicionarPoliticosActivity"
             android:label="Deputados"
             android:launchMode="singleTop"
-            android:parentActivityName=".controllers.SearchViewActivity"
             android:theme="@style/AppTheme.NoActionBar"
             android:screenOrientation="portrait">
-            <meta-data
-                android:name="android.app.default_searchable"
-                android:value=".controllers.SearchViewActivity" />
-        </activity>
-        <activity
-            android:name=".controllers.SearchViewActivity"
-            android:label="@string/title_activity_search_view"
-            android:launchMode="singleTop"
-            android:screenOrientation="portrait">
+
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH" />
             </intent-filter>
 
             <meta-data
+                android:name="android.app.default_searchable"
+                android:value="br.edu.ifce.engcomp.francis.radarpolitico.controllers.AdicionarPoliticosActivity" />
+
+            <meta-data
                 android:name="android.app.searchable"
                 android:resource="@xml/searchable" />
+
         </activity>
         <activity
             android:name=".controllers.DeputadoActivity"
             android:label="Deputado"
             android:launchMode="singleTop"
-            android:parentActivityName=".controllers.SearchViewActivity"
             android:theme="@style/AppTheme.NoActionBar"
             android:screenOrientation="portrait"/>
 

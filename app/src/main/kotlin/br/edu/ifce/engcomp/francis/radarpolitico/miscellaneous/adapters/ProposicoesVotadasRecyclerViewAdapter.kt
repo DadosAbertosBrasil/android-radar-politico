@@ -3,34 +3,24 @@ package br.edu.ifce.engcomp.francis.radarpolitico.miscellaneous.adapters
 import android.content.Context
 import android.content.Intent
 import android.support.v7.widget.RecyclerView
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.animation.Animation
-import android.widget.*
-
-import java.util.ArrayList
-import java.util.HashMap
-
+import android.widget.Button
+import android.widget.TextView
 import br.edu.ifce.engcomp.francis.radarpolitico.R
-import br.edu.ifce.engcomp.francis.radarpolitico.controllers.DeputadoActivity
 import br.edu.ifce.engcomp.francis.radarpolitico.controllers.ProposicaoVotadaActivity
 import br.edu.ifce.engcomp.francis.radarpolitico.helpers.VolleySharedQueue
 import br.edu.ifce.engcomp.francis.radarpolitico.miscellaneous.CDUrlFormatter
-import br.edu.ifce.engcomp.francis.radarpolitico.miscellaneous.connection.database.DeputadoDAO
-import br.edu.ifce.engcomp.francis.radarpolitico.miscellaneous.connection.parsers.ProposicaoParser
-import br.edu.ifce.engcomp.francis.radarpolitico.miscellaneous.connection.parsers.VotacaoParser
+import br.edu.ifce.engcomp.francis.radarpolitico.miscellaneous.connection.parsers.CDXmlParser
 import br.edu.ifce.engcomp.francis.radarpolitico.miscellaneous.helpers.IndexPath
-import br.edu.ifce.engcomp.francis.radarpolitico.models.Deputado
 import br.edu.ifce.engcomp.francis.radarpolitico.models.Proposicao
-import br.edu.ifce.engcomp.francis.radarpolitico.models.Votacao
-import br.edu.ifce.engcomp.francis.radarpolitico.models.Voto
 import com.android.volley.Request
 import com.android.volley.VolleyError
 import com.android.volley.toolbox.StringRequest
-import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.adapter_proposicao_votada.view.*
 import java.text.SimpleDateFormat
+import java.util.*
 
 /**
  * Created by francisco on 12/03/16.
@@ -75,7 +65,7 @@ class ProposicoesVotadasRecyclerViewAdapter(private val context: Context, privat
         val request = StringRequest(Request.Method.GET, requestUrl, {
             stringResponse: String ->
 
-            val p = ProposicaoParser.parserProposicaoFromXML(stringResponse.byteInputStream())
+            val p = CDXmlParser.parseProposicaoFromXML(stringResponse.byteInputStream())
             proposicao.merge(p)
 
             holder.title.text    = proposicao.nome
@@ -84,9 +74,19 @@ class ProposicoesVotadasRecyclerViewAdapter(private val context: Context, privat
         },{
             volleyError: VolleyError ->
             volleyError.printStackTrace()
+
+            holder.title.text = "Erro de Rede"
+            holder.ementa.text = "Não foi possível carregar proposição..."
+
+            holder.subtitle.hideView()
+            holder.seeMoreButton.hideView()
         } )
 
         VolleySharedQueue.getQueue(context)?.add(request)
+    }
+
+    fun View.hideView(){
+        this.visibility = View.GONE
     }
 
     inner class ViewHolder(val view: View) : RecyclerView.ViewHolder(view), View.OnClickListener {
@@ -109,7 +109,9 @@ class ProposicoesVotadasRecyclerViewAdapter(private val context: Context, privat
 
         override fun onClick(v: View) {
             val intent = Intent(v.context, ProposicaoVotadaActivity::class.java)
-            intent.putExtra("PROPOSICAO_EXTRA", datasource[indexPath.row])
+            val proposicao = datasource[indexPath.row]
+
+            intent.putExtra("PROPOSICAO_EXTRA", proposicao)
 
             v.context.startActivity(intent)
         }

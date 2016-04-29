@@ -9,18 +9,16 @@ import android.support.v4.app.Fragment
 import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ProgressBar
 import br.edu.ifce.engcomp.francis.radarpolitico.R
 import br.edu.ifce.engcomp.francis.radarpolitico.miscellaneous.adapters.DeputadoRecyclerViewAdapter
 import br.edu.ifce.engcomp.francis.radarpolitico.miscellaneous.connection.database.DeputadoDAO
 import br.edu.ifce.engcomp.francis.radarpolitico.models.Deputado
 import java.util.*
 
-class PoliticosFragment : Fragment() {
+class DeputadosSeguidosTabFragment : Fragment() {
     lateinit var politicosRecyclerView: RecyclerView
     lateinit var fabAddDeputado: FloatingActionButton
     lateinit var adapter: DeputadoRecyclerViewAdapter
@@ -70,7 +68,7 @@ class PoliticosFragment : Fragment() {
 
     private fun initFabAddDeputado() {
         this.fabAddDeputado.setOnClickListener {
-            val intentAddPoliticosActivity = Intent(activity, AddPoliticiansActivity::class.java)
+            val intentAddPoliticosActivity = Intent(activity, AdicionarPoliticosActivity::class.java)
             startActivityForResult(intentAddPoliticosActivity, addPoliticoIntentCode)
         }
     }

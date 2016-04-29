@@ -2,10 +2,14 @@ package br.edu.ifce.engcomp.francis.radarpolitico.miscellaneous.adapters
 
 import android.content.Context
 import android.support.v7.widget.RecyclerView
+import android.support.v7.widget.SearchView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.*
+import android.widget.CompoundButton
+import android.widget.ImageView
+import android.widget.Switch
+import android.widget.TextView
 import br.edu.ifce.engcomp.francis.radarpolitico.R
 import br.edu.ifce.engcomp.francis.radarpolitico.miscellaneous.connection.database.DeputadoDAO
 import br.edu.ifce.engcomp.francis.radarpolitico.miscellaneous.helpers.IndexPath
@@ -17,11 +21,20 @@ import java.util.*
 /**
  * Created by Joamila on 16/03/2016.
  */
-class AddDeputadoRecyclerViewAdapter(private val dataSource: ArrayList<Deputado>, private val context: Context) : RecyclerView.Adapter<AddDeputadoRecyclerViewAdapter.ViewHolder>() {
-    var deputadoAdded = false
+class AddDeputadoRecyclerViewAdapter : RecyclerView.Adapter<AddDeputadoRecyclerViewAdapter.ViewHolder> {
+
+    internal var deputadoAdded = false
+    internal val datasource: ArrayList<Deputado>
+    internal val context: Context
+
+    constructor(datasource: ArrayList<Deputado>, context: Context) {
+        this.datasource = ArrayList(datasource)
+        this.context = context
+
+    }
 
     fun getItem(position: Int): Deputado {
-        return this.dataSource[position]
+        return this.datasource[position]
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -32,7 +45,7 @@ class AddDeputadoRecyclerViewAdapter(private val dataSource: ArrayList<Deputado>
     }
 
     override fun onBindViewHolder(holder: AddDeputadoRecyclerViewAdapter.ViewHolder, position: Int) {
-        val deputado = this.dataSource[position]
+        val deputado = this.datasource[position]
         val deputadoDAO = DeputadoDAO(context)
 
         holder.nomePoliticoTextView.text = WordUtils.capitalize(deputado.nomeParlamentar!!.toLowerCase())
@@ -50,12 +63,18 @@ class AddDeputadoRecyclerViewAdapter(private val dataSource: ArrayList<Deputado>
     }
 
     override fun getItemCount(): Int {
-        return this.dataSource.size
+        return this.datasource.size
+    }
+
+    fun changeDatasource(deputados: ArrayList<Deputado>) {
+        datasource.clear()
+        datasource.addAll(deputados)
+        notifyDataSetChanged()
     }
 
     fun ImageView.loadImage(url: String?){
         if (!url.isNullOrBlank()) {
-            Picasso.with(this.context).load(url).into(this)
+            Picasso.with(this.context).load(url).error(R.drawable.image_icon).into(this)
         }
         else {
             this.setImageDrawable(resources.getDrawable(R.drawable.ic_smile))
@@ -83,7 +102,7 @@ class AddDeputadoRecyclerViewAdapter(private val dataSource: ArrayList<Deputado>
         }
 
         override fun onCheckedChanged(buttonView: CompoundButton?, isChecked: Boolean) {
-            val deputado = dataSource[indexPath.row]
+            val deputado = datasource[indexPath.row]
             val deputadoDAO = DeputadoDAO(itemView.context)
             if(isChecked){
                 deputadoDAO.create(deputado)

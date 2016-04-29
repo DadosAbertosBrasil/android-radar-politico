@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import android.widget.LinearLayout
 import android.widget.TextView
 import br.edu.ifce.engcomp.francis.radarpolitico.R
 import br.edu.ifce.engcomp.francis.radarpolitico.miscellaneous.connection.database.DeputadoDAO
@@ -17,6 +16,7 @@ import java.util.*
 /**
  * Created by francisco on 21/04/16.
  */
+
 class VotosDeputadosRecyclerViewAdapter(private val context: Context, private val datasource: ArrayList<Voto>) : RecyclerView.Adapter<VotosDeputadosRecyclerViewAdapter.ViewHolder>() {
     override fun getItemCount(): Int {
         return datasource.size
@@ -45,7 +45,7 @@ class VotosDeputadosRecyclerViewAdapter(private val context: Context, private va
 
     fun ImageView.loadImage(url: String?){
         if (!url.isNullOrBlank()) {
-            Picasso.with(this.context).load(url).into(this)
+            Picasso.with(this.context).load(url).error(R.drawable.image_icon).into(this)
         }
         else {
             this.setImageDrawable(resources.getDrawable(R.drawable.ic_smile))
