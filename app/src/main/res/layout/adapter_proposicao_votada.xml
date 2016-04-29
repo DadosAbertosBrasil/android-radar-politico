@@ -75,7 +75,8 @@
                     android:id="@+id/seeMoreButton"
                     android:layout_gravity="right"
                     android:textColor="@color/colorPrimary"
-                    android:background="@android:color/transparent" />
+                    android:background="@android:color/transparent"
+                    android:enabled="false" />
             </TableRow>
 
         </LinearLayout>
