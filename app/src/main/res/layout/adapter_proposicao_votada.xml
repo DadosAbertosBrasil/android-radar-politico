@@ -76,7 +76,7 @@
                     android:layout_gravity="right"
                     android:textColor="@color/colorPrimary"
                     android:background="@android:color/transparent"
-                    android:enabled="false" />
+                    android:enabled="true" />
             </TableRow>
 
         </LinearLayout>

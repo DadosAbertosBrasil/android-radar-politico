@@ -71,7 +71,11 @@ class DeputadoRecyclerViewAdapter(val context: Context, private val dataSource: 
 
         }, {
             volleyError: VolleyError ->
-            volleyError.printStackTrace()
+
+            holder.frasePresencasTextView.text = "Não foi possível carregar frequencias"
+            holder.presencaMensalProgressBar.isIndeterminate =false
+            holder.presencaMensalProgressBar.progress = 0
+            holder.numeroVotacoesTextView.text = ""
         })
 
         VolleySharedQueue.getQueue(context)?.add(request)
@@ -83,7 +87,7 @@ class DeputadoRecyclerViewAdapter(val context: Context, private val dataSource: 
 
     fun ImageView.loadImage(url: String?){
         if (!url.isNullOrBlank()) {
-            Picasso.with(this.context).load(url).into(this)
+            Picasso.with(this.context).load(url).error(R.drawable.image_icon).into(this)
         }
         else {
             this.setImageDrawable(resources.getDrawable(R.drawable.ic_smile))

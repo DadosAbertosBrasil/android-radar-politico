@@ -18,6 +18,7 @@ import br.edu.ifce.engcomp.francis.radarpolitico.models.Proposicao
 import com.android.volley.Request
 import com.android.volley.VolleyError
 import com.android.volley.toolbox.StringRequest
+import kotlinx.android.synthetic.main.adapter_proposicao_votada.view.*
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -73,9 +74,19 @@ class ProposicoesVotadasRecyclerViewAdapter(private val context: Context, privat
         },{
             volleyError: VolleyError ->
             volleyError.printStackTrace()
+
+            holder.title.text = "Erro de Rede"
+            holder.ementa.text = "Não foi possível carregar proposição..."
+
+            holder.subtitle.hideView()
+            holder.seeMoreButton.hideView()
         } )
 
         VolleySharedQueue.getQueue(context)?.add(request)
+    }
+
+    fun View.hideView(){
+        this.visibility = View.GONE
     }
 
     inner class ViewHolder(val view: View) : RecyclerView.ViewHolder(view), View.OnClickListener {

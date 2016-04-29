@@ -133,7 +133,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:textAppearance="?android:attr/textAppearanceSmall"
-                                android:text="PDT-CE"
+                                android:text="Sem Partido"
                                 android:id="@+id/partidoTextView"
                                 android:layout_gravity="center_vertical" />
                         </LinearLayout>
@@ -177,7 +177,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:text="Tema da Votação"
+                        android:text="Não foi possível carregar tema"
                         android:id="@+id/temaProposicaoTextView" />
 
                 </LinearLayout>
@@ -217,7 +217,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:text="Tema da Votação"
+                        android:text="Não foi possível carregar tipo"
                         android:id="@+id/tipoProposicaoTextView" />
 
                 </LinearLayout>
@@ -257,7 +257,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:text="http://www.google.com"
+                        android:text="Não foi possível carregar url do projeto"
                         android:id="@+id/urlInteiroTeorTextView"
                         android:autoLink="web"
                         android:textColorLink="@color/colorPrimary" />

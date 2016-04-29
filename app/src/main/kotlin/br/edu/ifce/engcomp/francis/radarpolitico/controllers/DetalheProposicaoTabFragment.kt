@@ -160,7 +160,7 @@ class DetalheProposicaoTabFragment : Fragment() {
 
     fun ImageView.loadImage(url: String?){
         if (!url.isNullOrBlank()) {
-            Picasso.with(this.context).load(url).into(this)
+            Picasso.with(this.context).load(url).error(R.drawable.image_icon).into(this)
         }
         else {
             this.setImageDrawable(resources.getDrawable(R.drawable.ic_smile))
