@@ -7,6 +7,7 @@ import android.os.Build
 import android.os.Bundle
 import android.support.v4.view.MenuCompat
 import android.support.v4.view.MenuItemCompat
+import android.support.v4.widget.SwipeRefreshLayout
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.LinearLayoutManager
@@ -29,7 +30,7 @@ import kotlinx.android.synthetic.main.activity_add_politicians.*
 import kotlinx.android.synthetic.main.content_add_politicians.*
 import java.util.*
 
-class AdicionarPoliticosActivity : AppCompatActivity(), SearchView.OnQueryTextListener{
+class AdicionarPoliticosActivity : AppCompatActivity(), SearchView.OnQueryTextListener, SwipeRefreshLayout.OnRefreshListener{
 
     var datasource: ArrayList<Deputado>
 
@@ -49,9 +50,11 @@ class AdicionarPoliticosActivity : AppCompatActivity(), SearchView.OnQueryTextLi
             supportActionBar!!.setDisplayShowHomeEnabled(true)
         }
 
+        initRecyclerView()
+        initSwipeRefreshLayout()
+
         Toast.makeText(this, "Baixando lista de Deputados...", Toast.LENGTH_SHORT).show()
         retrieveDeputiesFromServer()
-        initRecyclerView()
     }
 
     override fun onBackPressed() {
@@ -109,6 +112,11 @@ class AdicionarPoliticosActivity : AppCompatActivity(), SearchView.OnQueryTextLi
         return false
     }
 
+    override fun onRefresh() {
+        adapter.changeDatasource(ArrayList())
+        retrieveDeputiesFromServer()
+    }
+
     private fun initRecyclerView() {
         val layoutManager = LinearLayoutManager(this)
 
@@ -118,6 +126,11 @@ class AdicionarPoliticosActivity : AppCompatActivity(), SearchView.OnQueryTextLi
         addDeputadoRecyclerView.layoutManager = layoutManager
         addDeputadoRecyclerView.adapter = adapter
         addDeputadoRecyclerView.itemAnimator = DefaultItemAnimator()
+    }
+
+    private fun initSwipeRefreshLayout(){
+        swipeRefreshLayout.setOnRefreshListener(this)
+        swipeRefreshLayout.setColorSchemeColors(R.color.colorPrimaryDark, R.color.colorPrimary, R.color.colorAccent)
     }
 
     private fun retrieveDeputiesFromServer() {
@@ -132,12 +145,12 @@ class AdicionarPoliticosActivity : AppCompatActivity(), SearchView.OnQueryTextLi
             datasource.clear()
             datasource.addAll(deputados)
             adapter.changeDatasource(deputados)
-
-            addDeputadoProgressBar.visibility = View.GONE
+            swipeRefreshLayout.isRefreshing = false
 
         }, {
             volleyError: VolleyError ->
             Toast.makeText(this, "Ocorreu algum erro de rede. Tente mais tarde. :/", Toast.LENGTH_SHORT).show()
+
         })
 
         VolleySharedQueue.getQueue(this)?.add(request)
