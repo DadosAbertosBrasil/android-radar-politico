@@ -26,7 +26,7 @@ Colabore com novas funcionalidades e venha aprimorar essa ferramenta de Cidadani
 - [x] Visualizar Dados Sobre as Votações de Proposições na Câmara dos Deputados
 - [x] Seguir um Deputado
 - [x] Balanço da Frequencia do Deputado no mês corrente
-- [ ] Perfil do Peputado
+- [ ] Perfil do Deputado
 - [ ] Consultar Prestações de Contas do Deputado
 - [ ] Denunciar Emendas/Prestações de Contas Suspeitas
 - [ ] Notificações
