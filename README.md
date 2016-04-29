@@ -40,27 +40,27 @@ Outras possibilidades
 
 **Acompanhe os ultimos projetos votados na Câmara.**
 <p align="center">
-  <img src="https://cloud.githubusercontent.com/assets/6030656/14916121/f519a716-0ded-11e6-8ec1-b8da9fe4b3c8.png" width="500"/>
+  ![]("https://cloud.githubusercontent.com/assets/6030656/14916121/f519a716-0ded-11e6-8ec1-b8da9fe4b3c8.png" | width=500)
 </p>
 
 **Escolha os deputados que gostaria de Seguir**
 <p align="center">
-  <img src="https://cloud.githubusercontent.com/assets/6030656/14916185/51f2b9a0-0dee-11e6-8283-165cbf3544f8.png" width="500"/>
-  <img src="https://cloud.githubusercontent.com/assets/6030656/14916186/51f65376-0dee-11e6-95be-b84991260135.png" width="500"/>
+  ![]("https://cloud.githubusercontent.com/assets/6030656/14916185/51f2b9a0-0dee-11e6-8283-165cbf3544f8.png" | width=500)
+  ![]("https://cloud.githubusercontent.com/assets/6030656/14916186/51f65376-0dee-11e6-95be-b84991260135.png" | width=500)
 </p>
 
 **Acompanhe os  detalhes das proposições**
 <p align="center">
-  <img src="https://cloud.githubusercontent.com/assets/6030656/14916130/02f7f4aa-0dee-11e6-971f-e1e94f46c896.png" width="500"/>
-  <img src="https://cloud.githubusercontent.com/assets/6030656/14916164/2bd789a8-0dee-11e6-8a40-5fd1d6517a3c.png" width="500"/>
-  <img src="https://cloud.githubusercontent.com/assets/6030656/14916162/2bd32e62-0dee-11e6-9b99-c04939b3eef3.png" width="500"/>
+  ![]("https://cloud.githubusercontent.com/assets/6030656/14916130/02f7f4aa-0dee-11e6-971f-e1e94f46c896.png" | width=500)
+  ![]("https://cloud.githubusercontent.com/assets/6030656/14916164/2bd789a8-0dee-11e6-8a40-5fd1d6517a3c.png" | width=500)
+  ![]("https://cloud.githubusercontent.com/assets/6030656/14916162/2bd32e62-0dee-11e6-9b99-c04939b3eef3.png" | width=500)
 
 </p>
 
 
 **Veja os detalhes das votações e o voto de cada deputado**
 <p align="center">
-  <img src="https://cloud.githubusercontent.com/assets/6030656/14916163/2bd56f10-0dee-11e6-83a6-42898dbec052.png" width="500"/>
+  ![]("https://cloud.githubusercontent.com/assets/6030656/14916163/2bd56f10-0dee-11e6-83a6-42898dbec052.png" width=500)
 </p>
 
 ## Licença 
