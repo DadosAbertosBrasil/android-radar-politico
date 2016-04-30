@@ -12,7 +12,7 @@
     tools:showIn="@layout/activity_deputado">
 
     <ImageView
-        android:layout_width="80dp"
+        android:layout_width="60dp"
         android:layout_height="80dp"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
@@ -75,12 +75,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="8dp"
+                android:textSize="14sp"
                 android:text="E-Mail: "
                 android:layout_gravity="center_vertical" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textSize="14sp"
                 android:id="@+id/email_deputado_text_view"
                 android:layout_gravity="center_vertical" />
 
@@ -89,25 +91,25 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="3dp"
             android:orientation="horizontal">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
                 android:layout_marginLeft="8dp"
+                android:textSize="14sp"
                 android:text="Telefone do gabinete: "
                 android:layout_gravity="center_vertical" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textSize="14sp"
                 android:id="@+id/telefone_deputado_text_view"
                 android:layout_gravity="center_vertical" />
 
         </LinearLayout>
-
-
 
         <View
             android:layout_width="match_parent"

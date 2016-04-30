@@ -1,6 +1,7 @@
 package br.edu.ifce.engcomp.francis.radarpolitico.controllers;
 
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
@@ -33,8 +34,6 @@ public class DeputadoActivity extends AppCompatActivity {
     ArrayList<Falta> datasourceFaltas;
     RecyclerView recyclerViewVotacoes;
     ArrayList<VotacaoDeputado> datasourceVotacoes;
-    FloatingActionButton addDeputadoButton;
-
 
     public DeputadoActivity(){
         this.datasourceFaltas = generateDataSourceFaltasMock();
@@ -86,14 +85,12 @@ public class DeputadoActivity extends AppCompatActivity {
         }
 
         init();
-        initAddDeputadoButton();
         initRecyclerViewFaltas();
         initRecyclerViewVotacoes();
     }
 
 
     public void init(){
-        this.addDeputadoButton = (FloatingActionButton) findViewById(R.id.fab_add_deputado);
 
         ImageView fotoPoliticoImageView = (ImageView) findViewById(R.id.foto_deputado_image_view);
         TextView nomeDeputadoTextView = (TextView) findViewById(R.id.nome_deputado_text_view);
@@ -112,6 +109,13 @@ public class DeputadoActivity extends AppCompatActivity {
         dataNascDeputadoTextView.setText(deputado.getDataNascimento());
         emailDeputadoTextView.setText(deputado.getEmail());
         telefoneDeputadoTextView.setText(deputado.getFone());
+
+        if(deputado.getUrlFoto()!=null){
+            Picasso.with(this).load(deputado.getUrlFoto()).into(fotoPoliticoImageView);
+        }
+        else {
+            fotoPoliticoImageView.setImageDrawable(getResources().getDrawable(R.drawable.ic_smile));
+        }
     }
 
     public void initRecyclerViewFaltas(){
@@ -132,14 +136,5 @@ public class DeputadoActivity extends AppCompatActivity {
         this.recyclerViewVotacoes.setLayoutManager(layoutManager);
         this.recyclerViewVotacoes.setAdapter(adapter);
         this.recyclerViewVotacoes.setItemAnimator(new DefaultItemAnimator());
-    }
-
-    private void initAddDeputadoButton() {
-        this.addDeputadoButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(getBaseContext(), "Seguindo deputado!", Toast.LENGTH_SHORT).show();
-            }
-        });
     }
 }
