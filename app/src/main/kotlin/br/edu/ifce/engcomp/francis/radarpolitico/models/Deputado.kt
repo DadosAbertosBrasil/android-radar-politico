@@ -26,4 +26,5 @@ data class Deputado(
     var ufRepresentacaoAtual: String? = "",
     var nomeProfissao: String? = "",
 
+    var ausencia: String? = " ",
     var frequencia: Frequencia? = null) : Serializable

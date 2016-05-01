@@ -2,6 +2,7 @@ package br.edu.ifce.engcomp.francis.radarpolitico.miscellaneous.adapters
 
 import android.content.Context
 import android.content.Intent
+import android.os.Bundle
 import android.support.v7.widget.RecyclerView
 import android.util.Log
 import android.view.LayoutInflater
@@ -20,6 +21,7 @@ import br.edu.ifce.engcomp.francis.radarpolitico.miscellaneous.CDUrlFormatter
 import br.edu.ifce.engcomp.francis.radarpolitico.miscellaneous.connection.parsers.FrequenciaParser
 import br.edu.ifce.engcomp.francis.radarpolitico.miscellaneous.helpers.IndexPath
 import br.edu.ifce.engcomp.francis.radarpolitico.models.Deputado
+import br.edu.ifce.engcomp.francis.radarpolitico.models.Dia
 import com.android.volley.Request
 import com.android.volley.VolleyError
 import com.android.volley.toolbox.StringRequest
@@ -32,6 +34,8 @@ import java.util.*
  */
 class DeputadoRecyclerViewAdapter(val context: Context, private val dataSource: ArrayList<Deputado>) : RecyclerView.Adapter<DeputadoRecyclerViewAdapter.ViewHolder>() {
 
+    var diasFreq: ArrayList<Dia>? = null
+
     fun getItem(position: Int): Deputado {
         return this.dataSource[position]
     }
@@ -42,6 +46,7 @@ class DeputadoRecyclerViewAdapter(val context: Context, private val dataSource: 
 
         return ViewHolder(itemView)
     }
+
 
     override fun onBindViewHolder(holder: DeputadoRecyclerViewAdapter.ViewHolder, position: Int) {
         val deputado = this.dataSource[position]
@@ -73,6 +78,7 @@ class DeputadoRecyclerViewAdapter(val context: Context, private val dataSource: 
             holder.presencaMensalProgressBar.progress = percentualFrequencia.toInt()
             holder.numeroVotacoesTextView.text = diasPresente.size.toString()
 
+            diasFreq = dias
 
         }, {
             volleyError: VolleyError ->
@@ -123,6 +129,7 @@ class DeputadoRecyclerViewAdapter(val context: Context, private val dataSource: 
 
         override fun onClick(v: View) {
             val intent = Intent(v.context, DeputadoActivity::class.java)
+            intent.putExtra("DEPUTADO_FREQUENCIA", diasFreq)
             intent.putExtra("DEPUTADO_INFOS", dataSource[indexPath.row])
             v.context.startActivity(intent)
         }

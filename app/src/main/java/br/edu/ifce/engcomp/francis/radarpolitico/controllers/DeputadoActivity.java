@@ -24,7 +24,9 @@ import br.edu.ifce.engcomp.francis.radarpolitico.R;
 import br.edu.ifce.engcomp.francis.radarpolitico.miscellaneous.adapters.DeputadoFaltasRecyclerViewAdapter;
 import br.edu.ifce.engcomp.francis.radarpolitico.miscellaneous.adapters.DeputadoVotacoesRecyclerViewAdapter;
 import br.edu.ifce.engcomp.francis.radarpolitico.models.Deputado;
+import br.edu.ifce.engcomp.francis.radarpolitico.models.Dia;
 import br.edu.ifce.engcomp.francis.radarpolitico.models.Falta;
+import br.edu.ifce.engcomp.francis.radarpolitico.models.Frequencia;
 import br.edu.ifce.engcomp.francis.radarpolitico.models.VotacaoDeputado;
 import br.edu.ifce.engcomp.francis.radarpolitico.models.Voto;
 
@@ -36,22 +38,34 @@ public class DeputadoActivity extends AppCompatActivity {
     ArrayList<VotacaoDeputado> datasourceVotacoes;
 
     public DeputadoActivity(){
-        this.datasourceFaltas = generateDataSourceFaltasMock();
         this.datasourceVotacoes = generateDataSourceVotacoesMock();
     }
 
     public ArrayList<Falta> generateDataSourceFaltasMock(){
+        Intent currentIntent = getIntent();
+        ArrayList<Dia> dias = (ArrayList<Dia>) currentIntent.getSerializableExtra("DEPUTADO_FREQUENCIA");
+
         ArrayList<Falta> faltas = new ArrayList<>();
 
-        Falta teste1 = new Falta("01/02/2016", "Justificada");
+        if(dias!=null){
+            Log.i("TESTE-FALTAS", "Cheguei aqui");
+            for(int i = 0; i<dias.size(); i++){
+                if (!dias.get(i).getFrequencia().equals("Presença")){
+                    faltas.add(new Falta(dias.get(i).getData(), dias.get(i).getFrequencia()));
+                }
+            }
+        }
+
+        return faltas;
+
+        /*Falta teste1 = new Falta("01/02/2016", "Justificada");
         Falta teste2 = new Falta("05/03/2016", "Justificada");
         Falta teste3 = new Falta("15/03/2016", "Não-Justificada");
 
         faltas.add(teste1);
         faltas.add(teste2);
-        faltas.add(teste3);
+        faltas.add(teste3);*/
 
-        return faltas;
     }
 
     public ArrayList<VotacaoDeputado> generateDataSourceVotacoesMock(){
@@ -85,6 +99,7 @@ public class DeputadoActivity extends AppCompatActivity {
         }
 
         init();
+        this.datasourceFaltas = generateDataSourceFaltasMock();
         initRecyclerViewFaltas();
         initRecyclerViewVotacoes();
     }
