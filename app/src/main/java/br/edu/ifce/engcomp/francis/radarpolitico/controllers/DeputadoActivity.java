@@ -1,5 +1,6 @@
 package br.edu.ifce.engcomp.francis.radarpolitico.controllers;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -12,17 +13,33 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
 
+import org.xmlpull.v1.XmlPullParserException;
+
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 import br.edu.ifce.engcomp.francis.radarpolitico.R;
+import br.edu.ifce.engcomp.francis.radarpolitico.helpers.VolleySharedQueue;
+import br.edu.ifce.engcomp.francis.radarpolitico.miscellaneous.CDUrlFormatter;
 import br.edu.ifce.engcomp.francis.radarpolitico.miscellaneous.adapters.DeputadoFaltasRecyclerViewAdapter;
 import br.edu.ifce.engcomp.francis.radarpolitico.miscellaneous.adapters.DeputadoVotacoesRecyclerViewAdapter;
+import br.edu.ifce.engcomp.francis.radarpolitico.miscellaneous.connection.parsers.FrequenciaParser;
 import br.edu.ifce.engcomp.francis.radarpolitico.models.Deputado;
 import br.edu.ifce.engcomp.francis.radarpolitico.models.Dia;
 import br.edu.ifce.engcomp.francis.radarpolitico.models.Falta;
@@ -36,39 +53,65 @@ public class DeputadoActivity extends AppCompatActivity {
     ArrayList<Falta> datasourceFaltas;
     RecyclerView recyclerViewVotacoes;
     ArrayList<VotacaoDeputado> datasourceVotacoes;
+    ArrayList<Falta> faltas = new ArrayList<>();
+    ProgressDialog progressDialog;
+    DeputadoFaltasRecyclerViewAdapter adapterFaltas;
 
     public DeputadoActivity(){
-        this.datasourceVotacoes = generateDataSourceVotacoesMock();
+
     }
 
-    public ArrayList<Falta> generateDataSourceFaltasMock(){
-        Intent currentIntent = getIntent();
-        ArrayList<Dia> dias = (ArrayList<Dia>) currentIntent.getSerializableExtra("DEPUTADO_FREQUENCIA");
+    public ArrayList<Falta> generateDataSourceFaltas(){
+        Calendar currentCalendar  = Calendar.getInstance();
+        Calendar firstDayCalendar = Calendar.getInstance();
+        SimpleDateFormat formatter   = new SimpleDateFormat("dd/MM/yyyy");
 
-        ArrayList<Falta> faltas = new ArrayList<>();
+        firstDayCalendar.set(Calendar.DAY_OF_MONTH, 1);
 
-        if(dias!=null){
-            Log.i("TESTE-FALTAS", "Cheguei aqui");
-            for(int i = 0; i<dias.size(); i++){
-                if (!dias.get(i).getFrequencia().equals("Presença")){
-                    faltas.add(new Falta(dias.get(i).getData(), dias.get(i).getFrequencia()));
+        String dataInicio = formatter.format(firstDayCalendar.getTime());
+        String dataFim = formatter.format(currentCalendar.getTime());
+
+        String dataIni = "01/04/2016";
+        String dataFin = "30/04/2016";
+
+
+        String urlRequest = CDUrlFormatter.listarPresencasParlamentar(dataInicio, dataFim, deputado.getMatricula());
+        StringRequest request = new StringRequest(Request.Method.GET, urlRequest, new Response.Listener<String>() {
+
+            @Override
+            public void onResponse(String response) {
+                Log.i("RESPONSE", response);
+                try {
+                    ArrayList<Dia> dias = FrequenciaParser.parseFrequenciaFromXML(new ByteArrayInputStream(response.getBytes()));
+                    if(dias!=null){
+                        for(int i = 0; i<dias.size(); i++){
+                            if (!dias.get(i).getFrequencia().equals("Presença")){
+                                faltas.add(new Falta(dias.get(i).getData(), dias.get(i).getFrequencia()));
+                            }
+                        }
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (XmlPullParserException e) {
+                    e.printStackTrace();
                 }
+
+                adapterFaltas.notifyDataSetChanged();
             }
-        }
+
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.i("RESPONSE", "Erro no servidor!");
+                Toast.makeText(getApplicationContext(), "Erro no servidor!", Toast.LENGTH_SHORT).show();
+            }
+        });
+        VolleySharedQueue.INSTANCE.getQueue(this).add(request);
 
         return faltas;
-
-        /*Falta teste1 = new Falta("01/02/2016", "Justificada");
-        Falta teste2 = new Falta("05/03/2016", "Justificada");
-        Falta teste3 = new Falta("15/03/2016", "Não-Justificada");
-
-        faltas.add(teste1);
-        faltas.add(teste2);
-        faltas.add(teste3);*/
-
     }
 
-    public ArrayList<VotacaoDeputado> generateDataSourceVotacoesMock(){
+    public ArrayList<VotacaoDeputado> generateDataSourceVotacoes(){
         ArrayList<VotacaoDeputado> votacoes = new ArrayList<>();
 
         VotacaoDeputado teste1 = new VotacaoDeputado("PEC00/1969", "02/02/2016", "SIM");
@@ -99,7 +142,7 @@ public class DeputadoActivity extends AppCompatActivity {
         }
 
         init();
-        this.datasourceFaltas = generateDataSourceFaltasMock();
+        this.datasourceFaltas = generateDataSourceFaltas();
         initRecyclerViewFaltas();
         initRecyclerViewVotacoes();
     }
@@ -135,11 +178,11 @@ public class DeputadoActivity extends AppCompatActivity {
 
     public void initRecyclerViewFaltas(){
         LinearLayoutManager layoutManager   = new LinearLayoutManager(this);
-        DeputadoFaltasRecyclerViewAdapter adapter = new DeputadoFaltasRecyclerViewAdapter(this.datasourceFaltas, this);
+        adapterFaltas = new DeputadoFaltasRecyclerViewAdapter(this.datasourceFaltas, this);
 
         this.recyclerViewFaltas.setHasFixedSize(false);
         this.recyclerViewFaltas.setLayoutManager(layoutManager);
-        this.recyclerViewFaltas.setAdapter(adapter);
+        this.recyclerViewFaltas.setAdapter(adapterFaltas);
         this.recyclerViewFaltas.setItemAnimator(new DefaultItemAnimator());
     }
 

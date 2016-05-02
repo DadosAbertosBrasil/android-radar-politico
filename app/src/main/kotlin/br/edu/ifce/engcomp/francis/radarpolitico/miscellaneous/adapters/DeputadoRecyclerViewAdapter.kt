@@ -34,8 +34,6 @@ import java.util.*
  */
 class DeputadoRecyclerViewAdapter(val context: Context, private val dataSource: ArrayList<Deputado>) : RecyclerView.Adapter<DeputadoRecyclerViewAdapter.ViewHolder>() {
 
-    var diasFreq: ArrayList<Dia>? = null
-
     fun getItem(position: Int): Deputado {
         return this.dataSource[position]
     }
@@ -78,13 +76,10 @@ class DeputadoRecyclerViewAdapter(val context: Context, private val dataSource: 
             holder.presencaMensalProgressBar.progress = percentualFrequencia.toInt()
             holder.numeroVotacoesTextView.text = diasPresente.size.toString()
 
-            diasFreq = dias
-
         }, {
             volleyError: VolleyError ->
             volleyError.printStackTrace()
         })
-
         VolleySharedQueue.getQueue(context)?.add(request)
     }
 
@@ -129,7 +124,6 @@ class DeputadoRecyclerViewAdapter(val context: Context, private val dataSource: 
 
         override fun onClick(v: View) {
             val intent = Intent(v.context, DeputadoActivity::class.java)
-            intent.putExtra("DEPUTADO_FREQUENCIA", diasFreq)
             intent.putExtra("DEPUTADO_INFOS", dataSource[indexPath.row])
             v.context.startActivity(intent)
         }
