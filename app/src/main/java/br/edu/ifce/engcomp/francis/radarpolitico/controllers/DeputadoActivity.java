@@ -106,7 +106,7 @@ public class DeputadoActivity extends AppCompatActivity {
         gabineteDeputadoTextView.setText("Gabinete: " + deputado.getGabinete() + " Anexo: " + deputado.getAnexo());
 
         emailDeputadoTextView.setText(deputado.getEmail());
-        telefoneDeputadoTextView.setText(deputado.getFone());
+        telefoneDeputadoTextView.setText("(61) " + deputado.getFone());
 
         if(deputado.getUrlFoto()!=null){
             Picasso.with(this).load(deputado.getUrlFoto()).into(fotoPoliticoImageView);

@@ -13,7 +13,7 @@
 
     <ImageView
         android:layout_width="105dp"
-        android:layout_height="130dp"
+        android:layout_height="140dp"
         android:layout_marginLeft="4dp"
         android:layout_marginTop="8dp"
         android:id="@+id/foto_deputado_image_view"
@@ -23,7 +23,7 @@
     <LinearLayout
         android:orientation="vertical"
         android:layout_marginLeft="120dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="12dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -37,21 +37,22 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="14sp"
+            android:textSize="16sp"
+            android:layout_marginTop="10dp"
             android:id="@+id/condicao_deputado_text_view"
             android:layout_gravity="center_vertical" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="14sp"
+            android:textSize="16sp"
             android:id="@+id/partido_deputado_text_view"
             android:layout_gravity="center_vertical" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textSize="16sp"
             android:id="@+id/gabinete_deputado_text_view"
             android:layout_gravity="center_vertical" />
     </LinearLayout>
@@ -59,8 +60,31 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="160dp"
+        android:layout_marginLeft="4dp"
         android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:text="Telefone: "
+                android:layout_gravity="center_vertical" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:autoLink="phone"
+                android:id="@+id/telefone_deputado_text_view"
+                android:layout_gravity="center_vertical" />
+
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -70,7 +94,6 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="8dp"
                 android:textSize="14sp"
                 android:text="E-Mail: "
                 android:layout_gravity="center_vertical" />
@@ -78,80 +101,12 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="14sp"
+                android:textSize="18sp"
+                android:autoLink="email"
                 android:id="@+id/email_deputado_text_view"
                 android:layout_gravity="center_vertical" />
 
         </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="3dp"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="8dp"
-                android:textSize="14sp"
-                android:text="Telefone do gabinete: "
-                android:layout_gravity="center_vertical" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="14sp"
-                android:id="@+id/telefone_deputado_text_view"
-                android:layout_gravity="center_vertical" />
-
-        </LinearLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_marginLeft="40dp"
-            android:layout_marginRight="40dp"
-            android:layout_height="2dp"
-            android:layout_marginTop="20dp"
-            android:background="@android:color/darker_gray"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:layout_marginLeft="10dp"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="Últimas Faltas"
-            android:id="@+id/title_deputado_faltas_text_view"
-            android:layout_gravity="center_vertical" />
-
-        <android.support.v7.widget.RecyclerView
-            android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:id="@+id/deputado_faltas_recyler_view"/>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_marginLeft="40dp"
-            android:layout_marginRight="40dp"
-            android:layout_height="2dp"
-            android:layout_marginTop="20dp"
-            android:background="@android:color/darker_gray"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:layout_marginLeft="10dp"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="Últimas Votações"
-            android:id="@+id/title_deputado_votacoes_text_view"
-            android:layout_gravity="center_vertical" />
-
-        <android.support.v7.widget.RecyclerView
-            android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:id="@+id/deputado_votacoes_recyler_view"/>
 
     </LinearLayout>
 
