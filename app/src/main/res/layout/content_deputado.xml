@@ -12,9 +12,9 @@
     tools:showIn="@layout/activity_deputado">
 
     <ImageView
-        android:layout_width="60dp"
-        android:layout_height="80dp"
-        android:layout_marginLeft="8dp"
+        android:layout_width="105dp"
+        android:layout_height="130dp"
+        android:layout_marginLeft="4dp"
         android:layout_marginTop="8dp"
         android:id="@+id/foto_deputado_image_view"
         android:src="@drawable/ic_smile"
@@ -22,7 +22,7 @@
 
     <LinearLayout
         android:orientation="vertical"
-        android:layout_marginLeft="95dp"
+        android:layout_marginLeft="120dp"
         android:layout_marginTop="8dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -31,15 +31,20 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="Nome Deputado"
             android:id="@+id/nome_deputado_text_view"
             android:textColor="#000000" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:text="Partido/UF"
+            android:textSize="14sp"
+            android:id="@+id/condicao_deputado_text_view"
+            android:layout_gravity="center_vertical" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
             android:id="@+id/partido_deputado_text_view"
             android:layout_gravity="center_vertical" />
 
@@ -47,16 +52,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceSmall"
-            android:text="Profissão Deputado"
-            android:id="@+id/profissao_deputado_text_view"
-            android:layout_gravity="center_vertical" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:text="00/00/0000"
-            android:id="@+id/data_nasc_deputado_text_view"
+            android:id="@+id/gabinete_deputado_text_view"
             android:layout_gravity="center_vertical" />
     </LinearLayout>
 

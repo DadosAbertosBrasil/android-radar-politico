@@ -69,97 +69,6 @@ public class DeputadoActivity extends AppCompatActivity {
 
     }
 
-    public ArrayList<Falta> generateDataSourceFaltas(){
-        Calendar currentCalendar  = Calendar.getInstance();
-        Calendar firstDayCalendar = Calendar.getInstance();
-        SimpleDateFormat formatter   = new SimpleDateFormat("dd/MM/yyyy");
-
-        firstDayCalendar.set(Calendar.DAY_OF_MONTH, 1);
-
-        String dataInicio = formatter.format(firstDayCalendar.getTime());
-        String dataFim = formatter.format(currentCalendar.getTime());
-
-        String dataIni = "01/04/2016";
-        String dataFin = "30/04/2016";
-
-        String urlRequest = CDUrlFormatter.listarPresencasParlamentar(dataInicio, dataFim, deputado.getMatricula());
-        StringRequest request = new StringRequest(Request.Method.GET, urlRequest, new Response.Listener<String>() {
-
-            @Override
-            public void onResponse(String response) {
-                try {
-                    ArrayList<Dia> dias = FrequenciaParser.parseFrequenciaFromXML(new ByteArrayInputStream(response.getBytes()));
-                    if(dias!=null){
-                        for(int i = 0; i<dias.size(); i++){
-                            if (!dias.get(i).getFrequencia().equals("Presença")){
-                                faltas.add(new Falta(dias.get(i).getData(), dias.get(i).getFrequencia()));
-                            }
-                        }
-                    }
-                } catch (IOException e) {
-                    e.printStackTrace();
-                } catch (XmlPullParserException e) {
-                    e.printStackTrace();
-                }
-
-                adapterFaltas.notifyDataSetChanged();
-            }
-
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Toast.makeText(getApplicationContext(), "Erro no servidor!", Toast.LENGTH_SHORT).show();
-            }
-        });
-        VolleySharedQueue.INSTANCE.getQueue(this).add(request);
-
-        return faltas;
-    }
-
-    public ArrayList<VotacaoDeputado> generateDataSourceVotacoes(){
-        final ArrayList<VotacaoDeputado> votacoes = new ArrayList<>();
-
-        Calendar currentCalendar  = Calendar.getInstance();
-        Calendar firstDayCalendar = Calendar.getInstance();
-        SimpleDateFormat formatter   = new SimpleDateFormat("dd/MM/yyyy");
-
-        firstDayCalendar.set(Calendar.DAY_OF_MONTH, 1);
-
-        String dataInicio = formatter.format(firstDayCalendar.getTime());
-        String dataFim = formatter.format(currentCalendar.getTime());
-        String dataIni = "27/04/2016";
-        String dataFin = "28/04/2016";
-
-        String urlRequestProp = CDUrlFormatter.listarProposicoesTramitadasNoPeriodo(dataIni, dataFin);
-        StringRequest requestP = new StringRequest(Request.Method.GET, urlRequestProp, new Response.Listener<String>() {
-
-            @Override
-            public void onResponse(String response) {
-                try {
-                    proposicoes = ProposicoesParser.parseProposicoesFromXML(
-                            new ByteArrayInputStream(response.getBytes()));
-
-                } catch (IOException e) {
-                    e.printStackTrace();
-                } catch (XmlPullParserException e) {
-                    e.printStackTrace();
-                }
-
-                adapterVotacoes.notifyDataSetChanged();
-            }
-
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Toast.makeText(getApplicationContext(), "Erro no servidor!", Toast.LENGTH_SHORT).show();
-            }
-        });
-
-        VolleySharedQueue.INSTANCE.getQueue(this).add(requestP);
-
-        return votacoes;
-    }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -177,10 +86,6 @@ public class DeputadoActivity extends AppCompatActivity {
         }
 
         init();
-        this.datasourceVotacoes = generateDataSourceVotacoes();
-        this.datasourceFaltas = generateDataSourceFaltas();
-        initRecyclerViewFaltas();
-        initRecyclerViewVotacoes();
     }
 
 
@@ -189,18 +94,17 @@ public class DeputadoActivity extends AppCompatActivity {
         ImageView fotoPoliticoImageView = (ImageView) findViewById(R.id.foto_deputado_image_view);
         TextView nomeDeputadoTextView = (TextView) findViewById(R.id.nome_deputado_text_view);
         TextView partidoDeputadoTextView = (TextView) findViewById(R.id.partido_deputado_text_view);
-        TextView profissaoDeputadoTextView = (TextView) findViewById(R.id.profissao_deputado_text_view);
-        TextView dataNascDeputadoTextView = (TextView) findViewById(R.id.data_nasc_deputado_text_view);
+        TextView condicaoDeputadoTextView = (TextView) findViewById(R.id.condicao_deputado_text_view);
+        TextView gabineteDeputadoTextView = (TextView) findViewById(R.id.gabinete_deputado_text_view);
         TextView telefoneDeputadoTextView = (TextView) findViewById(R.id.telefone_deputado_text_view);
         TextView emailDeputadoTextView = (TextView) findViewById(R.id.email_deputado_text_view);
 
-        this.recyclerViewFaltas   = (RecyclerView) findViewById(R.id.deputado_faltas_recyler_view);
-        this.recyclerViewVotacoes   = (RecyclerView) findViewById(R.id.deputado_votacoes_recyler_view);
 
-        nomeDeputadoTextView.setText(deputado.getNomeParlamentar());
+        nomeDeputadoTextView.setText(deputado.getNome());
+        condicaoDeputadoTextView.setText(deputado.getCondicao());
         partidoDeputadoTextView.setText(deputado.getPartido() + "/" + deputado.getUf());
-        profissaoDeputadoTextView.setText(deputado.getNomeProfissao());
-        dataNascDeputadoTextView.setText(deputado.getDataNascimento());
+        gabineteDeputadoTextView.setText("Gabinete: " + deputado.getGabinete() + " Anexo: " + deputado.getAnexo());
+
         emailDeputadoTextView.setText(deputado.getEmail());
         telefoneDeputadoTextView.setText(deputado.getFone());
 
@@ -210,25 +114,5 @@ public class DeputadoActivity extends AppCompatActivity {
         else {
             fotoPoliticoImageView.setImageDrawable(getResources().getDrawable(R.drawable.ic_smile));
         }
-    }
-
-    public void initRecyclerViewFaltas(){
-        LinearLayoutManager layoutManager   = new LinearLayoutManager(this);
-        adapterFaltas = new DeputadoFaltasRecyclerViewAdapter(this.datasourceFaltas, this);
-
-        this.recyclerViewFaltas.setHasFixedSize(false);
-        this.recyclerViewFaltas.setLayoutManager(layoutManager);
-        this.recyclerViewFaltas.setAdapter(adapterFaltas);
-        this.recyclerViewFaltas.setItemAnimator(new DefaultItemAnimator());
-    }
-
-    public void initRecyclerViewVotacoes(){
-        LinearLayoutManager layoutManager   = new LinearLayoutManager(this);
-        adapterVotacoes = new DeputadoVotacoesRecyclerViewAdapter(this.datasourceVotacoes, this);
-
-        this.recyclerViewVotacoes.setHasFixedSize(false);
-        this.recyclerViewVotacoes.setLayoutManager(layoutManager);
-        this.recyclerViewVotacoes.setAdapter(adapterVotacoes);
-        this.recyclerViewVotacoes.setItemAnimator(new DefaultItemAnimator());
     }
 }
