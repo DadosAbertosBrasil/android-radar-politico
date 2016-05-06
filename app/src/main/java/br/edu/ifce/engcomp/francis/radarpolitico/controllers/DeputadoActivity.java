@@ -1,6 +1,8 @@
 package br.edu.ifce.engcomp.francis.radarpolitico.controllers;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
@@ -10,59 +12,60 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.RequestFuture;
+import com.android.volley.toolbox.StringRequest;
+import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Target;
+
+import org.xmlpull.v1.XmlPullParserException;
+
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 import br.edu.ifce.engcomp.francis.radarpolitico.R;
+import br.edu.ifce.engcomp.francis.radarpolitico.helpers.VolleySharedQueue;
+import br.edu.ifce.engcomp.francis.radarpolitico.miscellaneous.CDUrlFormatter;
 import br.edu.ifce.engcomp.francis.radarpolitico.miscellaneous.adapters.DeputadoFaltasRecyclerViewAdapter;
 import br.edu.ifce.engcomp.francis.radarpolitico.miscellaneous.adapters.DeputadoVotacoesRecyclerViewAdapter;
+import br.edu.ifce.engcomp.francis.radarpolitico.miscellaneous.connection.parsers.FrequenciaParser;
+import br.edu.ifce.engcomp.francis.radarpolitico.miscellaneous.connection.parsers.ProposicaoParser;
+import br.edu.ifce.engcomp.francis.radarpolitico.miscellaneous.connection.parsers.ProposicoesParser;
+import br.edu.ifce.engcomp.francis.radarpolitico.miscellaneous.connection.parsers.VotacaoParser;
+import br.edu.ifce.engcomp.francis.radarpolitico.models.Deputado;
+import br.edu.ifce.engcomp.francis.radarpolitico.models.Dia;
 import br.edu.ifce.engcomp.francis.radarpolitico.models.Falta;
+import br.edu.ifce.engcomp.francis.radarpolitico.models.Frequencia;
+import br.edu.ifce.engcomp.francis.radarpolitico.models.Proposicao;
+import br.edu.ifce.engcomp.francis.radarpolitico.models.Votacao;
 import br.edu.ifce.engcomp.francis.radarpolitico.models.VotacaoDeputado;
 import br.edu.ifce.engcomp.francis.radarpolitico.models.Voto;
 
 public class DeputadoActivity extends AppCompatActivity {
-    Voto deputadoAtual;
-    String deputado;
+    Deputado deputado;
     RecyclerView recyclerViewFaltas;
     ArrayList<Falta> datasourceFaltas;
     RecyclerView recyclerViewVotacoes;
     ArrayList<VotacaoDeputado> datasourceVotacoes;
-    FloatingActionButton addDeputadoButton;
-
+    ArrayList<Falta> faltas = new ArrayList<>();
+    ProgressDialog progressDialog;
+    DeputadoFaltasRecyclerViewAdapter adapterFaltas;
+    DeputadoVotacoesRecyclerViewAdapter adapterVotacoes;
+    ArrayList<Proposicao> proposicoes = new ArrayList<>();
 
     public DeputadoActivity(){
-        this.datasourceFaltas = generateDataSourceFaltasMock();
-        this.datasourceVotacoes = generateDataSourceVotacoesMock();
-    }
 
-    public ArrayList<Falta> generateDataSourceFaltasMock(){
-        ArrayList<Falta> faltas = new ArrayList<>();
-
-        Falta teste1 = new Falta("01/02/2016", "Justificada");
-        Falta teste2 = new Falta("05/03/2016", "Justificada");
-        Falta teste3 = new Falta("15/03/2016", "Não-Justificada");
-
-        faltas.add(teste1);
-        faltas.add(teste2);
-        faltas.add(teste3);
-
-        return faltas;
-    }
-
-    public ArrayList<VotacaoDeputado> generateDataSourceVotacoesMock(){
-        ArrayList<VotacaoDeputado> votacoes = new ArrayList<>();
-
-        VotacaoDeputado teste1 = new VotacaoDeputado("PEC00/1969", "02/02/2016", "SIM");
-        VotacaoDeputado teste2 = new VotacaoDeputado("PL99/1932", "15/02/2016", "SIM");
-        VotacaoDeputado teste3 = new VotacaoDeputado("ADV24/1944", "12/03/2016", "NÃO");
-
-        votacoes.add(teste1);
-        votacoes.add(teste2);
-        votacoes.add(teste3);
-
-        return votacoes;
     }
 
     @Override
@@ -71,68 +74,44 @@ public class DeputadoActivity extends AppCompatActivity {
         setContentView(R.layout.activity_deputado);
 
         Intent currentIntent = getIntent();
-        deputado = currentIntent.getStringExtra("DEPUTADO_INFOS");
+        deputado = (Deputado) currentIntent.getSerializableExtra("DEPUTADO_INFOS");
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         if(toolbar!=null){
             setSupportActionBar(toolbar);
-            getSupportActionBar().setTitle(deputado);
+            getSupportActionBar().setTitle(deputado.getNomeParlamentar());
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setDisplayShowHomeEnabled(true);
         }
 
         init();
-        initAddDeputadoButton();
-        initRecyclerViewFaltas();
-        initRecyclerViewVotacoes();
     }
 
+
     public void init(){
-        this.addDeputadoButton = (FloatingActionButton) findViewById(R.id.fab_add_deputado);
 
         ImageView fotoPoliticoImageView = (ImageView) findViewById(R.id.foto_deputado_image_view);
         TextView nomeDeputadoTextView = (TextView) findViewById(R.id.nome_deputado_text_view);
         TextView partidoDeputadoTextView = (TextView) findViewById(R.id.partido_deputado_text_view);
-        TextView profissaoDeputadoTextView = (TextView) findViewById(R.id.profissao_deputado_text_view);
-        TextView dataNascDeputadoTextView = (TextView) findViewById(R.id.data_nasc_deputado_text_view);
+        TextView condicaoDeputadoTextView = (TextView) findViewById(R.id.condicao_deputado_text_view);
+        TextView gabineteDeputadoTextView = (TextView) findViewById(R.id.gabinete_deputado_text_view);
         TextView telefoneDeputadoTextView = (TextView) findViewById(R.id.telefone_deputado_text_view);
+        TextView emailDeputadoTextView = (TextView) findViewById(R.id.email_deputado_text_view);
 
-        this.recyclerViewFaltas   = (RecyclerView) findViewById(R.id.deputado_faltas_recyler_view);
-        this.recyclerViewVotacoes   = (RecyclerView) findViewById(R.id.deputado_votacoes_recyler_view);
 
-        nomeDeputadoTextView.setText(deputado);
-        //partidoDeputadoTextView.setText(deputadoAtual.getPartido() + "/" + deputadoAtual.getUf());
-        //profissaoDeputadoTextView.setText(deputadoAtual.getNomeProfissao());
-        //dataNascDeputadoTextView.setText(deputadoAtual.getDataNascimento());
-        //telefoneDeputadoTextView.setText(deputadoAtual.getFone());
-    }
+        nomeDeputadoTextView.setText(deputado.getNome());
+        condicaoDeputadoTextView.setText(deputado.getCondicao());
+        partidoDeputadoTextView.setText(deputado.getPartido() + "/" + deputado.getUf());
+        gabineteDeputadoTextView.setText("Gabinete: " + deputado.getGabinete() + " Anexo: " + deputado.getAnexo());
 
-    public void initRecyclerViewFaltas(){
-        LinearLayoutManager layoutManager   = new LinearLayoutManager(this);
-        DeputadoFaltasRecyclerViewAdapter adapter = new DeputadoFaltasRecyclerViewAdapter(this.datasourceFaltas, this);
+        emailDeputadoTextView.setText(deputado.getEmail());
+        telefoneDeputadoTextView.setText("(61) " + deputado.getFone());
 
-        this.recyclerViewFaltas.setHasFixedSize(false);
-        this.recyclerViewFaltas.setLayoutManager(layoutManager);
-        this.recyclerViewFaltas.setAdapter(adapter);
-        this.recyclerViewFaltas.setItemAnimator(new DefaultItemAnimator());
-    }
-
-    public void initRecyclerViewVotacoes(){
-        LinearLayoutManager layoutManager   = new LinearLayoutManager(this);
-        DeputadoVotacoesRecyclerViewAdapter adapter = new DeputadoVotacoesRecyclerViewAdapter(this.datasourceVotacoes, this);
-
-        this.recyclerViewVotacoes.setHasFixedSize(false);
-        this.recyclerViewVotacoes.setLayoutManager(layoutManager);
-        this.recyclerViewVotacoes.setAdapter(adapter);
-        this.recyclerViewVotacoes.setItemAnimator(new DefaultItemAnimator());
-    }
-
-    private void initAddDeputadoButton() {
-        this.addDeputadoButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(getBaseContext(), "Seguindo deputado!", Toast.LENGTH_SHORT).show();
-            }
-        });
+        if(deputado.getUrlFoto()!=null){
+            Picasso.with(this).load(deputado.getUrlFoto()).into(fotoPoliticoImageView);
+        }
+        else {
+            fotoPoliticoImageView.setImageDrawable(getResources().getDrawable(R.drawable.ic_smile));
+        }
     }
 }
